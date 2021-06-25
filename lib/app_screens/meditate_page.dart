@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Meditate extends StatefulWidget {
-  const Meditate({Key key}) : super(key: key);
+//  const Meditate({required Key key}) : super(key: key);
 
   @override
   _MeditateState createState() => _MeditateState();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key key, String title}) : super(key: key);
+//  const Home({required Key key, required String title}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();

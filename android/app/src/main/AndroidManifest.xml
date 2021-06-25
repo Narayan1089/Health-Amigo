@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.amigo.amigoproject">
+    package="com.example.amigoproject">
    <application
         android:label="amigoproject"
         android:icon="@mipmap/ic_launcher">

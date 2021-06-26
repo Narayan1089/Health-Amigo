@@ -57,7 +57,10 @@ class _HomeState extends State<Home> {
               title: Text('Appointments'),
               trailing: TextButton(
                 onPressed: () {},
-                child: Text('View All'),
+                child: Text(
+                  'View All',
+                  style: TextStyle(color: Color(0xffFF834F)),
+                ),
               ),
             ),
             Card(
@@ -80,7 +83,10 @@ class _HomeState extends State<Home> {
               title: Text('Meditate'),
               trailing: TextButton(
                 onPressed: () {},
-                child: Text('View All'),
+                child: Text(
+                  'View All',
+                  style: TextStyle(color: Color(0xffFF834F)),
+                ),
               ),
             ),
             Row(

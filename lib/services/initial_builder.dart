@@ -152,7 +152,7 @@ class _AmigoState extends State<Amigo> {
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedpg,
           // selectedItemColor: Colors.orangeAccent,
-          fixedColor: Colors.orangeAccent,
+          fixedColor: Color(0xffFF834F),
           onTap: (int index) {
             setState(() {
               _selectedpg = index;

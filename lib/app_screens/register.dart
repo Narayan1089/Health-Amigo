@@ -2,7 +2,7 @@ import 'package:amigoproject/app_screens/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+// import 'package:flutter_icons/flutter_icons.dart';
 import 'package:amigoproject/components/Animation/FadeAnimation.dart';
 
 class Register extends StatefulWidget {

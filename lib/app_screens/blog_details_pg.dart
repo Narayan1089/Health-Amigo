@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BlogDetails extends StatefulWidget {
-  const BlogDetails({Key key}) : super(key: key);
+//  const BlogDetails({Key key}) : super(key: key);
 
   @override
   _BlogDetailsState createState() => _BlogDetailsState();

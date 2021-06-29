@@ -2,6 +2,7 @@ import 'package:amigoproject/app_screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:amigoproject/models/chatMessageModel.dart';
 import 'dart:async';
+import 'package:emoji_picker/emoji_picker.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -10,11 +11,50 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   ScrollController _scrollController = ScrollController();
+  bool keyboardfocus = false;
+  bool visibilityEmoji = false;
+  bool visibilityTextInput = true;
+  double h = 0.0;
+  FocusNode focus = FocusNode();
+  bool t = true;
+
+  bool isShowSticker = false;
+
+  Widget buildSticker() {
+    return EmojiPicker(
+      rows: 3,
+      columns: 7,
+//      buttonMode: ButtonMode.MATERIAL,
+//      recommendKeywords: ["racing", "horse"],
+      numRecommended: 10,
+      onEmojiSelected: (emoji, category) {
+        print(emoji);
+      },
+    );
+  }
+
+  void _changed(bool visibility, String field) {
+    setState(() {
+      if (field == "emoji") {
+        visibilityEmoji = visibility;
+      }
+      if (field == "textinput") {
+        visibilityTextInput = visibility;
+      }
+    });
+  }
 
   @override
   void initState() {
     _scrollController = ScrollController();
     super.initState();
+    focus.addListener(() {
+      if (focus.hasFocus) {
+        setState(() {
+          isShowSticker = false;
+        });
+      }
+    });
   }
 
   List<ChatMessage> messages = [
@@ -41,7 +81,11 @@ class _ChatScreenState extends State<ChatScreen> {
         messageContent: "Is there any thing wrong?", messageType: "sender"),
     ChatMessage(
         messageContent: "Is there any thing wrong?", messageType: "sender"),
+    ChatMessage(
+        messageContent: "How are you feeling - right now?",
+        messageType: "receiver"),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +106,10 @@ class _ChatScreenState extends State<ChatScreen> {
             controller: _scrollController,
             shrinkWrap: true,
             padding: EdgeInsets.only(
-                top: 10, bottom: MediaQuery.of(context).size.height * 0.07),
+                top: 10,
+                bottom: visibilityTextInput && !isShowSticker
+                    ? MediaQuery.of(context).size.height * 0.07
+                    : h),
             itemBuilder: (context, index) {
               if (index == messages.length + 1) {
                 Timer(
@@ -99,6 +146,22 @@ class _ChatScreenState extends State<ChatScreen> {
                 );
               } else {
                 if (messages[index - 1].messageType == "receiver") {
+                  print(index);
+                  if (index == (messages.length)) {
+                    if (messages[index - 1].messageContent ==
+                            "How are you feeling - right now?" &&
+                        t) {
+                      Timer(Duration(milliseconds: 500), () {
+                        _changed(true, "emoji");
+                        _changed(false, "textinput");
+                        setState(() {
+                          h = MediaQuery.of(context).size.height * 0.23;
+                        });
+                        print(h);
+                        t = false;
+                      });
+                    }
+                  }
                   return Container(
                     padding:
                         EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
@@ -155,6 +218,8 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   );
                 } else {
+                  print(index);
+
                   return Container(
                     padding:
                         EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
@@ -239,65 +304,244 @@ class _ChatScreenState extends State<ChatScreen> {
               }
             },
           ),
-          Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width - 15,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 10),
+          visibilityTextInput
+              ? WillPopScope(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+//                      height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width - 15,
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Row(
+                            children: [
+                              Flexible(
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(50),
+                                    border: Border.all(
+                                      color: Colors.black,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  width: MediaQuery.of(context).size.width - 15,
+                                  child: TextField(
+                                    focusNode: focus,
+                                    textAlignVertical: TextAlignVertical.center,
+                                    keyboardType: TextInputType.multiline,
+                                    minLines: 1,
+                                    maxLines: 5,
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.only(bottom: 5.0),
+                                      hintText: 'Type a Message',
+                                      border: InputBorder.none,
+                                      prefixIcon: IconButton(
+                                        onPressed: () {
+                                          focus.unfocus();
+                                          focus.canRequestFocus = false;
+                                          if (isShowSticker) {
+                                            focus.canRequestFocus = true;
+                                            focus.requestFocus();
+                                          }
+                                          setState(() {
+                                            isShowSticker = !isShowSticker;
+                                            h = MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.40;
+                                            debugPrint(
+                                                isShowSticker.toString());
+                                          });
+                                        },
+                                        icon: isShowSticker
+                                            ? Icon(Icons.keyboard)
+                                            : Container(
+                                                child: Image(
+                                                  image: AssetImage(
+                                                      'assets/images/smile.png'),
+                                                  height: 30,
+                                                  width: 30,
+                                                ),
+                                                height: 70,
+                                              ),
+                                      ),
+                                    ),
+                                    textInputAction: TextInputAction.newline,
+                                  ),
+                                ),
+                              ),
+                              CircleAvatar(
+                                backgroundColor: Color(0xffFF834F),
+                                radius: 25,
+                                child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.send_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          (isShowSticker ? buildSticker() : Container())
+                        ],
+                      ),
+                    ],
+                  ),
+                  onWillPop: () {
+                    if (isShowSticker) {
+                      setState(() {
+                        isShowSticker = false;
+                      });
+                    } else {
+                      Navigator.pop(context);
+                    }
+                    return Future.value(false);
+                  },
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10, left: 50, right: 50),
+                      height: MediaQuery.of(context).size.height * 0.20,
+                      width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.transparent,
                         borderRadius: BorderRadius.circular(50),
                         border: Border.all(
-                          color: Colors.black,
+                          color: Color(0xffFE834F),
                           width: 2,
                         ),
                       ),
-                      width: MediaQuery.of(context).size.width - 15,
-                      child: TextField(
-                        textAlignVertical: TextAlignVertical.center,
-                        keyboardType: TextInputType.multiline,
-                        minLines: 1,
-                        maxLines: 5,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.only(bottom: 5.0),
-                          hintText: 'Type a Message',
-                          border: InputBorder.none,
-                          prefixIcon: IconButton(
-                            onPressed: () {},
-                            icon: Container(
-                              child: Image(
-                                image: AssetImage('assets/images/smile.png'),
-                                height: 30,
-                                width: 30,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  _changed(false, "emoji");
+                                  _changed(true, "textinput");
+                                },
+                                icon: Container(
+                                  child: Image(
+                                    image:
+                                        AssetImage('assets/images/smile.png'),
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                ),
                               ),
-                              height: 70,
-                            ),
+                              IconButton(
+                                onPressed: () {
+                                  _changed(false, "emoji");
+                                  _changed(true, "textinput");
+                                },
+                                icon: Container(
+                                  child: Image(
+                                    image:
+                                        AssetImage('assets/images/smile.png'),
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  _changed(false, "emoji");
+                                  _changed(true, "textinput");
+                                },
+                                icon: Container(
+                                  child: Image(
+                                    image:
+                                        AssetImage('assets/images/smile.png'),
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        textInputAction: TextInputAction.newline,
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  _changed(false, "emoji");
+                                  _changed(true, "textinput");
+                                },
+                                icon: Container(
+                                  child: Image(
+                                    image:
+                                        AssetImage('assets/images/smile.png'),
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  _changed(false, "emoji");
+                                  _changed(true, "textinput");
+                                },
+                                icon: Container(
+                                  child: Image(
+                                    image:
+                                        AssetImage('assets/images/smile.png'),
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  _changed(false, "emoji");
+                                  _changed(true, "textinput");
+                                },
+                                icon: Container(
+                                  child: Image(
+                                    image:
+                                        AssetImage('assets/images/smile.png'),
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  _changed(false, "emoji");
+                                  _changed(true, "textinput");
+                                },
+                                icon: Container(
+                                  child: Image(
+                                    image:
+                                        AssetImage('assets/images/smile.png'),
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
                     ),
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Color(0xffFF834F),
-                    radius: 25,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.send_outlined,
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
+                  ],
+                ),
         ],
       ),
     );

@@ -1,12 +1,14 @@
-import 'package:amigoproject/app_screens/home_page.dart';
 import 'package:amigoproject/app_screens/register.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:amigoproject/app_screens/reset_password.dart';
 import 'package:amigoproject/services/initial_builder.dart';
+import 'package:amigoproject/services/auth.dart';
 
 class LogIn extends StatefulWidget {
+  final Function toggle;
+  LogIn(this.toggle);
   @override
   _LogInState createState() => _LogInState();
 }
@@ -15,7 +17,36 @@ class _LogInState extends State<LogIn> {
   TextEditingController emailText = TextEditingController();
   TextEditingController passwordText = TextEditingController();
 
+  String subLocal = '';
+  String email = '';
+  String password = '';
+  bool isLoading = false;
+
+  AuthMethods authMethods = AuthMethods();
   final _formKey = GlobalKey<FormState>();
+
+  Future signMeIn() async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+
+      await authMethods
+          .signInWithEmailAndPassword(emailText.text, passwordText.text)
+          .then((value) {
+        print(value);
+        if (value != 'error') {
+          email = emailText.text;
+          password = passwordText.text;
+          print('$email \n $password');
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Amigo()));
+        } else {
+          return 'error';
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,24 +85,19 @@ class _LogInState extends State<LogIn> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30.0),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Colors.black, width: 1.5),
-//                boxShadow: [
-//                  BoxShadow(
-//                    color: Color.fromRGBO(254, 131, 79, .3),
-//                    blurRadius: 20,
-//                    offset: Offset(0, 10),
-//                  ),
-                      ),
-                      child: Form(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 30.0),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Colors.black, width: 1.5),
+//
+                        ),
                         child: TextFormField(
                           validator: (value) {
                             return RegExp(
@@ -96,26 +122,17 @@ class _LogInState extends State<LogIn> {
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30.0),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Colors.black, width: 1.5),
-//                boxShadow: [
-//                  BoxShadow(
-//                    color: Color.fromRGBO(254, 131, 79, .3),
-//                    blurRadius: 20,
-//                    offset: Offset(0, 10),
-//                  ),
+                      SizedBox(
+                        height: 20,
                       ),
-                      child: Form(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 30.0),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Colors.black, width: 1.5),
+                        ),
                         child: TextFormField(
                           validator: (value) {
                             return value.toString().length < 6
@@ -138,89 +155,100 @@ class _LogInState extends State<LogIn> {
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 30.0),
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ResetPassword()));
-                            },
-                            child: Text(
-                              "Forgot Password?",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 30.0),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => ResetPassword()));
+                              },
+                              child: Text(
+                                "Forgot Password?",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      height: 40,
-                      width: 189,
-                      margin: EdgeInsets.symmetric(horizontal: 70),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Color(0xffFE834F),
+                        ],
                       ),
-                      child: Center(
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Amigo()));
-                          },
-                          child: Text(
-                            "Login",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: 'Roboto',
-                                fontSize: 20),
-                          ),
-                        ),
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "New Here?",
-                          style: TextStyle(
-                              color: Color(0xffFF834F),
-                              fontFamily: 'Montserrat',
-                              fontSize: 16),
+                      Container(
+                        height: 40,
+                        width: 189,
+                        margin: EdgeInsets.symmetric(horizontal: 70),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color(0xffFE834F),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Register()));
-                          },
-                          child: Text(
-                            "Register",
-                            style: TextStyle(
-                              color: Color(0xffFF834F),
-                              fontFamily: 'Montserrat',
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.underline,
+                        child: Center(
+                          child: TextButton(
+                            onPressed: () async {
+                              var val = await signMeIn();
+                              print(val);
+                              if (val == 'error') {
+                                print('error recieved');
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(authMethods.errorMessage),
+                                  ),
+                                );
+                              }
+//                              Navigator.of(context).push(MaterialPageRoute(
+//                                  builder: (context) => Amigo()));
+                            },
+                            child: Text(
+                              "Login",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.normal,
+                                  fontFamily: 'Roboto',
+                                  fontSize: 20),
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "New Here?",
+                            style: TextStyle(
+                                color: Color(0xffFF834F),
+                                fontFamily: 'Montserrat',
+                                fontSize: 16),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      Register(widget.toggle)));
+                            },
+                            child: Text(
+                              "Register",
+                              style: TextStyle(
+                                color: Color(0xffFF834F),
+                                fontFamily: 'Montserrat',
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )

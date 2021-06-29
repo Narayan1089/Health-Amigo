@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
-import 'package:amigoproject/app_screens/chat_page.dart';
 import 'package:amigoproject/app_screens/home_page.dart';
 import 'package:amigoproject/app_screens/meditate_page.dart';
-import 'package:amigoproject/app_screens/welcome_screen.dart';
 import 'package:amigoproject/app_screens/chat_screen.dart';
 
 void main() {

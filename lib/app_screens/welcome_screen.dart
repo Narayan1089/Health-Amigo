@@ -4,8 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/login.dart';
 import 'package:amigoproject/app_screens/chat_screen.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
+  final Function toggle;
+  WelcomeScreen(this.toggle);
+
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
   bool isDoctor = false;
+
   @override
   Widget build(BuildContext context) {
     @override
@@ -66,8 +75,8 @@ class WelcomeScreen extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   isDoctor = true;
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => LogIn()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => LogIn(widget.toggle)));
                 },
                 child: Text(
                   "Doctor",
@@ -96,8 +105,8 @@ class WelcomeScreen extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   isDoctor = false;
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => LogIn()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => LogIn(widget.toggle)));
                 },
                 child: Text(
                   "Patient",

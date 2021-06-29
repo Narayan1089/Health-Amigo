@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+User? loggedInUser;
 
 class Home extends StatefulWidget {
 //  const Home({required Key key, required String title}) : super(key: key);
@@ -8,6 +11,33 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final _auth = FirebaseAuth.instance;
+  String? email = '';
+  String? id = '';
+  String? name = '';
+  Future<void> getCurrentUser() async {
+    try {
+      final user = _auth.currentUser;
+
+      if (user != null) {
+        loggedInUser = user;
+        if (loggedInUser != null) {
+          email = loggedInUser?.email;
+          id = loggedInUser?.uid;
+          name = loggedInUser?.displayName;
+        }
+      }
+      print(user);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     String userName = 'Sneh';

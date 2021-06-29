@@ -34,7 +34,7 @@ class _Register extends State<Register> {
 
       await authMethods
           .signUpWithEmailAndPassword(
-              'ansel20@gmail.com', 'amigobot', 'Ansel Dsouza')
+              emailTextReg.text, passwordTextReg.text, nameTextReg.text)
           .then(
         (value) {
           print('$value');

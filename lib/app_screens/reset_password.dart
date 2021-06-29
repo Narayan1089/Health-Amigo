@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:amigoproject/app_screens/login.dart';
+import 'package:amigoproject/services/auth.dart';
 
 class ResetPassword extends StatefulWidget {
   @override
@@ -10,8 +11,27 @@ class ResetPassword extends StatefulWidget {
 
 class _ResetPassword extends State<ResetPassword> {
   TextEditingController resetEmailText = TextEditingController();
-
+  bool isLoading = false;
+  String email = '';
   final _formKey = GlobalKey<FormState>();
+
+  AuthMethods authMethods = new AuthMethods();
+
+  resetPass() {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        isLoading = true;
+      });
+
+      authMethods.resetPassword(resetEmailText.text).then((value) {
+        print('$value');
+        email = resetEmailText.text;
+
+        print("$email");
+        Navigator.pop(context);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +88,7 @@ class _ResetPassword extends State<ResetPassword> {
                       ),
                       child: Form(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
+                        key: _formKey,
                         child: TextFormField(
                           validator: (value) {
                             return RegExp(
@@ -106,9 +127,8 @@ class _ResetPassword extends State<ResetPassword> {
                       ),
                       child: Center(
                         child: TextButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => LogIn()));
+                          onPressed: () async {
+                            await resetPass();
                           },
                           child: Text(
                             "Send",

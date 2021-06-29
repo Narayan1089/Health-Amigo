@@ -1,11 +1,12 @@
-import 'package:amigoproject/app_screens/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter_icons/flutter_icons.dart';
-import 'package:amigoproject/components/Animation/FadeAnimation.dart';
+import 'package:amigoproject/services/auth.dart';
+import 'package:amigoproject/services/initial_builder.dart';
 
 class Register extends StatefulWidget {
+  final Function toggle;
+  Register(this.toggle);
   @override
   _Register createState() => _Register();
 }
@@ -17,6 +18,40 @@ class _Register extends State<Register> {
   TextEditingController nameTextReg = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  AuthMethods authMethods = AuthMethods();
+
+  String email = '';
+  String password = '';
+  bool isLoading = false;
+
+  Future signMeUp() async {
+    var r = _formKey.currentState;
+    if (r != null) {
+      r.validate();
+      setState(() {
+        isLoading = true;
+      });
+
+      await authMethods
+          .signUpWithEmailAndPassword(
+              'ansel20@gmail.com', 'amigobot', 'Ansel Dsouza')
+          .then(
+        (value) {
+          print('$value');
+          if (value != 'error') {
+            email = emailTextReg.text;
+            password = passwordTextReg.text;
+
+            print('$email \n $password');
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Amigo()));
+          } else {
+            return 'error';
+          }
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +101,7 @@ class _Register extends State<Register> {
                         border: Border.all(color: Colors.black, width: 1.5),
                       ),
                       child: Form(
+                        key: _formKey,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         child: TextFormField(
                           validator: (value) {
@@ -112,13 +148,13 @@ class _Register extends State<Register> {
                       child: Form(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         child: TextFormField(
-                          validator: (value) {
-                            return RegExp(
-                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                    .hasMatch(value.toString())
-                                ? null
-                                : 'Enter correct email';
-                          },
+//                          validator: (value) {
+//                            return RegExp(
+//                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+//                                    .hasMatch(value.toString())
+//                                ? null
+//                                : 'Enter correct email';
+//                          },
                           controller: emailTextReg,
                           keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
@@ -150,11 +186,11 @@ class _Register extends State<Register> {
                       child: Form(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         child: TextFormField(
-                          validator: (value) {
-                            return value.toString().length < 6
-                                ? 'Enter Password 6+ characters'
-                                : null;
-                          },
+//                          validator: (value) {
+//                            return value.toString().length < 6
+//                                ? 'Enter Password 6+ characters'
+//                                : null;
+//                          },
                           controller: passwordTextReg,
                           keyboardType: TextInputType.visiblePassword,
                           decoration: const InputDecoration(
@@ -186,11 +222,11 @@ class _Register extends State<Register> {
                       child: Form(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         child: TextFormField(
-                          validator: (value) {
-                            return value != passwordTextReg.text
-                                ? 'Passwords do not match!'
-                                : null;
-                          },
+//                          validator: (value) {
+//                            return value != passwordTextReg.text
+//                                ? 'Passwords do not match!'
+//                                : null;
+//                          },
                           controller: conPasswordTextReg,
                           keyboardType: TextInputType.visiblePassword,
                           decoration: const InputDecoration(
@@ -221,9 +257,20 @@ class _Register extends State<Register> {
                       ),
                       child: Center(
                         child: TextButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Register()));
+                          onPressed: () async {
+                            var val = await signMeUp();
+                            print(val);
+                            if (val == 'error') {
+                              print('error recieved');
+                              debugPrint(authMethods.errorMessage);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(authMethods.errorMessage),
+                                ),
+                              );
+                            }
+//                            Navigator.of(context).push(MaterialPageRoute(
+//                                builder: (context) => Register(widget.toggle)));
                           },
                           child: Text(
                             "Register",
@@ -248,8 +295,9 @@ class _Register extends State<Register> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => LogIn()));
+                        Navigator.of(context).pop();
+//                        Navigator.of(context).push(MaterialPageRoute(
+//                            builder: (context) => LogIn(widget.toggle)));
                       },
                       child: Text(
                         "Click Here",

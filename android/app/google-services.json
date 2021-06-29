@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "657600427761",
+    "project_id": "amigo-d300d",
+    "storage_bucket": "amigo-d300d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657600427761:android:7d51bca20c82a1ed2a5b50",
+        "android_client_info": {
+          "package_name": "com.example.amigoproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657600427761-mtd9bajit9cshurklv5nta5t2orl2mac.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.amigoproject",
+            "certificate_hash": "20dc171ea5195b579752316652f14e5c626c35f4"
+          }
+        },
+        {
+          "client_id": "657600427761-l10a5f9rjoe6aiog9bfl16dvd0su3ni7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAroQBk3RWdP35lA8LBdltb9Z2Poln7uJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657600427761-l10a5f9rjoe6aiog9bfl16dvd0su3ni7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

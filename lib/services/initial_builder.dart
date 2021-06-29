@@ -55,6 +55,8 @@ class _AmigoState extends State<Amigo> {
           child: ListView(
             children: <Widget>[
               DrawerHeader(
+                margin: EdgeInsets.all(0),
+                // margin: EdgeInsets.fromLTRB(0, top, right, bottom),
                 child: ListTile(
                   title: Text('Settings'),
                   trailing: Icon(Icons.settings),
@@ -63,27 +65,75 @@ class _AmigoState extends State<Amigo> {
                 padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
               ),
               ListTile(
-                title: Text('Account Details'),
+                title: Row(
+                  children: [
+                    Icon(Icons.face_retouching_natural),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Account Details'),
+                  ],
+                ),
                 onTap: () => {Navigator.pop(context)},
               ),
               ListTile(
-                title: Text('Subscription Details'),
+                title: Row(
+                  children: [
+                    Icon(Icons.subscriptions_outlined),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Subscription Details'),
+                  ],
+                ),
                 onTap: () => {Navigator.pop(context)},
               ),
               ListTile(
-                title: Text('About Info'),
+                title: Row(
+                  children: [
+                    Icon(Icons.info_outline),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('About Info'),
+                  ],
+                ),
                 onTap: () => {Navigator.pop(context)},
               ),
               ListTile(
-                title: Text('Support'),
+                title: Row(
+                  children: [
+                    Icon(Icons.support_agent_outlined),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Support'),
+                  ],
+                ),
                 onTap: () => {Navigator.pop(context)},
               ),
               ListTile(
-                title: Text('Logout'),
+                title: Row(
+                  children: [
+                    Icon(Icons.logout),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Logout'),
+                  ],
+                ),
                 onTap: () => {Navigator.pop(context)},
               ),
               ListTile(
-                title: Text('Privacy Policy'),
+                title: Row(
+                  children: [
+                    Icon(Icons.privacy_tip),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Privacy Policy'),
+                  ],
+                ),
                 onTap: () => {Navigator.pop(context)},
               ),
             ],
@@ -103,12 +153,15 @@ class _AmigoState extends State<Amigo> {
                 width: 105,
               ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search),
-              iconSize: 26,
-              color: Colors.black,
+            SizedBox(
+              width: 15,
             ),
+            // IconButton(
+            //   onPressed: () {},
+            //   icon: const Icon(Icons.search),
+            //   iconSize: 26,
+            //   color: Colors.black,
+            // ),
           ],
           elevation: 0,
           automaticallyImplyLeading: false,
@@ -165,10 +218,7 @@ class _AmigoState extends State<Amigo> {
                 ),
                 label: 'Meditate'),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home_outlined,
-                ),
-                label: 'Amigo'),
+                icon: Icon(Icons.home_outlined), label: 'Amigo'),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home_outlined,

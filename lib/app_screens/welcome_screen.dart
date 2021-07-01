@@ -64,12 +64,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             height: 110,
           ),
           Container(
-            height: 59,
+            height: 85,
             width: 235,
             margin: EdgeInsets.symmetric(horizontal: 50),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
               color: Color(0xffFE834F),
+              // border: Border.all(color: Color(4B4C4D), width: 2),
             ),
             child: Center(
               child: TextButton(
@@ -79,7 +80,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       builder: (context) => LogIn(widget.toggle)));
                 },
                 child: Text(
-                  "Doctor",
+                  // "Doctorjsvbdfj \nfcbsdb",
+                  "Mental Health\n Professional",
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.normal,
@@ -90,11 +92,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
           ),
           SizedBox(
-            height: 11,
+            height: 25,
           ),
           Container(
-            height: 59,
+            height: 85,
             width: 235,
+            // height: 59,
+            // width: 235,
             margin: EdgeInsets.symmetric(horizontal: 50),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
@@ -109,7 +113,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       builder: (context) => LogIn(widget.toggle)));
                 },
                 child: Text(
-                  "Patient",
+                  "User",
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.normal,

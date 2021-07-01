@@ -1,3 +1,7 @@
+import 'package:amigoproject/app_screens/doctors_pg.dart';
+import 'package:amigoproject/app_screens/login.dart';
+import 'package:amigoproject/app_screens/welcome_screen.dart';
+import 'package:amigoproject/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
 import 'package:amigoproject/app_screens/home_page.dart';
@@ -30,14 +34,11 @@ Map<int, Color> color = {
 class _AmigoState extends State<Amigo> {
   @override
   int _selectedpg = 0;
-  final _pgOptions = [
-    Home(),
-    Meditate(),
-    ChatScreen(),
-    Blogs(),
-  ];
+  final _pgOptions = [Home(), Meditate(), ChatScreen(), Blogs(), Doctor()];
 
   MaterialColor colorCustom = MaterialColor(0xffFE834F, color);
+
+  AuthMethods authMethods = AuthMethods();
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +123,11 @@ class _AmigoState extends State<Amigo> {
                     Text('Logout'),
                   ],
                 ),
-                onTap: () => {Navigator.pop(context)},
+                onTap: () => {
+                  // authMethods.signOut(),
+                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => WelcomeScreen()))),
+                  // debugPrint(authMethods.user.toString() + ' Signed Out.')
+                },
               ),
               ListTile(
                 title: Row(
@@ -223,12 +228,16 @@ class _AmigoState extends State<Amigo> {
                 icon: Icon(
                   Icons.home_outlined,
                 ),
+                // ImageIcon(
+                //   AssetImage('assets/images/blog.png'),
+                //   size: 30,
+                // ),
                 label: 'Blogs'),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home_outlined,
                 ),
-                label: 'XYZ'),
+                label: 'Doctor'),
           ],
         ),
       ),

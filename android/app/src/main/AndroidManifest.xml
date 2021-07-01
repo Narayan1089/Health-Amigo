@@ -1,8 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.amigoproject">
+   <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="amigoproject"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/logo">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -25,7 +26,7 @@
                  Flutter's first frame. -->
             <meta-data
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
-              android:resource="@drawable/launch_background"
+              android:resource="@drawable/splash"
               />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

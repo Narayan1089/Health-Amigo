@@ -59,10 +59,11 @@ class _LogInState extends State<LogIn> {
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-//            SizedBox(
-//              height: 114,
-//            ),
+            SizedBox(
+              height: 70,
+            ),
             Image(
               image: AssetImage('assets/images/Logo.png'),
               height: 102,
@@ -200,7 +201,12 @@ class _LogInState extends State<LogIn> {
                                 print('error recieved');
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text(authMethods.errorMessage),
+                                    content: Text(
+                                      authMethods.errorMessage,
+                                      style: TextStyle(
+                                        color: Color(0xffFE834F),
+                                      ),
+                                    ),
                                   ),
                                 );
                               }

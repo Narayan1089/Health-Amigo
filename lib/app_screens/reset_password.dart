@@ -150,7 +150,9 @@ class _ResetPassword extends State<ResetPassword> {
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 30.0),
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
                             child: Text(
                               "Back to Login",
                               style: TextStyle(

@@ -37,6 +37,7 @@ class _MyApp extends State<MyApp> {
         // Check for errors
         if (snapshot.hasError) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Center(
                 child: Column(
@@ -50,6 +51,7 @@ class _MyApp extends State<MyApp> {
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Authenticate(),
             ),

@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    String userName = 'Sneh';
+    // String userName = 'Sneh';
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -51,9 +51,20 @@ class _HomeState extends State<Home> {
             children: [
               ListTile(
                 // leading: Icon(Icons.face_rounded),
-                title: Text('Welcome $userName'),
-                subtitle: Text('How do you feel right now?'),
+                title: Text('Welcome, ' + loggedInUser!.displayName.toString(),
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 17,
+                        fontWeight: FontWeight.normal)),
+                subtitle: Text('How do you feel right now?',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal)),
                 trailing: Icon(Icons.calendar_today_outlined),
+              ),
+              SizedBox(
+                height: 15,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -66,6 +77,9 @@ class _HomeState extends State<Home> {
                   Icon(Icons.face_outlined),
                   Icon(Icons.face_outlined),
                 ],
+              ),
+              SizedBox(
+                height: 15,
               ),
               Card(
                 margin: EdgeInsets.fromLTRB(5, 15, 5, 0),

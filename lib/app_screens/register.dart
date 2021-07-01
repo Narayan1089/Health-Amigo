@@ -65,9 +65,9 @@ class _Register extends State<Register> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-//            SizedBox(
-//              height: 114,
-//            ),
+            SizedBox(
+              height: 60,
+            ),
             Image(
               image: AssetImage('assets/images/Logo.png'),
               height: 102,

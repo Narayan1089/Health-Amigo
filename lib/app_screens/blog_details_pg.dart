@@ -17,6 +17,7 @@ class _BlogDetailsState extends State<BlogDetails> {
         mainAxisAlignment: MainAxisAlignment.start,
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Image(image: AssetImage('assets/images/test.png')),
           Text(
             'The OCD Stories',
             style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic),

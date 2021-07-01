@@ -14,6 +14,7 @@ void main() {
 
 class Amigo extends StatefulWidget {
 //  const Amigo({Key key}) : super(key: key);
+
   @override
   _AmigoState createState() => _AmigoState();
 }
@@ -125,7 +126,7 @@ class _AmigoState extends State<Amigo> {
                 ),
                 onTap: () => {
                   // authMethods.signOut(),
-                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => WelcomeScreen()))),
+                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => WelcomeScreen(to)))),
                   // debugPrint(authMethods.user.toString() + ' Signed Out.')
                 },
               ),

@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:amigoproject/app_screens/welcome_screen.dart';
 import 'package:amigoproject/services/authenticate.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  //     .then((_) {
+  //   runApp(new MyApp());
+  // });
 }
 
 class MyApp extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:amigoproject/app_screens/doctors_pg.dart';
 import 'package:amigoproject/app_screens/login.dart';
+import 'package:amigoproject/app_screens/sos.dart';
 import 'package:amigoproject/app_screens/welcome_screen.dart';
 import 'package:amigoproject/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -148,7 +149,10 @@ class _AmigoState extends State<Amigo> {
         appBar: AppBar(
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => SOS()));
+              },
               icon: Container(
                 child: Image(
                   image: AssetImage('assets/images/sos_big.png'),
@@ -224,15 +228,19 @@ class _AmigoState extends State<Amigo> {
                 ),
                 label: 'Meditate'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined), label: 'Amigo'),
-            BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home_outlined,
                 ),
                 // ImageIcon(
-                //   AssetImage('assets/images/blog.png'),
+                //   AssetImage('assets/images/chatbot.png'),
                 //   size: 30,
                 // ),
+                label: 'Amigo'),
+            BottomNavigationBarItem(
+                icon: ImageIcon(
+                  AssetImage('assets/images/blog.png'),
+                  size: 30,
+                ),
                 label: 'Blogs'),
             BottomNavigationBarItem(
                 icon: Icon(

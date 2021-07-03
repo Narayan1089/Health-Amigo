@@ -69,6 +69,15 @@ class _HomeState extends State<Home> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  // ImageIcon(
+                  //   AssetImage('assets/images/angry_face.png'),
+                  //   // size: 40,
+                  // ),
+                  // ImageIcon(
+                  //   AssetImage('assets/images/angry_face.png'),
+                  //   size: 40,
+                  // ),
+                  // Icon(Icons.face_outlined),
                   Icon(Icons.face_outlined),
                   Icon(Icons.face_outlined),
                   Icon(Icons.face_outlined),
@@ -124,7 +133,7 @@ class _HomeState extends State<Home> {
               Card(
                   // margin: EdgeInsets.all(10),
                   shape: null,
-                  elevation: 5,
+                  // elevation: 5,
                   child: Column(
                     children: [
                       ListTile(

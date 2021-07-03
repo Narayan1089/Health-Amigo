@@ -64,8 +64,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             height: 110,
           ),
           Container(
-            height: 85,
-            width: 235,
+            height: 70,
+            width: 280,
             margin: EdgeInsets.symmetric(horizontal: 50),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50),
@@ -81,12 +81,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 },
                 child: Text(
                   // "Doctorjsvbdfj \nfcbsdb",
-                  "Mental Health\n Professional",
+                  "Mental Health Professional",
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.normal,
                       fontFamily: 'Roboto',
-                      fontSize: 25),
+                      fontSize: 18),
                 ),
               ),
             ),
@@ -95,8 +95,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             height: 25,
           ),
           Container(
-            height: 85,
-            width: 235,
+            height: 70,
+            width: 280,
             // height: 59,
             // width: 235,
             margin: EdgeInsets.symmetric(horizontal: 50),
@@ -118,7 +118,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       color: Colors.black,
                       fontWeight: FontWeight.normal,
                       fontFamily: 'Roboto',
-                      fontSize: 25),
+                      fontSize: 18),
                 ),
               ),
             ),

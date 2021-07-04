@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'authenticate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:amigoproject/app_screens/home_page.dart';
+import 'package:amigoproject/services/initial_builder.dart';
 
 class Wrapper extends StatelessWidget {
   @override
@@ -11,7 +11,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return Home();
+      return Amigo();
     }
   }
 }

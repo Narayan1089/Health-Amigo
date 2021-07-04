@@ -1,10 +1,9 @@
 // @dart = 2.9
-import 'package:amigoproject/services/authenticate.dart';
+import 'package:amigoproject/services/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:amigoproject/app_screens/welcome_screen.dart';
-import 'package:amigoproject/services/authenticate.dart';
-import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:amigoproject/services/auth.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,20 +20,6 @@ class MyApp extends StatefulWidget {
 
 class _MyApp extends State<MyApp> {
   @override
-//  Widget build(BuildContext context) {
-//    return StreamProvider<User>.value(
-//      value: AuthMethods().user,
-//      child: MaterialApp(
-//        debugShowCheckedModeBanner: false,
-//        title: 'Amigo',
-//        theme: ThemeData(
-//          primarySwatch: Colors.orange,
-//          visualDensity: VisualDensity.adaptivePlatformDensity,
-//        ),
-//        home: Wrapper(),
-//      ),
-//    );
-//  }
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: Firebase.initializeApp(),
@@ -55,10 +40,20 @@ class _MyApp extends State<MyApp> {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: Scaffold(
-              body: Authenticate(),
+          return MultiProvider(
+            providers: [
+              Provider<AuthMethods>(
+                create: (_) => AuthMethods(),
+              ),
+              StreamProvider(
+                create: (context) => context.read<AuthMethods>().authState,
+              )
+            ],
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: Scaffold(
+                body: Wrapper(),
+              ),
             ),
           );
         }

@@ -17,6 +17,12 @@ class _LogInState extends State<LogIn> {
   TextEditingController emailText = TextEditingController();
   TextEditingController passwordText = TextEditingController();
 
+  void dispose() {
+    emailText.dispose();
+    passwordText.dispose();
+    super.dispose();
+  }
+
   String subLocal = '';
   String email = '';
   String password = '';
@@ -193,7 +199,8 @@ class _LogInState extends State<LogIn> {
                           color: Color(0xffFE834F),
                         ),
                         child: Center(
-                          child: TextButton(
+                          child: MaterialButton(
+                            minWidth: double.infinity,
                             onPressed: () async {
                               var val = await signMeIn();
                               print(val);

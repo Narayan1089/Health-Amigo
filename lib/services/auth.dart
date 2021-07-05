@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  Stream<User?> get authState => _auth.idTokenChanges();
 //  var token;
   String errorMessage = '';
   String err = '';
@@ -22,6 +23,10 @@ class AuthMethods {
 
   Stream<User?> get user {
     return _auth.authStateChanges().map(_userFromFirebaseUser);
+  }
+
+  Future<String> getCurrentuid() async {
+    return _auth.currentUser!.uid;
   }
 
   Future signInWithEmailAndPassword(String email, String password) async {

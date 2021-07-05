@@ -7,8 +7,8 @@ import 'package:amigoproject/services/initial_builder.dart';
 import 'package:amigoproject/services/auth.dart';
 
 class LogIn extends StatefulWidget {
-  final Function toggle;
-  LogIn(this.toggle);
+  // final Function toggle;
+  // LogIn(this.toggle);
   @override
   _LogInState createState() => _LogInState();
 }
@@ -237,8 +237,7 @@ class _LogInState extends State<LogIn> {
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      Register(widget.toggle)));
+                                  builder: (context) => Register()));
                             },
                             child: Text(
                               "Register",

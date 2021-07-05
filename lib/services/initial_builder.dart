@@ -126,9 +126,7 @@ class _AmigoState extends State<Amigo> {
                   ],
                 ),
                 onTap: () => {
-                  // authMethods.signOut(),
-                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => WelcomeScreen(to)))),
-                  // debugPrint(authMethods.user.toString() + ' Signed Out.')
+                  authMethods.signOut(context),
                 },
               ),
               ListTile(

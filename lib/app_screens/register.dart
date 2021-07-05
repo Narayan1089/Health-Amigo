@@ -5,8 +5,8 @@ import 'package:amigoproject/services/auth.dart';
 import 'package:amigoproject/services/initial_builder.dart';
 
 class Register extends StatefulWidget {
-  final Function toggle;
-  Register(this.toggle);
+  // final Function toggle;
+  // Register(this.toggle);
   @override
   _Register createState() => _Register();
 }

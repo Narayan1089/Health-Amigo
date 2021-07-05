@@ -5,8 +5,8 @@ import 'package:amigoproject/app_screens/login.dart';
 import 'package:amigoproject/app_screens/chat_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  final Function toggle;
-  WelcomeScreen(this.toggle);
+  // final Function toggle;
+  // WelcomeScreen(this.toggle);
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
@@ -76,8 +76,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: TextButton(
                 onPressed: () {
                   isDoctor = true;
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => LogIn(widget.toggle)));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => LogIn()));
                 },
                 child: Text(
                   // "Doctorjsvbdfj \nfcbsdb",
@@ -109,8 +109,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: TextButton(
                 onPressed: () {
                   isDoctor = false;
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => LogIn(widget.toggle)));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => LogIn()));
                 },
                 child: Text(
                   "User",

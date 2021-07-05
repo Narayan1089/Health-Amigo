@@ -1,6 +1,7 @@
 //import 'package:amigoproject/models/user.dart';
 import 'dart:io';
 
+import 'package:amigoproject/app_screens/login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -112,9 +113,11 @@ class AuthMethods {
     }
   }
 
-  Future signOut() async {
+  Future signOut(BuildContext context) async {
     try {
-      return await _auth.signOut();
+      return await _auth.signOut().then((value) {
+        Navigator.push(context, MaterialPageRoute(builder: (_) => LogIn()));
+      });
     } catch (e) {
       print(e.toString());
     }

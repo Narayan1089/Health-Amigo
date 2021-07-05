@@ -1,3 +1,4 @@
+import 'package:amigoproject/app_screens/sos_1.dart';
 import 'package:flutter/material.dart';
 
 class SOS extends StatelessWidget {
@@ -47,7 +48,10 @@ class SOS extends StatelessWidget {
                 ),
                 child: Center(
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SOS1()));
+                    },
                     child: Text(
                       "Yes",
                       style: TextStyle(

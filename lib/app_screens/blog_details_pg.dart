@@ -1,3 +1,4 @@
+import 'package:amigoproject/app_screens/blog_comments.dart';
 import 'package:flutter/material.dart';
 
 class BlogDetails extends StatefulWidget {
@@ -51,7 +52,14 @@ class _BlogDetailsState extends State<BlogDetails> {
                           SizedBox(
                             width: 30,
                           ),
-                          Icon(Icons.comment)
+                          GestureDetector(
+                              child: Icon(Icons.comment),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Comments()));
+                              })
                         ],
                       ),
                       SizedBox(

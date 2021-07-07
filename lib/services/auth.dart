@@ -14,6 +14,7 @@ class AuthMethods {
 //  var token;
   String errorMessage = '';
   String err = '';
+  String? verifyerror = '';
 
   /// Condition ? TRUE : FALSE
   User? _userFromFirebaseUser(User? user) {
@@ -76,6 +77,7 @@ class AuthMethods {
       if (user != null && !user.emailVerified) {
         await user.sendEmailVerification();
       }
+
       user?.updateDisplayName(username);
       print(errorMessage);
       return _userFromFirebaseUser(user);
@@ -124,4 +126,30 @@ class AuthMethods {
       print(e.toString());
     }
   }
+
+//  Future phoneVerification(
+//    String number,
+//    String email,
+//    String password,
+//  ) async {
+//    try {
+//      UserCredential result = await _auth.createUserWithEmailAndPassword(
+//          email: email, password: password);
+//      User? user = result.user;
+//      _auth.verifyPhoneNumber(
+//        phoneNumber: number,
+//        verificationCompleted: (phoneAuthCredential) async {},
+//        verificationFailed: (verificationFailed) {
+//          verifyerror = verificationFailed.message;
+//        },
+//        codeSent: (verificationId, resendingToken) async {
+//          this.verificationId = verificationId;
+//        },
+//        codeAutoRetrievalTimeout: (verificationId) async {},
+//      );
+//      if (verifyerror != "") {
+//        return 'error';
+//      }
+//    } catch (e) {}
+//  }
 }

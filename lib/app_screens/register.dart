@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:amigoproject/services/auth.dart';
 import 'package:amigoproject/services/initial_builder.dart';
+import 'package:amigoproject/app_screens/phoneNumberScreen.dart';
 
 class Register extends StatefulWidget {
   final Function toggle;
@@ -269,8 +270,9 @@ class _Register extends State<Register> {
                                 ),
                               );
                             }
-//                            Navigator.of(context).push(MaterialPageRoute(
-//                                builder: (context) => Register(widget.toggle)));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => PhoneScreen(
+                                    emailTextReg.text, passwordTextReg.text)));
                           },
                           child: Text(
                             "Register",

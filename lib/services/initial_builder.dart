@@ -1,6 +1,7 @@
 import 'package:amigoproject/app_screens/doctors_pg.dart';
 import 'package:amigoproject/app_screens/login.dart';
 import 'package:amigoproject/app_screens/sos.dart';
+import 'package:amigoproject/app_screens/subscription/surbs_1.dart';
 import 'package:amigoproject/app_screens/welcome_screen.dart';
 import 'package:amigoproject/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +90,8 @@ class _AmigoState extends State<Amigo> {
                     Text('Subscription Details'),
                   ],
                 ),
-                onTap: () => {Navigator.pop(context)},
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => SubscriptionPage())),
               ),
               ListTile(
                 title: Row(

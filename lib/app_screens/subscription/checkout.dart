@@ -173,34 +173,39 @@ class _CheckoutState extends State<Checkout> {
                   SizedBox(
                     height: 10,
                   ),
-                  // Container(
-                  //   child: ListView.builder(
-                  //     itemCount: 2,
-                  //     itemBuilder: (BuildContext context, int index) {
-                  //       return Row(
-                  //         children: [
-                  //           Container(
-                  //             width: 70,
-                  //             height: 70,
-                  //             color: Colors.pinkAccent,
-                  //           ),
-                  //           SizedBox(
-                  //             width: 30,
-                  //           ),
-                  //           Column(
-                  //             children: [
-                  //               Text('Plan Name'),
-                  //               Text('Period: 6 Months'),
-                  //               Text('RS. 800'),
-                  //             ],
-                  //           ),
-                  //           SizedBox(width: 50),
-                  //           Center(child: Text('x1')),
-                  //         ],
-                  //       );
-                  //     },
-                  //   ),
-                  // ),
+                  Container(
+                    height: 100,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 3,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Row(
+                          children: [
+                            Container(
+                                width: 70,
+                                height: 70,
+                                decoration: BoxDecoration(
+                                  color: Colors.pink[50],
+                                  borderRadius: BorderRadius.circular(7.6),
+                                )),
+                            SizedBox(
+                              width: 30,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Plan Name'),
+                                Text('Period: 6 Months'),
+                                Text('RS. 800'),
+                              ],
+                            ),
+                            SizedBox(width: 70),
+                            Center(child: Text('x1')),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
                   SizedBox(
                     height: 20,
                   ),

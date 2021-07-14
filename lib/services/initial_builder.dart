@@ -222,15 +222,22 @@ class _AmigoState extends State<Amigo> {
           },
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined), label: 'Home'),
+                icon: ImageIcon(
+                  AssetImage('assets/images/home.png'),
+                  size: 30,
+                ),
+                label: 'Home'),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home_outlined,
+                icon: ImageIcon(
+                  AssetImage('assets/images/meditate.png'),
+                  size: 30,
                 ),
                 label: 'Meditate'),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home_outlined,
+                icon: ImageIcon(
+                  AssetImage('assets/images/amigo-1.png'),
+                  color: Color(0xffFF834F),
+                  size: 30,
                 ),
                 // ImageIcon(
                 //   AssetImage('assets/images/chatbot.png'),
@@ -244,9 +251,11 @@ class _AmigoState extends State<Amigo> {
                 ),
                 label: 'Blogs'),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home_outlined,
-                ),
+                icon: Icon(Icons.local_hospital),
+                // icon: ImageIcon(
+                //   AssetImage('assets/images/doctor.png'),
+                //   // size: 30,
+                // ),
                 label: 'Doctor'),
           ],
         ),

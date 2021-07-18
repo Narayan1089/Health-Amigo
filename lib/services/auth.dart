@@ -2,11 +2,11 @@
 import 'dart:io';
 
 import 'package:amigoproject/app_screens/login.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;

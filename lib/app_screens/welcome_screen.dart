@@ -1,8 +1,8 @@
-import 'package:amigoproject/app_screens/chat_screen.dart';
-import 'package:amigoproject/app_screens/register.dart';
+// import 'package:amigoproject/app_screens/chat_screen.dart';
+// import 'package:amigoproject/app_screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/login.dart';
-import 'package:amigoproject/app_screens/chat_screen.dart';
+// import 'package:amigoproject/app_screens/chat_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   // final Function toggle;

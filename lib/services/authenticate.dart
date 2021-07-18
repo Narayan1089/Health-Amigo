@@ -1,10 +1,10 @@
-import 'package:amigoproject/app_screens/home_page.dart';
-import 'package:amigoproject/app_screens/login.dart';
-import 'package:amigoproject/app_screens/register.dart';
+// import 'package:amigoproject/app_screens/home_page.dart';
+// import 'package:amigoproject/app_screens/login.dart';
+// import 'package:amigoproject/app_screens/register.dart';
 import 'package:amigoproject/app_screens/welcome_screen.dart';
 import 'package:amigoproject/services/initial_builder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {

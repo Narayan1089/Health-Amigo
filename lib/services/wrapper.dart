@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'authenticate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:amigoproject/services/initial_builder.dart';
-import 'package:amigoproject/app_screens/phoneNumberScreen.dart';
+// import 'package:amigoproject/app_screens/phoneNumberScreen.dart';
 
 class Wrapper extends StatelessWidget {
   @override

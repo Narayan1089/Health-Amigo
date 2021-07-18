@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:amigoproject/app_screens/login.dart';
+// import 'package:amigoproject/app_screens/login.dart';
 import 'package:amigoproject/services/auth.dart';
 
 class ResetPassword extends StatefulWidget {

@@ -1,15 +1,15 @@
 import 'package:amigoproject/app_screens/doctors_pg.dart';
-import 'package:amigoproject/app_screens/login.dart';
+// import 'package:amigoproject/app_screens/login.dart';
 import 'package:amigoproject/app_screens/sos.dart';
 import 'package:amigoproject/app_screens/subscription/surbs_1.dart';
-import 'package:amigoproject/app_screens/welcome_screen.dart';
+// import 'package:amigoproject/app_screens/welcome_screen.dart';
 import 'package:amigoproject/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
 import 'package:amigoproject/app_screens/home_page.dart';
 import 'package:amigoproject/app_screens/meditate_page.dart';
 import 'package:amigoproject/app_screens/chat_screen.dart';
-import 'package:amigoproject/app_screens/phoneNumberScreen.dart';
+// import 'package:amigoproject/app_screens/phoneNumberScreen.dart';
 
 void main() {
   runApp(Amigo());

@@ -1,9 +1,9 @@
-import 'package:amigoproject/app_screens/register.dart';
+// import 'package:amigoproject/app_screens/register.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:amigoproject/services/auth.dart';
-import 'package:amigoproject/services/authenticate.dart';
+// import 'package:amigoproject/services/authenticate.dart';
 
 class PhoneScreen extends StatefulWidget {
   final String email;

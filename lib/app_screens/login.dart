@@ -217,8 +217,8 @@ class _LogInState extends State<LogIn> {
                                   ),
                                 );
                               }
-//                              Navigator.of(context).push(MaterialPageRoute(
-//                                  builder: (context) => Amigo()));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Amigo()));
                             },
                             child: Text(
                               "Login",

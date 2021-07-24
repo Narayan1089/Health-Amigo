@@ -174,55 +174,55 @@ class _HomeState extends State<Home> {
               //     ],
               //   ),
               // ),
-              ListTile(
-                // leading: Icon(Icons.face_rounded),
-                title: Text('Appointments'),
-                trailing: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'View All',
-                    style: TextStyle(color: Color(0xffFF834F)),
-                  ),
-                ),
-              ),
-              Card(
-                  // margin: EdgeInsets.all(10),
-                  shape: null,
-                  // elevation: 5,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        // isThreeLine: true,
-                        leading: Icon(Icons.face_rounded),
-                        title: Text('Doctor Name'),
-                        subtitle: Text('Date \nTime Venue'),
-                        trailing: Icon(Icons.lock_clock),
-                      ),
-                    ],
-                  )),
-              SizedBox(
-                height: 10,
-              ),
-              ListTile(
-                // leading: Icon(Icons.face_rounded),
-                title: Text('Meditate'),
-                trailing: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'View All',
-                    style: TextStyle(color: Color(0xffFF834F)),
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MeditateCard('assets/images/smile_face.png', 'Peace'),
-                  MeditateCard('assets/images/smile_face.png', 'Sad'),
-                  MeditateCard('assets/images/smile_face.png', 'Sleep'),
-                  MeditateCard('assets/images/smile_face.png', 'Sad'),
-                ],
-              ),
+              // ListTile(
+              //   // leading: Icon(Icons.face_rounded),
+              //   title: Text('Appointments'),
+              //   trailing: TextButton(
+              //     onPressed: () {},
+              //     child: Text(
+              //       'View All',
+              //       style: TextStyle(color: Color(0xffFF834F)),
+              //     ),
+              //   ),
+              // ),
+              // Card(
+              //     // margin: EdgeInsets.all(10),
+              //     shape: null,
+              //     // elevation: 5,
+              //     child: Column(
+              //       children: [
+              //         ListTile(
+              //           // isThreeLine: true,
+              //           leading: Icon(Icons.face_rounded),
+              //           title: Text('Doctor Name'),
+              //           subtitle: Text('Date \nTime Venue'),
+              //           trailing: Icon(Icons.lock_clock),
+              //         ),
+              //       ],
+              //     )),
+              // SizedBox(
+              //   height: 10,
+              // ),
+              // ListTile(
+              //   // leading: Icon(Icons.face_rounded),
+              //   title: Text('Meditate'),
+              //   trailing: TextButton(
+              //     onPressed: () {},
+              //     child: Text(
+              //       'View All',
+              //       style: TextStyle(color: Color(0xffFF834F)),
+              //     ),
+              //   ),
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     MeditateCard('assets/images/smile_face.png', 'Peace'),
+              //     MeditateCard('assets/images/smile_face.png', 'Sad'),
+              //     MeditateCard('assets/images/smile_face.png', 'Sleep'),
+              //     MeditateCard('assets/images/smile_face.png', 'Sad'),
+              //   ],
+              // ),
             ],
           ),
         ),

@@ -15,6 +15,7 @@ class AuthMethods {
 //  var token;
   String errorMessage = '';
   String err = '';
+  bool e = false;
   String? verifyerror = '';
 
   /// Condition ? TRUE : FALSE
@@ -40,9 +41,11 @@ class AuthMethods {
       user = result.user;
       return _userFromFirebaseUser(user);
     } on SocketException {
+      e = true;
       errorMessage = 'No interent connection!';
       return errorMessage;
     } on FirebaseAuthException catch (error) {
+      e = true;
       switch (error.code) {
         case 'ERROR_INVALID_EMAIL':
           errorMessage = 'Your email address appears to be malformed.';

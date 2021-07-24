@@ -65,7 +65,10 @@ class _AmigoState extends State<Amigo> {
                 child: ListTile(
                   title: Text('Settings'),
                   trailing: Icon(Icons.settings),
-                  onTap: () => {Navigator.pop(context)},
+                  onTap: () => {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => Amigo()))
+                  },
                 ),
                 padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
               ),
@@ -175,39 +178,47 @@ class _AmigoState extends State<Amigo> {
             // ),
           ],
           elevation: 0,
-          automaticallyImplyLeading: false,
+          // automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
-          flexibleSpace: SafeArea(
-            child: Container(
-              padding: EdgeInsets.only(right: 16),
-              child: Row(
-                children: <Widget>[
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.account_circle_rounded),
-                    iconSize: 26,
-                    color: Color(0xffFF834F),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.settings_outlined),
-                    iconSize: 26,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Amigo",
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
-              ),
+          title: Text(
+            "Amigo",
+            style: TextStyle(
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.w700,
+              fontSize: 20,
             ),
           ),
+          // flexibleSpace: SafeArea(
+          //   child: Container(
+          //     padding: EdgeInsets.only(right: 16),
+          // child: Row(
+          //   children: <Widget>[
+          // IconButton(
+          //   onPressed: () {},
+          //   icon: const Icon(Icons.account_circle_rounded),
+          //   iconSize: 26,
+          //   color: Color(0xffFF834F),
+          // ),
+          // IconButton(
+          //   onPressed: () {},
+          //   icon: Icon(Icons.settings_outlined),
+          //   iconSize: 26,
+          // ),
+          //     SizedBox(
+          //       width: 60,
+          //     ),
+          //     Text(
+          //       "Amigo",
+          //       style: TextStyle(
+          //         fontFamily: "Poppins",
+          //         fontWeight: FontWeight.w700,
+          //         fontSize: 20,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // ),
+          // ),
         ),
         body: _pgOptions[_selectedpg],
         bottomNavigationBar: BottomNavigationBar(

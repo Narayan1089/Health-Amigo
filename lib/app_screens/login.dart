@@ -7,8 +7,6 @@ import 'package:amigoproject/services/initial_builder.dart';
 import 'package:amigoproject/services/auth.dart';
 
 class LogIn extends StatefulWidget {
-  // final Function toggle;
-  // LogIn(this.toggle);
   @override
   _LogInState createState() => _LogInState();
 }
@@ -27,11 +25,12 @@ class _LogInState extends State<LogIn> {
   String email = '';
   String password = '';
   bool isLoading = false;
+  bool _isObscure = true;
 
   AuthMethods authMethods = AuthMethods();
   final _formKey = GlobalKey<FormState>();
 
-  Future signMeIn() async {
+  Future<dynamic> signMeIn() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         isLoading = true;
@@ -40,11 +39,12 @@ class _LogInState extends State<LogIn> {
       await authMethods
           .signInWithEmailAndPassword(emailText.text, passwordText.text)
           .then((value) {
-        print(value);
+        // print(value);
         if (value != 'error') {
           email = emailText.text;
           password = passwordText.text;
-          print('$email \n $password');
+          // print('$email \n $password');
+          debugPrint('Email: ' + email + " " + "Password: " + password);
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => Amigo()));
         } else {
@@ -106,6 +106,7 @@ class _LogInState extends State<LogIn> {
 //
                         ),
                         child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
                             return RegExp(
                                         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -120,10 +121,10 @@ class _LogInState extends State<LogIn> {
                             contentPadding: EdgeInsets.all(4),
                             enabledBorder: InputBorder.none,
 //                        errorBorder: InputBorder.none,
-                            hintText: 'Email',
-                            hintStyle: TextStyle(
+                            labelText: 'Email',
+                            labelStyle: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                              fontSize: 17,
                               color: Color(0xffFF834F),
                             ),
                           ),
@@ -141,6 +142,8 @@ class _LogInState extends State<LogIn> {
                           border: Border.all(color: Colors.black, width: 1.5),
                         ),
                         child: TextFormField(
+                          obscureText: _isObscure,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
                             return value.toString().length < 6
                                 ? 'Enter Password 6+ characters'
@@ -148,14 +151,27 @@ class _LogInState extends State<LogIn> {
                           },
                           controller: passwordText,
                           keyboardType: TextInputType.visiblePassword,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isObscure = !_isObscure;
+                                });
+                              },
+                              icon: Icon(
+                                _isObscure
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Color(0xffFF834F),
+                              ),
+                            ),
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.all(4),
                             enabledBorder: InputBorder.none,
 //                        errorBorder: InputBorder.none,
-                            hintText: 'Password',
-                            hintStyle: TextStyle(
-                              fontSize: 20,
+                            labelText: 'Password',
+                            labelStyle: TextStyle(
+                              fontSize: 17,
                               fontWeight: FontWeight.bold,
                               color: Color(0xffFF834F),
                             ),
@@ -202,10 +218,20 @@ class _LogInState extends State<LogIn> {
                           child: MaterialButton(
                             minWidth: double.infinity,
                             onPressed: () async {
-                              var val = await signMeIn();
-                              print(val);
-                              if (val == 'error') {
-                                print('error recieved');
+                              // if (await Vibration.hasVibrator()) {
+                              //   Vibration.vibrate(
+                              //       amplitude: 128, duration: 1000);
+                              // } else {
+                              //   debugPrint('NO Vibration');
+                              // }
+                              await signMeIn();
+                              // print("Login: $val");
+                              if (authMethods.e) {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                print('error recieved: ' +
+                                    authMethods.e.toString());
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
@@ -217,17 +243,17 @@ class _LogInState extends State<LogIn> {
                                   ),
                                 );
                               }
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Amigo()));
                             },
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: 'Roboto',
-                                  fontSize: 20),
-                            ),
+                            child: isLoading
+                                ? CupertinoActivityIndicator()
+                                : Text(
+                                    "Login",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: 'Roboto',
+                                        fontSize: 20),
+                                  ),
                           ),
                         ),
                       ),

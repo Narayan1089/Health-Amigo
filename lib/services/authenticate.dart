@@ -1,6 +1,7 @@
 // import 'package:amigoproject/app_screens/home_page.dart';
 // import 'package:amigoproject/app_screens/login.dart';
 // import 'package:amigoproject/app_screens/register.dart';
+import 'package:amigoproject/app_screens/login.dart';
 import 'package:amigoproject/app_screens/welcome_screen.dart';
 import 'package:amigoproject/services/initial_builder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,7 +28,7 @@ class _AuthenticateState extends State<Authenticate> {
     if (_auth.currentUser != null) {
       return Amigo();
     } else {
-      return WelcomeScreen();
+      return LogIn();
     }
   }
 }

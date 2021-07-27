@@ -7,10 +7,6 @@ import 'package:amigoproject/services/auth.dart';
 
 void main() {
   runApp(MyApp());
-  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-  //     .then((_) {
-  //   runApp(new MyApp());
-  // });
 }
 
 class MyApp extends StatefulWidget {
@@ -24,6 +20,8 @@ class _MyApp extends State<MyApp> {
     return FutureBuilder(
       future: Firebase.initializeApp(),
       builder: (context, snapshot) {
+        // FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+        // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
         // Check for errors
         if (snapshot.hasError) {
           return MaterialApp(

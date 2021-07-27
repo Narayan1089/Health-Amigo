@@ -55,7 +55,8 @@ class _HomeState extends State<Home> {
               ListTile(
                 // leading: Icon(Icons.face_rounded),
                 title: Text(
-                  'Welcome, ' + loggedInUser!.displayName.toString(),
+                  'Welcome, ' +
+                      loggedInUser!.displayName.toString().split(" ")[0],
                   style: TextStyle(
                       // color: Colors.white,
                       fontFamily: 'Montserrat',

@@ -37,8 +37,16 @@ class AuthMethods {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      print(result);
+      // print(result);
       user = result.user;
+      // if (!user!.emailVerified) {
+      //   e = true;
+      //   errorMessage =
+      //       'Please verify your Email using the link sent on registered email.';
+      //   return 'error';
+      // } else {
+      //   return _userFromFirebaseUser(user);
+      // }
       return _userFromFirebaseUser(user);
     } on SocketException {
       e = true;
@@ -47,13 +55,13 @@ class AuthMethods {
     } on FirebaseAuthException catch (error) {
       e = true;
       switch (error.code) {
-        case 'ERROR_INVALID_EMAIL':
+        case 'invalid-email':
           errorMessage = 'Your email address appears to be malformed.';
           break;
-        case 'ERROR_WRONG_PASSWORD':
-          errorMessage = 'Your password is wrong.';
+        case 'wrong-password':
+          errorMessage = 'Incorrect Password! Please try again.';
           break;
-        case 'ERROR_USER_NOT_FOUND':
+        case 'user-not-found':
           errorMessage = "User with this email doesn't exist.";
           break;
         case 'ERROR_USER_DISABLED':
@@ -86,10 +94,12 @@ class AuthMethods {
       print(errorMessage);
       return _userFromFirebaseUser(user);
     } on SocketException {
+      e = true;
       errorMessage = 'No interent connection!';
       print(1);
       return 'error';
     } on FirebaseAuthException catch (error) {
+      e = true;
       print(error.message);
       switch (error.code) {
         case 'ERROR_OPERATION_NOT_ALLOWED':
@@ -98,10 +108,10 @@ class AuthMethods {
         case 'ERROR_WEAK_PASSWORD':
           errorMessage = 'The password is not strong enough.';
           break;
-        case 'ERROR_INVALID_EMAIL':
+        case 'invalid-email':
           errorMessage = 'The email address is malformed.';
           break;
-        case 'ERROR_EMAIL_ALREADY_IN_USE':
+        case 'email-already-in-use':
           errorMessage = 'The email is already in use by a different account.';
           break;
         case 'ERROR_INVALID_CREDENTIAL':
@@ -126,7 +136,8 @@ class AuthMethods {
   Future signOut(BuildContext context) async {
     try {
       return await _auth.signOut().then((value) {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => LogIn()));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => LogIn()));
       });
     } catch (e) {
       print(e.toString());

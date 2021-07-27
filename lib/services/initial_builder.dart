@@ -152,24 +152,24 @@ class _AmigoState extends State<Amigo> {
         ),
         appBar: AppBar(
           actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => SOS()));
-              },
-              icon: Container(
-                child: Image(
-                  image: AssetImage('assets/images/sos_big.png'),
-                  height: 100,
-                  width: 100,
-                ),
-                height: 105,
-                width: 105,
-              ),
-            ),
-            SizedBox(
-              width: 15,
-            ),
+            // IconButton(
+            //   onPressed: () {
+            //     Navigator.of(context)
+            //         .push(MaterialPageRoute(builder: (context) => SOS()));
+            //   },
+            //   icon: Container(
+            //     child: Image(
+            //       image: AssetImage('assets/images/sos_big.png'),
+            //       height: 100,
+            //       width: 100,
+            //     ),
+            //     height: 105,
+            //     width: 105,
+            //   ),
+            // ),
+            // SizedBox(
+            //   width: 15,
+            // ),
             // IconButton(
             //   onPressed: () {},
             //   icon: const Icon(Icons.search),
@@ -261,13 +261,13 @@ class _AmigoState extends State<Amigo> {
                   size: 30,
                 ),
                 label: 'Blogs'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.local_hospital),
-                // icon: ImageIcon(
-                //   AssetImage('assets/images/doctor.png'),
-                //   // size: 30,
-                // ),
-                label: 'Doctor'),
+            // BottomNavigationBarItem(
+            //     icon: Icon(Icons.local_hospital),
+            //     // icon: ImageIcon(
+            //     //   AssetImage('assets/images/doctor.png'),
+            //     //   // size: 30,
+            //     // ),
+            //     label: 'Doctor'),
           ],
         ),
       ),

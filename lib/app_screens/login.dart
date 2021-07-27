@@ -40,7 +40,7 @@ class _LogInState extends State<LogIn> {
           .signInWithEmailAndPassword(emailText.text, passwordText.text)
           .then((value) {
         // print(value);
-        if (value != 'error') {
+        if (value != 'error' && authMethods.e == false) {
           email = emailText.text;
           password = passwordText.text;
           // print('$email \n $password');
@@ -234,10 +234,11 @@ class _LogInState extends State<LogIn> {
                                     authMethods.e.toString());
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
+                                    backgroundColor: Color(0xffFE834F),
                                     content: Text(
                                       authMethods.errorMessage,
                                       style: TextStyle(
-                                        color: Color(0xffFE834F),
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ),

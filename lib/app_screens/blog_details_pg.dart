@@ -5,13 +5,12 @@ import 'blog.dart';
 class BlogDetails extends StatefulWidget {
   // const BlogDetails({Key key}) : super(key: key);
   Blog blog;
-  BlogDetails({ required this.blog});
+  BlogDetails({required this.blog});
   @override
   _BlogDetailsState createState() => _BlogDetailsState(blog: blog);
 }
 
 class _BlogDetailsState extends State<BlogDetails> {
-
   Blog blog;
   _BlogDetailsState({required this.blog});
   @override
@@ -73,16 +72,15 @@ class _BlogDetailsState extends State<BlogDetails> {
                       RichText(
                         textAlign: TextAlign.justify,
                         text: TextSpan(
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Poppins',
-                            fontSize: 18,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w300,
-                            // height: 27
-                          ),
-                          text: blog.text
-                        ),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Poppins',
+                              fontSize: 18,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w300,
+                              // height: 27
+                            ),
+                            text: blog.text),
                       )
                     ],
                   ),
@@ -91,11 +89,11 @@ class _BlogDetailsState extends State<BlogDetails> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.white,
-          onPressed: () {},
-          child: Icon(Icons.add, color: Color(0xffFF834F)),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   backgroundColor: Colors.white,
+        //   onPressed: () {},
+        //   child: Icon(Icons.add, color: Color(0xffFF834F)),
+        // ),
       ),
     );
   }

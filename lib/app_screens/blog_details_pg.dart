@@ -4,7 +4,7 @@ import 'blog.dart';
 
 class BlogDetails extends StatefulWidget {
   // const BlogDetails({Key key}) : super(key: key);
-  Blog blog;
+  final Blog blog;
   BlogDetails({required this.blog});
   @override
   _BlogDetailsState createState() => _BlogDetailsState(blog: blog);
@@ -27,7 +27,7 @@ class _BlogDetailsState extends State<BlogDetails> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image(image: AssetImage('assets/images/test.png')),
+                Image(image: NetworkImage(blog.url)),
                 SizedBox(
                   height: 10,
                 ),

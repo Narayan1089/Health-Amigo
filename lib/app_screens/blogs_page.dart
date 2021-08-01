@@ -69,35 +69,35 @@ class _BlogsState extends State<Blogs> {
         child: Container(
           child: Column(
             children: [
-              Container(
-                width: 372,
-                height: 42,
-                alignment: Alignment.center,
-                child: TextField(
-                  decoration: InputDecoration(
-                      hintText: 'Search...',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                ),
-                // Row(
-                //   children: [
-                //     Icon(Icons.search),
-                //     SizedBox(
-                //       width: 10,
-                //     ),
-                //     TextField(
-                //       decoration: InputDecoration(
-                //           hintText: 'Search...',
-                //           border: OutlineInputBorder(
-                //               borderRadius: BorderRadius.circular(10))),
-                //     ),
-                //     SizedBox(
-                //       width: 10,
-                //     ),
-                //     Icon(Icons.mic_outlined)
-                //   ],
-                // ),
-              ),
+              // Container(
+              // width: 372,
+              // height: 42,
+              // alignment: Alignment.center,
+              // child: TextField(
+              //   decoration: InputDecoration(
+              //       hintText: 'Search...',
+              //       border: OutlineInputBorder(
+              //           borderRadius: BorderRadius.circular(10))),
+              // ),
+              // Row(
+              //   children: [
+              //     Icon(Icons.search),
+              //     SizedBox(
+              //       width: 10,
+              //     ),
+              //     TextField(
+              //       decoration: InputDecoration(
+              //           hintText: 'Search...',
+              //           border: OutlineInputBorder(
+              //               borderRadius: BorderRadius.circular(10))),
+              //     ),
+              //     SizedBox(
+              //       width: 10,
+              //     ),
+              //     Icon(Icons.mic_outlined)
+              //   ],
+              // ),
+              // ),
               ListTile(
                 title: Text('Blogs'),
                 subtitle: Text('Feeling Happy or Sad? Vent it out with us.'),
@@ -114,16 +114,6 @@ class _BlogsState extends State<Blogs> {
                       child: Column(
                         children: [
                           Image(image: NetworkImage(blogs[index].url)),
-
-                          // Icon(
-                          //   Icons.home,
-                          //   size: 150,
-                          // ),
-                          // FittedBox(
-                          //   fit: BoxFit.contain,
-                          //   alignment: Alignment.center,
-                          //   child: Text(blogs[index].title),
-                          // )
                         ],
                       ),
                     ),
@@ -141,69 +131,6 @@ class _BlogsState extends State<Blogs> {
                 mainAxisSpacing: 4.0,
                 crossAxisSpacing: 4.0,
               ),
-              // GestureDetector(
-              //   child: Card(
-              //     child: Column(
-              //       children: [
-              //         Icon(
-              //           Icons.home,
-              //           size: 200,
-              //         ),
-              //         FittedBox(
-              //           fit: BoxFit.contain,
-              //           alignment: Alignment.center,
-              //           child: Text('The OCD Stories'),
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              //   onTap: () => {
-              //     Navigator.push(context,
-              //         MaterialPageRoute(builder: (context) => BlogDetails(blog: blogs.elementAt(0),)))
-              //   },
-              // ),
-              // Expanded(
-              //   child: SizedBox(
-              //     height: 50,
-              //     child: StaggeredGridView.countBuilder(
-              //       physics: NeverScrollableScrollPhysics(),
-              //       shrinkWrap: true,
-              //       crossAxisCount: 4,
-              //       itemCount: blogs.length,
-              //       itemBuilder: (BuildContext context, int index) {
-              //         return GestureDetector(
-              //           child: Card(
-              //             child: Column(
-              //               children: [
-              //                 Icon(
-              //                   Icons.home,
-              //                   size: 150,
-              //                 ),
-              //                 FittedBox(
-              //                   fit: BoxFit.contain,
-              //                   alignment: Alignment.center,
-              //                   child: Text(blogs[index].title),
-              //                 )
-              //               ],
-              //             ),
-              //           ),
-              //           onTap: () => {
-              //             Navigator.push(
-              //                 context,
-              //                 MaterialPageRoute(
-              //                     builder: (context) => BlogDetails(
-              //                           blog: blogs.elementAt(0),
-              //                         )))
-              //           },
-              //         );
-              //       },
-              //       staggeredTileBuilder: (int index) =>
-              //           new StaggeredTile.fit(2),
-              //       mainAxisSpacing: 4.0,
-              //       crossAxisSpacing: 4.0,
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         ),

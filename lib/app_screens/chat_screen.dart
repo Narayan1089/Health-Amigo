@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:amigoproject/models/chatMessageModel.dart';
 import 'dart:async';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:emoji_picker/emoji_picker.dart';
 
 class ChatScreen extends StatefulWidget {

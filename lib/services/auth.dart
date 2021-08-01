@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:amigoproject/app_screens/login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Stream<User?> get authState => _auth.idTokenChanges();
 //  var token;
@@ -39,6 +41,14 @@ class AuthMethods {
           email: email, password: password);
       // print(result);
       user = result.user;
+      if (user != null) {
+        // await _firestore.;
+        await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
+          "name": user.displayName,
+          "moodTrack": 0,
+        });
+        return _userFromFirebaseUser(user);
+      }
       // if (!user!.emailVerified) {
       //   e = true;
       //   errorMessage =
@@ -47,7 +57,7 @@ class AuthMethods {
       // } else {
       //   return _userFromFirebaseUser(user);
       // }
-      return _userFromFirebaseUser(user);
+
     } on SocketException {
       e = true;
       errorMessage = 'No interent connection!';

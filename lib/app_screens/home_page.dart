@@ -1,3 +1,4 @@
+import 'package:amigoproject/services/database/db.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -12,9 +13,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _auth = FirebaseAuth.instance;
+  // final _firestore = FirebaseFirestore.instance;
+  FirestoreConfig _firestoreConfig = FirestoreConfig();
+
   String? email = '';
   String? id = '';
   String? name = '';
+  // int moodTrack = 0;
+
   Future<void> getCurrentUser() async {
     try {
       final user = _auth.currentUser;
@@ -86,13 +92,76 @@ class _HomeState extends State<Home> {
                   //   size: 40,
                   // ),
                   // Icon(Icons.face_outlined),
-                  Icon(Icons.face_outlined),
-                  Icon(Icons.face_outlined),
-                  Icon(Icons.face_outlined),
-                  Icon(Icons.face_outlined),
-                  Icon(Icons.face_outlined),
-                  Icon(Icons.face_outlined),
-                  Icon(Icons.face_outlined),
+                  IconButton(
+                      onPressed: () async {
+                        int moodTrack = 3;
+                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
+                        int? prev = _firestoreConfig.mood;
+                        int? avg = (prev! + moodTrack) ~/ 2;
+                        await _firestoreConfig.updateMoodTrack(
+                            user: loggedInUser, mood: avg);
+                      },
+                      icon: Icon(Icons.face_outlined)),
+                  IconButton(
+                      onPressed: () async {
+                        int moodTrack = 2;
+                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
+                        int? prev = _firestoreConfig.mood;
+                        int? avg = (prev! + moodTrack) ~/ 2;
+                        await _firestoreConfig.updateMoodTrack(
+                            user: loggedInUser, mood: avg);
+                      },
+                      icon: Icon(Icons.face_outlined)),
+                  IconButton(
+                      onPressed: () async {
+                        int moodTrack = 1;
+                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
+                        int? prev = _firestoreConfig.mood;
+                        int? avg = (prev! + moodTrack) ~/ 2;
+                        await _firestoreConfig.updateMoodTrack(
+                            user: loggedInUser, mood: avg);
+                      },
+                      icon: Icon(Icons.face_outlined)),
+                  IconButton(
+                      onPressed: () async {
+                        int moodTrack = 0;
+                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
+                        int? prev = _firestoreConfig.mood;
+                        int? avg = (prev! + moodTrack) ~/ 2;
+                        await _firestoreConfig.updateMoodTrack(
+                            user: loggedInUser, mood: avg);
+                      },
+                      icon: Icon(Icons.face_outlined)),
+                  IconButton(
+                      onPressed: () async {
+                        int moodTrack = -1;
+                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
+                        int? prev = _firestoreConfig.mood;
+                        int? avg = (prev! + moodTrack) ~/ 2;
+                        await _firestoreConfig.updateMoodTrack(
+                            user: loggedInUser, mood: avg);
+                      },
+                      icon: Icon(Icons.face_outlined)),
+                  IconButton(
+                      onPressed: () async {
+                        int moodTrack = -2;
+                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
+                        int? prev = _firestoreConfig.mood;
+                        int? avg = (prev! + moodTrack) ~/ 2;
+                        await _firestoreConfig.updateMoodTrack(
+                            user: loggedInUser, mood: avg);
+                      },
+                      icon: Icon(Icons.face_outlined)),
+                  IconButton(
+                      onPressed: () async {
+                        int moodTrack = -3;
+                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
+                        int? prev = _firestoreConfig.mood;
+                        int? avg = (prev! + moodTrack) ~/ 2;
+                        await _firestoreConfig.updateMoodTrack(
+                            user: loggedInUser, mood: avg);
+                      },
+                      icon: Icon(Icons.face_outlined)),
                 ],
               ),
               SizedBox(
@@ -108,10 +177,10 @@ class _HomeState extends State<Home> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 55,
+                      height: 20,
                     ),
                     Text(
-                      'Let’s prepare for',
+                      'Quote of the Day',
                       style: TextStyle(
                           // color: Colors.white,
                           fontFamily: 'Montserrat',
@@ -119,17 +188,17 @@ class _HomeState extends State<Home> {
                           fontStyle: FontStyle.normal,
                           fontSize: 20),
                     ),
-                    Text(
-                      'your day',
-                      style: TextStyle(
-                          // color: Colors.white,
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 20),
-                    ),
+                    // Text(
+                    //   'your day',
+                    //   style: TextStyle(
+                    //       // color: Colors.white,
+                    //       fontFamily: 'Montserrat',
+                    //       fontWeight: FontWeight.w600,
+                    //       fontStyle: FontStyle.normal,
+                    //       fontSize: 20),
+                    // ),
                     SizedBox(
-                      height: 23,
+                      height: 53,
                     ),
                     Text(
                       'So nothing will break your inner peace',
@@ -143,9 +212,55 @@ class _HomeState extends State<Home> {
                   ],
                 ),
               ),
+              // Container(
+              //   width: 370,
+              //   height: 220,
+              //   padding: EdgeInsets.only(top: 10, bottom: 10),
+              //   decoration: BoxDecoration(
+              //       color: Color(0xffE5E5E5),
+              //       borderRadius: BorderRadius.circular(10)),
+              //   child: Column(
+              //     children: [
+              //       SizedBox(
+              //         height: 55,
+              //       ),
+              //       Text(
+              //         'Let’s prepare for',
+              //         style: TextStyle(
+              //             // color: Colors.white,
+              //             fontFamily: 'Montserrat',
+              //             fontWeight: FontWeight.w600,
+              //             fontStyle: FontStyle.normal,
+              //             fontSize: 20),
+              //       ),
+              //       Text(
+              //         'your day',
+              //         style: TextStyle(
+              //             // color: Colors.white,
+              //             fontFamily: 'Montserrat',
+              //             fontWeight: FontWeight.w600,
+              //             fontStyle: FontStyle.normal,
+              //             fontSize: 20),
+              //       ),
+              //       SizedBox(
+              //         height: 23,
+              //       ),
+              //       Text(
+              //         'So nothing will break your inner peace',
+              //         style: TextStyle(
+              //             // color: Colors.white,
+              //             fontFamily: 'Montserrat',
+              //             fontWeight: FontWeight.w400,
+              //             fontStyle: FontStyle.normal,
+              //             fontSize: 10.47),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               SizedBox(
                 height: 10,
               ),
+              Text('Must Read Blogs...'),
               // Card(
               //   margin: EdgeInsets.fromLTRB(5, 15, 5, 0),
               //   child: Column(

@@ -1,15 +1,10 @@
 import 'package:amigoproject/app_screens/doctors_pg.dart';
-// import 'package:amigoproject/app_screens/login.dart';
-import 'package:amigoproject/app_screens/sos.dart';
-import 'package:amigoproject/app_screens/subscription/surbs_1.dart';
-// import 'package:amigoproject/app_screens/welcome_screen.dart';
 import 'package:amigoproject/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
 import 'package:amigoproject/app_screens/home_page.dart';
 import 'package:amigoproject/app_screens/meditate_page.dart';
 import 'package:amigoproject/app_screens/chat_screen.dart';
-// import 'package:amigoproject/app_screens/phoneNumberScreen.dart';
 
 void main() {
   runApp(Amigo());
@@ -84,19 +79,19 @@ class _AmigoState extends State<Amigo> {
                 ),
                 onTap: () => {Navigator.pop(context)},
               ),
-              ListTile(
-                title: Row(
-                  children: [
-                    Icon(Icons.subscriptions_outlined),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text('Subscription Details'),
-                  ],
-                ),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => SubscriptionPage())),
-              ),
+              // ListTile(
+              //   title: Row(
+              //     children: [
+              //       Icon(Icons.subscriptions_outlined),
+              //       SizedBox(
+              //         width: 10,
+              //       ),
+              //       Text('Subscription Details'),
+              //     ],
+              //   ),
+              //   onTap: () => Navigator.push(context,
+              //       MaterialPageRoute(builder: (_) => SubscriptionPage())),
+              // ),
               ListTile(
                 title: Row(
                   children: [

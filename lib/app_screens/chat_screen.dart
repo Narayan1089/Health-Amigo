@@ -170,12 +170,12 @@ class _ChatScreenState extends State<ChatScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundColor: Colors.transparent,
-                              backgroundImage:
-                                  AssetImage('assets/images/chatbot.png'),
-                            ),
+                            // CircleAvatar(
+                            //   radius: 25,
+                            //   backgroundColor: Colors.transparent,
+                            //   backgroundImage:
+                            //       AssetImage('assets/images/chatbot.png'),
+                            // ),
                             SizedBox(
                               width: 5,
                             ),
@@ -261,40 +261,40 @@ class _ChatScreenState extends State<ChatScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.3),
-                                    spreadRadius: 2,
-                                    blurRadius: 3,
-                                    offset: Offset(1, 2),
-                                  )
-                                ],
-                              ),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.black,
-                                radius: 25,
-                                child: CircleAvatar(
-                                  radius: 23,
+                            // SizedBox(
+                            //   width: 5,
+                            // ),
+                            // Container(
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.white,
+                            //     shape: BoxShape.circle,
+                            //     boxShadow: [
+                            //       BoxShadow(
+                            //         color: Colors.black.withOpacity(0.3),
+                            //         spreadRadius: 2,
+                            //         blurRadius: 3,
+                            //         offset: Offset(1, 2),
+                            //       )
+                            //     ],
+                            //   ),
+                            //   child: CircleAvatar(
+                            //     backgroundColor: Colors.black,
+                            //     radius: 25,
+                            //     child: CircleAvatar(
+                            //       radius: 23,
 
-                                  backgroundColor: Colors.white,
-                                  child: const Text(
-                                    'A',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 16,
-                                    ),
-                                  ), //Has to be replaced by the initial of the user
-                                ),
-                              ),
-                            ),
+                            //       backgroundColor: Colors.white,
+                            //       child: const Text(
+                            //         'A',
+                            //         style: TextStyle(
+                            //           color: Colors.black,
+                            //           fontWeight: FontWeight.w900,
+                            //           fontSize: 16,
+                            //         ),
+                            //       ), //Has to be replaced by the initial of the user
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ],

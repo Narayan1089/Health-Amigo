@@ -173,6 +173,16 @@ class _CheckoutState extends State<Checkout> {
                   SizedBox(
                     height: 10,
                   ),
+                  // ListView.builder(
+                  //   physics: NeverScrollableScrollPhysics(),
+                  //   shrinkWrap: true,
+                  //   itemCount: blogs.length,
+                  //   itemBuilder: (BuildContext context, int index) {
+                  //     return ListTile(
+                  //       title: Text(blogs[index].title),
+                  //     );
+                  //   },
+                  // ),
                   Container(
                     height: 100,
                     child: ListView.builder(

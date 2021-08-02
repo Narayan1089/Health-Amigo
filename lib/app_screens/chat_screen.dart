@@ -21,6 +21,16 @@ class _ChatScreenState extends State<ChatScreen> {
 
   bool isShowSticker = false;
 
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+
+  }
+
   Widget buildSticker() {
     return EmojiPicker(
       rows: 3,
@@ -58,33 +68,10 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  List<ChatMessage> messages = [
+  List<ChatMessage> messages =  [
     ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
     ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
-    ChatMessage(
-        messageContent:
-            "So follow up to @RobinSinha answer, using the Tab widget looks weirds as the Tab widget has an external padding, so i'd suggest to avoid that",
-        messageType: "sender"),
-    ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "How are you feeling - right now?",
-        messageType: "receiver"),
+
   ];
 
   @override
@@ -330,6 +317,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ),
                                   width: MediaQuery.of(context).size.width - 15,
                                   child: TextField(
+                                    controller: myController,
                                     focusNode: focus,
                                     textAlignVertical: TextAlignVertical.center,
                                     keyboardType: TextInputType.multiline,
@@ -379,7 +367,23 @@ class _ChatScreenState extends State<ChatScreen> {
                                 backgroundColor: Color(0xffFF834F),
                                 radius: 25,
                                 child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    print(myController.text);
+                                    
+                                    messages.add(
+                                        ChatMessage(
+                                            
+                                            messageContent: "${myController.text}", 
+                                            messageType: "sender")
+                                      );
+                                    myController.clear();
+                                    FocusScope.of(context).unfocus();
+                                    setState(() {
+                                      print(myController.text);
+                                      
+                                      
+                                    });
+                                  },
                                   icon: Icon(
                                     Icons.send_outlined,
                                     color: Colors.white,
@@ -548,3 +552,5 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
+
+ 

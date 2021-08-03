@@ -4,6 +4,7 @@ import 'package:amigoproject/models/chatMessageModel.dart';
 import 'dart:async';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:emoji_picker/emoji_picker.dart';
+import 'package:amigoproject/services/bot.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -378,6 +379,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                       );
                                     myController.clear();
                                     FocusScope.of(context).unfocus();
+                                    Bot bot = Bot();
+                                    bot.getBotResponse();
                                     setState(() {
                                       print(myController.text);
                                       

@@ -259,23 +259,22 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: 20,
                     ),
-                    Container(child: Consumer<MoodClass>(
-                            builder: (context, mood, child) {
-                      String message = mood._moodStatus;
-                      debugPrint("Mood Message: " + message);
-                      return Text(
-                        message.toString(),
-                        style: TextStyle(
-                            color: mood._color,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w800,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 18),
-                      );
-                      // String message = (mood._moodStatus.isEmpty ? "Please try our Mood Tracker" : )
-                    })
-                        // child:
-                        ),
+                    Container(
+                      child:
+                          Consumer<MoodClass>(builder: (context, mood, child) {
+                        String message = mood._moodStatus;
+                        debugPrint("Mood Message: " + message);
+                        return Text(
+                          message.toString(),
+                          style: TextStyle(
+                              color: mood._color,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w800,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 18),
+                        );
+                      }),
+                    ),
                   ],
                 ),
               ),
@@ -541,14 +540,14 @@ moodTracker({int? mood, User? user}) async {
 
 class MoodClass with ChangeNotifier {
   int? _data;
-  String _moodStatus = "Try out our mood tracker!";
+  String _moodStatus = "";
   Color _color = Colors.white;
   String get moodStatus => _moodStatus;
   Color get color => _color;
   // int? get data = _data;
 
-  void displayMood() {
-    _firestoreConfig.retrieveMoodTracker(loggedInUser);
+  void displayMood() async {
+    await _firestoreConfig.retrieveMoodTracker(loggedInUser);
     _data = _firestoreConfig.mood;
     switch (_data) {
       case (2):
@@ -588,5 +587,6 @@ class MoodClass with ChangeNotifier {
       // return moodText;
 
     }
+    // notifyListeners();
   }
 }

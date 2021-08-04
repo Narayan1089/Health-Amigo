@@ -96,8 +96,8 @@ class AuthMethods {
       }
       if (user != null) {
         // await _firestore.;
-        await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
-          "name": user.displayName,
+        await _firestore.collection('users').doc(user.uid).set({
+          "name": username,
           "moodTrack": 0,
         });
         user.updateDisplayName(username);

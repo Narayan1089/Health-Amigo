@@ -5,26 +5,16 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Blogs extends StatefulWidget {
   // const Blogs({Key key}) : super(key: key);
-
-  @override
-  _BlogsState createState() => _BlogsState();
-}
-
-class _BlogsState extends State<Blogs> {
-  // Future<List<Blog>> _getBlogs() {
-  //   return blogs;
-  // }
-
   List<Blog> blogs = [
     Blog(
-        author: '',
+        author: 'Anshika',
         url:
             'https://images.unsplash.com/photo-1580428354768-03a028646bc8?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDQxfF9oYi1kbDRRLTRVfHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
         text:
             'The Mind and the Body are not separate; what affects one, affects the other...\n\n Stress has varied meaning for different people under varied conditions. Lazarus and Folkman (1984) defined stress as a specific relationship that a person has to that of the environment which result in terms of threat, danger or deterioration of mental wellbeing.\n\nIn December 2019, the new coronavirus disease 2019 (COVID-2019) started spreading in the Chinese city of Wuhan (Hubei province). The pandemic of Corona Virus (Covid -19) has a huge impact on the whole world. Which is associated with uncertainty hence leading to an increase in testing psychological resilience of the masses. People are going through a myriad of psychological problems in adjusting to the current lifestyles and fear of the disease. The corona virus disease (Covid-19) pandemic is a public health emergency of international concern and poses a challenge to humanity to cope up by countering this potential stressor. A stressor could be any chemical or biological agent, environmental condition, external stimulus or an event seen as causing stress to an organism (Sato, 2006). And it is very important to understand that a stimulus cannot be labelled as a stressor if it doesn’t result into stress. But covid-19 pandemic and lockdown along with other stimulus act as potent stressors.\n\n However, many recent studies aim to analyze varied effects of covid-19 related to clinical aspects, likelihood of survival, genomic characterization of the virus and drugs and therapeutic ways. But majorly lacked the effort in place of psychological element of the present situation and paid least focus on the effects of one of the major aspects of the same pandemic situation that is “lockdown”. Our study exaggerates that covid-19 pandemic, several months lockdown, social distancing, distance learning situation; could be some of the potent stressors for students.\n\nHowever, here comes the role of coping strategies in order to dough the potent stressors of covid-19 pandemic and lockdown. There are broad categories of coping strategies but the most general ones are classified as problem-focused, emotion-focused, approach coping strategies and avoidant coping strategies. Particular strategies are not inherently either good or bad, but instead their value depends on the specific stressor and the situation in which it occurs.\n\n Coping is characterized by the subscales of active coping, positive reframing, planning, acceptance, seeking emotional support, and seeking informational support. Avoidant Coping which is characterized by the subscales of denial, substance use, venting, behavioral disengagement, self-distraction and self-blame. Neither approach nor avoidant coping strategy may include humor or religion which are neither considered as avoidant nor approach in strategy.\n\n Mental illnesses affect 19% of the adult population, 46% of teenagers and 13% of children each year. People struggling with their mental health may be living next to our doors, in your school, college or dorm but only half of those receive the required treatment, often because of the stigma attached to mental health. Untreated, mental illness can contribute to higher medical expenses, poorer performance at school and work, fewer employment opportunities and increased risk of suicide.\n\n This will help people to understand how students suffer from stress and what coping strategies can be used during Covid-19 pandemic lockdown. Learning more about mental health allows us to provide helpful support to those affected in our communities.\n\nA COVID-19 epidemic has been spreading in China and other parts of the world since December 2019. The epidemic has brought not only the risk of death from infection but also unbearable psychological pressure. The pandemic has pushed the global economy into a recession, which means the economy starts shrinking and growth stops.\n\nThe priority for governments and the global community is to prevent people from contracting the disease and to cure those who do. More health awareness spending can save lives both at home and globally.\n\nSince majority of the population is experiencing borderline stress, it is recommended to the academic institution’s counseling service to arrange regular virtual mental health checkups or counseling sessions to counter the same.\n\n It is recommended to the institutions to make effective changes or additions in their curriculum and co-curriculum according to the digitalization demand of the present time, which will help to elevate student’s productivity. \n\nSince the studies show high usage of approach coping strategy to counter the stressors, hence it is recommendable that class teacher/professors engage their students in such activities including active coping, gaining emotional support, use of informational support, positive reframing, planning, etc.\n\n Since there is correlation between stress levels and coping strategy, hence it is recommendable that community services carry out measures like virtual campaigns having agendas like importance of mental health and its preservation through tough times. They are even recommended to provide various services particularly having a foundation of approach coping strategies to counter stress levels that they could provide to their visitors and help them out.',
         title: 'Is Coping with Stress A Part of Fighting the Pandemic?'),
     Blog(
-      author: '',
+      author: 'Sharvari',
       url:
           'https://images.unsplash.com/photo-1542639130-c9fadbddcc6b?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDMzfF9oYi1kbDRRLTRVfHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
       text:
@@ -32,7 +22,7 @@ class _BlogsState extends State<Blogs> {
       title: 'Workplace, productivity and the pandemic.',
     ),
     Blog(
-        author: '',
+        author: 'Almash',
         url:
             'https://images.unsplash.com/photo-1548839140-29a749e1cf4d?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDQ1fF9oYi1kbDRRLTRVfHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
         text:
@@ -61,6 +51,16 @@ class _BlogsState extends State<Blogs> {
             'The Mind and the Body are not separate; what affects one, affects the other...\n\n Stress has varied meaning for different people under varied conditions. Lazarus and Folkman (1984) defined stress as a specific relationship that a person has to that of the environment which result in terms of threat, danger or deterioration of mental wellbeing.\n\nIn December 2019, the new coronavirus disease 2019 (COVID-2019) started spreading in the Chinese city of Wuhan (Hubei province). The pandemic of Corona Virus (Covid -19) has a huge impact on the whole world. Which is associated with uncertainty hence leading to an increase in testing psychological resilience of the masses. People are going through a myriad of psychological problems in adjusting to the current lifestyles and fear of the disease. The corona virus disease (Covid-19) pandemic is a public health emergency of international concern and poses a challenge to humanity to cope up by countering this potential stressor. A stressor could be any chemical or biological agent, environmental condition, external stimulus or an event seen as causing stress to an organism (Sato, 2006). And it is very important to understand that a stimulus cannot be labelled as a stressor if it doesn’t result into stress. But covid-19 pandemic and lockdown along with other stimulus act as potent stressors.\n\n However, many recent studies aim to analyze varied effects of covid-19 related to clinical aspects, likelihood of survival, genomic characterization of the virus and drugs and therapeutic ways. But majorly lacked the effort in place of psychological element of the present situation and paid least focus on the effects of one of the major aspects of the same pandemic situation that is “lockdown”. Our study exaggerates that covid-19 pandemic, several months lockdown, social distancing, distance learning situation; could be some of the potent stressors for students.\n\nHowever, here comes the role of coping strategies in order to dough the potent stressors of covid-19 pandemic and lockdown. There are broad categories of coping strategies but the most general ones are classified as problem-focused, emotion-focused, approach coping strategies and avoidant coping strategies. Particular strategies are not inherently either good or bad, but instead their value depends on the specific stressor and the situation in which it occurs.\n\n Coping is characterized by the subscales of active coping, positive reframing, planning, acceptance, seeking emotional support, and seeking informational support. Avoidant Coping which is characterized by the subscales of denial, substance use, venting, behavioral disengagement, self-distraction and self-blame. Neither approach nor avoidant coping strategy may include humor or religion which are neither considered as avoidant nor approach in strategy.\n\n Mental illnesses affect 19% of the adult population, 46% of teenagers and 13% of children each year. People struggling with their mental health may be living next to our doors, in your school, college or dorm but only half of those receive the required treatment, often because of the stigma attached to mental health. Untreated, mental illness can contribute to higher medical expenses, poorer performance at school and work, fewer employment opportunities and increased risk of suicide.\n\n This will help people to understand how students suffer from stress and what coping strategies can be used during Covid-19 pandemic lockdown. Learning more about mental health allows us to provide helpful support to those affected in our communities.\n\nA COVID-19 epidemic has been spreading in China and other parts of the world since December 2019. The epidemic has brought not only the risk of death from infection but also unbearable psychological pressure. The pandemic has pushed the global economy into a recession, which means the economy starts shrinking and growth stops.\n\nThe priority for governments and the global community is to prevent people from contracting the disease and to cure those who do. More health awareness spending can save lives both at home and globally.\n\nSince majority of the population is experiencing borderline stress, it is recommended to the academic institution’s counseling service to arrange regular virtual mental health checkups or counseling sessions to counter the same.\n\n It is recommended to the institutions to make effective changes or additions in their curriculum and co-curriculum according to the digitalization demand of the present time, which will help to elevate student’s productivity. \n\nSince the studies show high usage of approach coping strategy to counter the stressors, hence it is recommendable that class teacher/professors engage their students in such activities including active coping, gaining emotional support, use of informational support, positive reframing, planning, etc.\n\n Since there is correlation between stress levels and coping strategy, hence it is recommendable that community services carry out measures like virtual campaigns having agendas like importance of mental health and its preservation through tough times. They are even recommended to provide various services particularly having a foundation of approach coping strategies to counter stress levels that they could provide to their visitors and help them out.',
         title: 'Is Coping with Stress A Part of Fighting the Pandemic?'),
   ];
+
+  @override
+  _BlogsState createState() => _BlogsState();
+}
+
+class _BlogsState extends State<Blogs> {
+  // Future<List<Blog>> _getBlogs() {
+  //   return blogs;
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,13 +107,13 @@ class _BlogsState extends State<Blogs> {
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 crossAxisCount: 4,
-                itemCount: blogs.length,
+                itemCount: widget.blogs.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     child: Card(
                       child: Column(
                         children: [
-                          Image(image: NetworkImage(blogs[index].url)),
+                          Image(image: NetworkImage(widget.blogs[index].url)),
                         ],
                       ),
                     ),
@@ -122,7 +122,7 @@ class _BlogsState extends State<Blogs> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => BlogDetails(
-                                    blog: blogs[index],
+                                    blog: widget.blogs[index],
                                   )))
                     },
                   );

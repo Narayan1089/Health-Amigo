@@ -1,4 +1,5 @@
 // @dart = 2.9
+import 'package:amigoproject/app_screens/home_page.dart';
 import 'package:amigoproject/services/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -45,7 +46,8 @@ class _MyApp extends State<MyApp> {
               ),
               StreamProvider(
                 create: (context) => context.read<AuthMethods>().authState,
-              )
+              ),
+              ChangeNotifierProvider(create: (_) => MoodClass())
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

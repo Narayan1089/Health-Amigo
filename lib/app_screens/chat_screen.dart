@@ -4,6 +4,9 @@ import 'package:amigoproject/models/chatMessageModel.dart';
 import 'dart:async';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:emoji_picker/emoji_picker.dart';
+import 'package:amigoproject/services/bot.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:amigoproject/services/database/db.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -20,6 +23,21 @@ class _ChatScreenState extends State<ChatScreen> {
   bool t = true;
 
   bool isShowSticker = false;
+
+  final _auth = FirebaseAuth.instance;
+  
+  final myController = TextEditingController();
+
+
+
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+
+  }
 
   Widget buildSticker() {
     return EmojiPicker(
@@ -58,33 +76,10 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  List<ChatMessage> messages = [
+  List<ChatMessage> messages =  [
     ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
     ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
-    ChatMessage(
-        messageContent:
-            "So follow up to @RobinSinha answer, using the Tab widget looks weirds as the Tab widget has an external padding, so i'd suggest to avoid that",
-        messageType: "sender"),
-    ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "Is there any thing wrong?", messageType: "sender"),
-    ChatMessage(
-        messageContent: "How are you feeling - right now?",
-        messageType: "receiver"),
+
   ];
 
   @override
@@ -171,12 +166,12 @@ class _ChatScreenState extends State<ChatScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundColor: Colors.transparent,
-                              backgroundImage:
-                                  AssetImage('assets/images/chatbot.png'),
-                            ),
+                            // CircleAvatar(
+                            //   radius: 25,
+                            //   backgroundColor: Colors.transparent,
+                            //   backgroundImage:
+                            //       AssetImage('assets/images/chatbot.png'),
+                            // ),
                             SizedBox(
                               width: 5,
                             ),
@@ -262,40 +257,40 @@ class _ChatScreenState extends State<ChatScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.3),
-                                    spreadRadius: 2,
-                                    blurRadius: 3,
-                                    offset: Offset(1, 2),
-                                  )
-                                ],
-                              ),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.black,
-                                radius: 25,
-                                child: CircleAvatar(
-                                  radius: 23,
+                            // SizedBox(
+                            //   width: 5,
+                            // ),
+                            // Container(
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.white,
+                            //     shape: BoxShape.circle,
+                            //     boxShadow: [
+                            //       BoxShadow(
+                            //         color: Colors.black.withOpacity(0.3),
+                            //         spreadRadius: 2,
+                            //         blurRadius: 3,
+                            //         offset: Offset(1, 2),
+                            //       )
+                            //     ],
+                            //   ),
+                            //   child: CircleAvatar(
+                            //     backgroundColor: Colors.black,
+                            //     radius: 25,
+                            //     child: CircleAvatar(
+                            //       radius: 23,
 
-                                  backgroundColor: Colors.white,
-                                  child: const Text(
-                                    'A',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 16,
-                                    ),
-                                  ), //Has to be replaced by the initial of the user
-                                ),
-                              ),
-                            ),
+                            //       backgroundColor: Colors.white,
+                            //       child: const Text(
+                            //         'A',
+                            //         style: TextStyle(
+                            //           color: Colors.black,
+                            //           fontWeight: FontWeight.w900,
+                            //           fontSize: 16,
+                            //         ),
+                            //       ), //Has to be replaced by the initial of the user
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ],
@@ -330,6 +325,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ),
                                   width: MediaQuery.of(context).size.width - 15,
                                   child: TextField(
+                                    controller: myController,
                                     focusNode: focus,
                                     textAlignVertical: TextAlignVertical.center,
                                     keyboardType: TextInputType.multiline,
@@ -379,7 +375,40 @@ class _ChatScreenState extends State<ChatScreen> {
                                 backgroundColor: Color(0xffFF834F),
                                 radius: 25,
                                 child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    print(myController.text);
+                                    
+                                    messages.add(
+                                        ChatMessage(
+                                            
+                                            messageContent: "${myController.text}", 
+                                            messageType: "sender")
+                                      );
+                                    
+                                    FocusScope.of(context).unfocus();
+                                    Bot bot = Bot();
+                                    final user = _auth.currentUser;
+                                    String? id = user?.uid;
+                                    print(id);
+                                    List<BotResponse> responses = await bot.getBotResponse(id!,myController.text);
+                                    
+                                    responses.forEach((response){
+                                      messages.add(
+                                        ChatMessage(
+                                            
+                                            messageContent: response.text , 
+                                            messageType: "receiver")
+                                      );
+                                    });
+
+
+                                    myController.clear();
+                                    setState(() {
+                                      print(myController.text);
+                                      
+                                      
+                                    });
+                                  },
                                   icon: Icon(
                                     Icons.send_outlined,
                                     color: Colors.white,
@@ -548,3 +577,5 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
+
+ 

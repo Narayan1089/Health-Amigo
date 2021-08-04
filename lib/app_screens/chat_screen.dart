@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:amigoproject/services/bot.dart';
 
+
 class ChatScreen extends StatefulWidget {
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -368,7 +369,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 backgroundColor: Color(0xffFF834F),
                                 radius: 25,
                                 child: IconButton(
-                                  onPressed: () {
+                                  onPressed: () async {
                                     print(myController.text);
                                     
                                     messages.add(
@@ -377,10 +378,22 @@ class _ChatScreenState extends State<ChatScreen> {
                                             messageContent: "${myController.text}", 
                                             messageType: "sender")
                                       );
-                                    myController.clear();
+                                    
                                     FocusScope.of(context).unfocus();
                                     Bot bot = Bot();
-                                    bot.getBotResponse();
+                                    List<BotResponse> responses = await bot.getBotResponse("1",myController.text);
+                                    
+                                    responses.forEach((response){
+                                      messages.add(
+                                        ChatMessage(
+                                            
+                                            messageContent: response.text , 
+                                            messageType: "receiver")
+                                      );
+                                    });
+
+
+                                    myController.clear();
                                     setState(() {
                                       print(myController.text);
                                       

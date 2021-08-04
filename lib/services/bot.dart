@@ -43,7 +43,7 @@ class Bot {
 
     try{
      final response = await post(
-       Uri.parse("http://a8c85ef5a244.ngrok.io/webhooks/rest/webhook"),
+       Uri.parse("http://35.244.60.65:443/webhooks/rest/webhook"),
        headers:<String, String>{
       'Content-Type': 'application/json',
       },

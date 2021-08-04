@@ -5,7 +5,8 @@ import 'dart:async';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:amigoproject/services/bot.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:amigoproject/services/database/db.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -23,7 +24,12 @@ class _ChatScreenState extends State<ChatScreen> {
 
   bool isShowSticker = false;
 
+  final _auth = FirebaseAuth.instance;
+  
   final myController = TextEditingController();
+
+
+
 
   @override
   void dispose() {
@@ -381,7 +387,10 @@ class _ChatScreenState extends State<ChatScreen> {
                                     
                                     FocusScope.of(context).unfocus();
                                     Bot bot = Bot();
-                                    List<BotResponse> responses = await bot.getBotResponse("1",myController.text);
+                                    final user = _auth.currentUser;
+                                    String? id = user?.uid;
+                                    print(id);
+                                    List<BotResponse> responses = await bot.getBotResponse(id!,myController.text);
                                     
                                     responses.forEach((response){
                                       messages.add(

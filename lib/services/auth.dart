@@ -42,11 +42,6 @@ class AuthMethods {
       // print(result);
       user = result.user;
       if (user != null) {
-        // await _firestore.;
-        await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
-          "name": user.displayName,
-          "moodTrack": 0,
-        });
         return _userFromFirebaseUser(user);
       }
       // if (!user!.emailVerified) {
@@ -99,10 +94,16 @@ class AuthMethods {
       if (user != null && !user.emailVerified) {
         await user.sendEmailVerification();
       }
-
-      user?.updateDisplayName(username);
-      print(errorMessage);
-      return _userFromFirebaseUser(user);
+      if (user != null) {
+        // await _firestore.;
+        await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
+          "name": user.displayName,
+          "moodTrack": 0,
+        });
+        user.updateDisplayName(username);
+        print(errorMessage);
+        return _userFromFirebaseUser(user);
+      }
     } on SocketException {
       e = true;
       errorMessage = 'No interent connection!';

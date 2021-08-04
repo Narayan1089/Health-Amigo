@@ -48,9 +48,9 @@ class _BlogDetailsState extends State<BlogDetails> {
                       ),
                       Row(
                         children: [
-                          Text('Date\tTime\t-Author-${blog.author} '),
+                          Text('Date\tTime\t-${blog.author} '),
                           SizedBox(
-                            width: 140,
+                            width: 130,
                           ),
                           Icon(Icons.share_outlined),
                           SizedBox(

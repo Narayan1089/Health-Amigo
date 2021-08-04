@@ -1,8 +1,14 @@
+import 'package:amigoproject/app_screens/blog_details_pg.dart';
+import 'package:amigoproject/app_screens/blogs_page.dart';
 import 'package:amigoproject/services/database/db.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:provider/provider.dart';
 
 User? loggedInUser;
+String? moodText = '';
+FirestoreConfig _firestoreConfig = FirestoreConfig();
 
 class Home extends StatefulWidget {
 //  const Home({required Key key, required String title}) : super(key: key);
@@ -13,13 +19,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _auth = FirebaseAuth.instance;
-  // final _firestore = FirebaseFirestore.instance;
-  FirestoreConfig _firestoreConfig = FirestoreConfig();
+
+  Blogs _blog = Blogs();
 
   String? email = '';
   String? id = '';
   String? name = '';
-  // int moodTrack = 0;
+  String? mood = '';
 
   Future<void> getCurrentUser() async {
     try {
@@ -42,18 +48,25 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     getCurrentUser();
+    // Provider.of<MoodClass>(context).displayMood();
+    // mood = displayMood();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Provider.of<MoodClass>(context).displayMood();
   }
 
   @override
   Widget build(BuildContext context) {
-    // String userName = 'Sneh';
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 height: 10,
@@ -75,11 +88,11 @@ class _HomeState extends State<Home> {
                         fontFamily: 'Montserrat',
                         fontSize: 14,
                         fontWeight: FontWeight.normal)),
-                trailing: Icon(Icons.calendar_today_outlined),
+                // trailing: Icon(Icons.calendar_today_outlined),
               ),
-              SizedBox(
-                height: 15,
-              ),
+              // SizedBox(
+              //   height: 5,
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -93,82 +106,107 @@ class _HomeState extends State<Home> {
                   // ),
                   // Icon(Icons.face_outlined),
                   IconButton(
-                      onPressed: () async {
-                        int moodTrack = 3;
-                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
-                        int? prev = _firestoreConfig.mood;
-                        int? avg = (prev! + moodTrack) ~/ 2;
-                        await _firestoreConfig.updateMoodTrack(
-                            user: loggedInUser, mood: avg);
-                      },
-                      icon: Icon(Icons.face_outlined)),
+                    disabledColor: Colors.blue,
+                    onPressed: () async {
+                      // int mood = 3;
+                      await moodTracker(mood: 3, user: loggedInUser);
+                      // mood = displayMood();
+                      Provider.of<MoodClass>(context, listen: false)
+                          .displayMood();
+                      // setState(() {
+                      //   mood = moodText;
+                      // });
+                    },
+                    icon: Icon(
+                      Icons.face,
+                      size: 40,
+                    ),
+                    color: Colors.pinkAccent,
+                  ),
                   IconButton(
-                      onPressed: () async {
-                        int moodTrack = 2;
-                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
-                        int? prev = _firestoreConfig.mood;
-                        int? avg = (prev! + moodTrack) ~/ 2;
-                        await _firestoreConfig.updateMoodTrack(
-                            user: loggedInUser, mood: avg);
-                      },
-                      icon: Icon(Icons.face_outlined)),
+                    onPressed: () async {
+                      await moodTracker(mood: 2, user: loggedInUser);
+                      Provider.of<MoodClass>(context, listen: false)
+                          .displayMood();
+                      // setState(() {
+                      //   mood = moodText;
+                      // });
+                    },
+                    icon: Icon(
+                      Icons.face_rounded,
+                      size: 40,
+                    ),
+                    color: Colors.lightGreen.shade300,
+                  ),
                   IconButton(
-                      onPressed: () async {
-                        int moodTrack = 1;
-                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
-                        int? prev = _firestoreConfig.mood;
-                        int? avg = (prev! + moodTrack) ~/ 2;
-                        await _firestoreConfig.updateMoodTrack(
-                            user: loggedInUser, mood: avg);
-                      },
-                      icon: Icon(Icons.face_outlined)),
+                    onPressed: () async {
+                      await moodTracker(mood: 1, user: loggedInUser);
+                      Provider.of<MoodClass>(context, listen: false)
+                          .displayMood();
+                    },
+                    icon: Icon(
+                      Icons.face,
+                      size: 40,
+                    ),
+                    color: Colors.yellow,
+                  ),
                   IconButton(
-                      onPressed: () async {
-                        int moodTrack = 0;
-                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
-                        int? prev = _firestoreConfig.mood;
-                        int? avg = (prev! + moodTrack) ~/ 2;
-                        await _firestoreConfig.updateMoodTrack(
-                            user: loggedInUser, mood: avg);
-                      },
-                      icon: Icon(Icons.face_outlined)),
+                    onPressed: () async {
+                      await moodTracker(mood: 0, user: loggedInUser);
+                      Provider.of<MoodClass>(context, listen: false)
+                          .displayMood();
+                    },
+                    icon: Icon(
+                      Icons.face,
+                      size: 40,
+                    ),
+                    color: Colors.grey,
+                  ),
                   IconButton(
-                      onPressed: () async {
-                        int moodTrack = -1;
-                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
-                        int? prev = _firestoreConfig.mood;
-                        int? avg = (prev! + moodTrack) ~/ 2;
-                        await _firestoreConfig.updateMoodTrack(
-                            user: loggedInUser, mood: avg);
-                      },
-                      icon: Icon(Icons.face_outlined)),
+                    onPressed: () async {
+                      await moodTracker(mood: -1, user: loggedInUser);
+                      Provider.of<MoodClass>(context, listen: false)
+                          .displayMood();
+                    },
+                    icon: Icon(
+                      Icons.face,
+                      size: 40,
+                    ),
+                    color: Colors.blueAccent,
+                  ),
                   IconButton(
-                      onPressed: () async {
-                        int moodTrack = -2;
-                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
-                        int? prev = _firestoreConfig.mood;
-                        int? avg = (prev! + moodTrack) ~/ 2;
-                        await _firestoreConfig.updateMoodTrack(
-                            user: loggedInUser, mood: avg);
-                      },
-                      icon: Icon(Icons.face_outlined)),
+                    onPressed: () async {
+                      await moodTracker(mood: -2, user: loggedInUser);
+                      Provider.of<MoodClass>(context, listen: false)
+                          .displayMood();
+                    },
+                    icon: Icon(
+                      Icons.face,
+                      size: 40,
+                    ),
+                    color: Colors.purple.shade800,
+                  ),
                   IconButton(
-                      onPressed: () async {
-                        int moodTrack = -3;
-                        _firestoreConfig.retrieveMoodTracker(loggedInUser);
-                        int? prev = _firestoreConfig.mood;
-                        int? avg = (prev! + moodTrack) ~/ 2;
-                        await _firestoreConfig.updateMoodTrack(
-                            user: loggedInUser, mood: avg);
-                      },
-                      icon: Icon(Icons.face_outlined)),
+                    onPressed: () async {
+                      await moodTracker(mood: -3, user: loggedInUser);
+                      Provider.of<MoodClass>(context, listen: false)
+                          .displayMood();
+                    },
+                    icon: Icon(
+                      Icons.face,
+                      size: 40,
+                    ),
+                    color: Colors.red,
+                  ),
                 ],
               ),
               SizedBox(
                 height: 25,
               ),
               Container(
-                width: 370,
+                // alignment: AlignmentGeometry.lerp(a, b, t),
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                width: 400,
                 height: 220,
                 padding: EdgeInsets.only(top: 10, bottom: 10),
                 decoration: BoxDecoration(
@@ -184,7 +222,7 @@ class _HomeState extends State<Home> {
                       style: TextStyle(
                           // color: Colors.white,
                           fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                           fontStyle: FontStyle.normal,
                           fontSize: 20),
                     ),
@@ -198,17 +236,46 @@ class _HomeState extends State<Home> {
                     //       fontSize: 20),
                     // ),
                     SizedBox(
-                      height: 53,
+                      height: 33,
                     ),
                     Text(
-                      'So nothing will break your inner peace',
+                      'I am incharge of how I feel,',
                       style: TextStyle(
                           // color: Colors.white,
                           fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w800,
                           fontStyle: FontStyle.normal,
-                          fontSize: 10.47),
+                          fontSize: 20),
                     ),
+                    Text(
+                      'I am choosing happiness.',
+                      style: TextStyle(
+                          // color: Colors.white,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w800,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 20),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(child: Consumer<MoodClass>(
+                            builder: (context, mood, child) {
+                      String message = mood._moodStatus;
+                      debugPrint("Mood Message: " + message);
+                      return Text(
+                        message.toString(),
+                        style: TextStyle(
+                            color: mood._color,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w800,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 18),
+                      );
+                      // String message = (mood._moodStatus.isEmpty ? "Please try our Mood Tracker" : )
+                    })
+                        // child:
+                        ),
                   ],
                 ),
               ),
@@ -258,9 +325,73 @@ class _HomeState extends State<Home> {
               //   ),
               // ),
               SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(13, 0, 0, 0),
+                child: Text(
+                  'Must Read Blogs',
+                  style: TextStyle(
+                      // color: Colors.white,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 20),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              SizedBox(
                 height: 10,
               ),
-              Text('Must Read Blogs...'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    // height: 230,
+                    // width: 150,
+                    child: GestureDetector(
+                      child: Card(
+                        elevation: 3,
+                        child: Image(
+                          image: NetworkImage(_blog.blogs[0].url),
+                          width: 175,
+                          height: 195,
+                        ),
+                      ),
+                      onTap: () => {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BlogDetails(
+                                      blog: _blog.blogs[0],
+                                    )))
+                      },
+                    ),
+                  ),
+                  Container(
+                    // height: 230,
+                    // width: 150,
+                    child: GestureDetector(
+                      child: Card(
+                        elevation: 3,
+                        child: Image(
+                          image: NetworkImage(_blog.blogs[1].url),
+                          width: 175,
+                          height: 195,
+                        ),
+                      ),
+                      onTap: () => {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BlogDetails(
+                                      blog: _blog.blogs[1],
+                                    )))
+                      },
+                    ),
+                  ),
+                ],
+              ),
               // Card(
               //   margin: EdgeInsets.fromLTRB(5, 15, 5, 0),
               //   child: Column(
@@ -398,5 +529,64 @@ class MeditateCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+moodTracker({int? mood, User? user}) async {
+  _firestoreConfig.retrieveMoodTracker(loggedInUser);
+  int? prev = _firestoreConfig.mood;
+  int? avg = (prev! + mood!) ~/ 2;
+  await _firestoreConfig.updateMoodTrack(user: loggedInUser, mood: avg);
+}
+
+class MoodClass with ChangeNotifier {
+  int? _data;
+  String _moodStatus = "Try out our mood tracker!";
+  Color _color = Colors.white;
+  String get moodStatus => _moodStatus;
+  Color get color => _color;
+  // int? get data = _data;
+
+  void displayMood() {
+    _firestoreConfig.retrieveMoodTracker(loggedInUser);
+    _data = _firestoreConfig.mood;
+    switch (_data) {
+      case (2):
+        _moodStatus = "Stay Motivated";
+        _color = Colors.green;
+        notifyListeners();
+        // return moodText;
+        break;
+      case (1):
+        _moodStatus = "Stay Happy";
+        _color = Colors.yellow;
+        notifyListeners();
+        // return moodText;
+        break;
+      case (0):
+        _moodStatus = "Mood with MoodTracker";
+        _color = Colors.white;
+        notifyListeners();
+        // return moodText;
+        break;
+      case (-1):
+        _moodStatus = "Don't Worry. Stay Strong";
+        _color = Colors.blue;
+        notifyListeners();
+        // return moodText;
+        break;
+      case (-2):
+        _moodStatus = "Stay strong and be Happy!";
+        _color = Colors.purple;
+        notifyListeners();
+        // return moodText;
+        break;
+      default:
+        _moodStatus = "Try out our mood tracker!";
+        _color = Colors.grey;
+        notifyListeners();
+      // return moodText;
+
+    }
   }
 }

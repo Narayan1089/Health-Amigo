@@ -99,8 +99,24 @@ class _BlogsState extends State<Blogs> {
               // ),
               // ),
               ListTile(
-                title: Text('Blogs'),
-                subtitle: Text('Feeling Happy or Sad? Vent it out with us.'),
+                title: Text(
+                  'Blogs',
+                  style: TextStyle(
+                      // color: Colors.white,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 20),
+                ),
+                subtitle: Text(
+                  'Feeling Happy or Sad? Vent it out with us.',
+                  style: TextStyle(
+                      // color: Colors.white,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 13),
+                ),
               ),
               StaggeredGridView.countBuilder(
                 padding: EdgeInsets.fromLTRB(7, 3, 7, 3),
@@ -114,6 +130,18 @@ class _BlogsState extends State<Blogs> {
                       child: Column(
                         children: [
                           Image(image: NetworkImage(widget.blogs[index].url)),
+                          Container(
+                            child: Text(
+                              widget.blogs[index].title,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.03),
+                            ),
+                          )
                         ],
                       ),
                     ),

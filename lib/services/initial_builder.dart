@@ -1,4 +1,5 @@
 import 'package:amigoproject/app_screens/doctors_pg.dart';
+import 'package:amigoproject/app_screens/drawer-screens/about_life.dart';
 import 'package:amigoproject/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
@@ -77,7 +78,10 @@ class _AmigoState extends State<Amigo> {
                     Text('Account Details'),
                   ],
                 ),
-                onTap: () => {Navigator.pop(context)},
+                onTap: () => {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => AboutInfo()))
+                },
               ),
               // ListTile(
               //   title: Row(
@@ -102,7 +106,10 @@ class _AmigoState extends State<Amigo> {
                     Text('About Info'),
                   ],
                 ),
-                onTap: () => {Navigator.pop(context)},
+                onTap: () => {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => AboutInfo()))
+                },
               ),
               ListTile(
                 title: Row(
@@ -130,18 +137,18 @@ class _AmigoState extends State<Amigo> {
                   authMethods.signOut(context),
                 },
               ),
-              ListTile(
-                title: Row(
-                  children: [
-                    Icon(Icons.privacy_tip),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text('Privacy Policy'),
-                  ],
-                ),
-                onTap: () => {Navigator.pop(context)},
-              ),
+              // ListTile(
+              //   title: Row(
+              //     children: [
+              //       Icon(Icons.privacy_tip),
+              //       SizedBox(
+              //         width: 10,
+              //       ),
+              //       Text('Privacy Policy'),
+              //     ],
+              //   ),
+              //   onTap: () => {Navigator.pop(context)},
+              // ),
             ],
           ),
         ),
@@ -175,14 +182,14 @@ class _AmigoState extends State<Amigo> {
           elevation: 0,
           // automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
-          title: Text(
-            "Amigo",
-            style: TextStyle(
-              fontFamily: "Poppins",
-              fontWeight: FontWeight.w700,
-              fontSize: 20,
-            ),
-          ),
+          // title: Text(
+          //   "Amigo",
+          //   style: TextStyle(
+          //     fontFamily: "Poppins",
+          //     fontWeight: FontWeight.w700,
+          //     fontSize: 20,
+          //   ),
+          // ),
           // flexibleSpace: SafeArea(
           //   child: Container(
           //     padding: EdgeInsets.only(right: 16),

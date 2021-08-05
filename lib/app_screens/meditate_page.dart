@@ -28,50 +28,50 @@ class _MeditateState extends State<Meditate> {
           SizedBox(
             height: 36,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CircleAvatar(
-                radius: 25,
-                child: Image(
-                  image: AssetImage('assets/images/yoga.png'),
-                ),
-              ),
-              CircleAvatar(
-                radius: 25,
-                child: Image(
-                  image: AssetImage('assets/images/yoga.png'),
-                ),
-              ),
-              CircleAvatar(
-                radius: 25,
-                child: Image(
-                  image: AssetImage('assets/images/yoga.png'),
-                ),
-              ),
-              CircleAvatar(
-                radius: 25,
-                child: Image(
-                  image: AssetImage('assets/images/yoga.png'),
-                ),
-              ),
-              CircleAvatar(
-                radius: 25,
-                child: Image(
-                  image: AssetImage('assets/images/yoga.png'),
-                ),
-              ),
-              CircleAvatar(
-                radius: 25,
-                child: Image(
-                  image: AssetImage('assets/images/yoga.png'),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 60,
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: [
+          //     CircleAvatar(
+          //       radius: 25,
+          //       child: Image(
+          //         image: AssetImage('assets/images/yoga.png'),
+          //       ),
+          //     ),
+          //     CircleAvatar(
+          //       radius: 25,
+          //       child: Image(
+          //         image: AssetImage('assets/images/yoga.png'),
+          //       ),
+          //     ),
+          //     CircleAvatar(
+          //       radius: 25,
+          //       child: Image(
+          //         image: AssetImage('assets/images/yoga.png'),
+          //       ),
+          //     ),
+          //     CircleAvatar(
+          //       radius: 25,
+          //       child: Image(
+          //         image: AssetImage('assets/images/yoga.png'),
+          //       ),
+          //     ),
+          //     CircleAvatar(
+          //       radius: 25,
+          //       child: Image(
+          //         image: AssetImage('assets/images/yoga.png'),
+          //       ),
+          //     ),
+          //     CircleAvatar(
+          //       radius: 25,
+          //       child: Image(
+          //         image: AssetImage('assets/images/yoga.png'),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(
+          //   height: 60,
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

@@ -6,7 +6,6 @@ import 'dart:async';
 import 'package:emoji_picker/emoji_picker.dart';
 import 'package:amigoproject/services/bot.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:amigoproject/services/database/db.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -25,18 +24,14 @@ class _ChatScreenState extends State<ChatScreen> {
   bool isShowSticker = false;
 
   final _auth = FirebaseAuth.instance;
-  
+
   final myController = TextEditingController();
-
-
-
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     myController.dispose();
     super.dispose();
-
   }
 
   Widget buildSticker() {
@@ -76,10 +71,9 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  List<ChatMessage> messages =  [
+  List<ChatMessage> messages = [
     ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
     ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
-
   ];
 
   @override
@@ -377,36 +371,28 @@ class _ChatScreenState extends State<ChatScreen> {
                                 child: IconButton(
                                   onPressed: () async {
                                     print(myController.text);
-                                    
-                                    messages.add(
-                                        ChatMessage(
-                                            
-                                            messageContent: "${myController.text}", 
-                                            messageType: "sender")
-                                      );
-                                    
+
+                                    messages.add(ChatMessage(
+                                        messageContent: "${myController.text}",
+                                        messageType: "sender"));
+
                                     FocusScope.of(context).unfocus();
                                     Bot bot = Bot();
                                     final user = _auth.currentUser;
                                     String? id = user?.uid;
                                     print(id);
-                                    List<BotResponse> responses = await bot.getBotResponse(id!,myController.text);
-                                    
-                                    responses.forEach((response){
-                                      messages.add(
-                                        ChatMessage(
-                                            
-                                            messageContent: response.text , 
-                                            messageType: "receiver")
-                                      );
-                                    });
+                                    List<BotResponse> responses = await bot
+                                        .getBotResponse(id!, myController.text);
 
+                                    responses.forEach((response) {
+                                      messages.add(ChatMessage(
+                                          messageContent: response.text,
+                                          messageType: "receiver"));
+                                    });
 
                                     myController.clear();
                                     setState(() {
                                       print(myController.text);
-                                      
-                                      
                                     });
                                   },
                                   icon: Icon(
@@ -577,5 +563,3 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
-
- 

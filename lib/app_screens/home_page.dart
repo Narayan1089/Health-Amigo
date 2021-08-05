@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 User? loggedInUser;
 String? moodText = '';
 FirestoreConfig _firestoreConfig = FirestoreConfig();
+// MediaQueryData mediaQueryData = MediaQuery.of(context);
 
 class Home extends StatefulWidget {
 //  const Home({required Key key, required String title}) : super(key: key);
@@ -245,7 +246,7 @@ class _HomeState extends State<Home> {
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w800,
                           fontStyle: FontStyle.normal,
-                          fontSize: 20),
+                          fontSize: MediaQuery.of(context).size.width * 0.05),
                     ),
                     Text(
                       'I am choosing happiness.',
@@ -353,8 +354,8 @@ class _HomeState extends State<Home> {
                         elevation: 3,
                         child: Image(
                           image: NetworkImage(_blog.blogs[0].url),
-                          width: 175,
-                          height: 195,
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          width: MediaQuery.of(context).size.width * 0.40,
                         ),
                       ),
                       onTap: () => {
@@ -375,8 +376,8 @@ class _HomeState extends State<Home> {
                         elevation: 3,
                         child: Image(
                           image: NetworkImage(_blog.blogs[1].url),
-                          width: 175,
-                          height: 195,
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          width: MediaQuery.of(context).size.width * 0.40,
                         ),
                       ),
                       onTap: () => {
@@ -540,7 +541,7 @@ moodTracker({int? mood, User? user}) async {
 
 class MoodClass with ChangeNotifier {
   int? _data;
-  String _moodStatus = "";
+  String _moodStatus = "Mood Tracker";
   Color _color = Colors.white;
   String get moodStatus => _moodStatus;
   Color get color => _color;

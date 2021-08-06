@@ -34,6 +34,14 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
+  void scrollDown() {
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
   Widget buildSticker() {
     return EmojiPicker(
       rows: 3,
@@ -72,12 +80,15 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   List<ChatMessage> messages = [
-    ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
-    ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
+    ChatMessage(messageContent: "Hello!", messageType: "receiver"),
+    // ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
   ];
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero, () {
+      scrollDown();
+    });
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -299,6 +310,9 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      // SizedBox(
+                      //   width: 20,
+                      // ),
                       Container(
 //                      height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width - 15,
@@ -330,36 +344,36 @@ class _ChatScreenState extends State<ChatScreen> {
                                           const EdgeInsets.only(bottom: 5.0),
                                       hintText: 'Type a Message',
                                       border: InputBorder.none,
-                                      prefixIcon: IconButton(
-                                        onPressed: () {
-                                          focus.unfocus();
-                                          focus.canRequestFocus = false;
-                                          if (isShowSticker) {
-                                            focus.canRequestFocus = true;
-                                            focus.requestFocus();
-                                          }
-                                          setState(() {
-                                            isShowSticker = !isShowSticker;
-                                            h = MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.40;
-                                            debugPrint(
-                                                isShowSticker.toString());
-                                          });
-                                        },
-                                        icon: isShowSticker
-                                            ? Icon(Icons.keyboard)
-                                            : Container(
-                                                child: Image(
-                                                  image: AssetImage(
-                                                      'assets/images/smile.png'),
-                                                  height: 30,
-                                                  width: 30,
-                                                ),
-                                                height: 70,
-                                              ),
-                                      ),
+                                      // prefixIcon: IconButton(
+                                      //   onPressed: () {
+                                      //     focus.unfocus();
+                                      //     focus.canRequestFocus = false;
+                                      //     if (isShowSticker) {
+                                      //       focus.canRequestFocus = true;
+                                      //       focus.requestFocus();
+                                      //     }
+                                      //     setState(() {
+                                      //       isShowSticker = !isShowSticker;
+                                      //       h = MediaQuery.of(context)
+                                      //               .size
+                                      //               .height *
+                                      //           0.40;
+                                      //       debugPrint(
+                                      //           isShowSticker.toString());
+                                      //     });
+                                      //   },
+                                      //   icon: isShowSticker
+                                      //       ? Icon(Icons.keyboard)
+                                      //       : Container(
+                                      //           child: Image(
+                                      //             image: AssetImage(
+                                      //                 'assets/images/smile.png'),
+                                      //             height: 30,
+                                      //             width: 30,
+                                      //           ),
+                                      //           height: 70,
+                                      //         ),
+                                      // ),
                                     ),
                                     textInputAction: TextInputAction.newline,
                                   ),

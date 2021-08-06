@@ -149,7 +149,7 @@ class _AmigoState extends State<Amigo> {
                   ],
                 ),
                 onTap: () => {
-                  _launchInWebViewOrVC('https://forms.gle/ze8CJBA25pp2jxYQ6'),
+                  _launchInBrowser('https://forms.gle/ze8CJBA25pp2jxYQ6'),
                 },
               ),
               // ListTile(
@@ -292,12 +292,12 @@ class _AmigoState extends State<Amigo> {
     );
   }
 
-  Future<void> _launchInWebViewOrVC(String url) async {
+  Future<void> _launchInBrowser(String url) async {
     if (await canLaunch(url)) {
       await launch(
         url,
-        forceSafariVC: true,
-        forceWebView: true,
+        forceSafariVC: false,
+        forceWebView: false,
         headers: <String, String>{'my_header_key': 'my_header_value'},
       );
     } else {

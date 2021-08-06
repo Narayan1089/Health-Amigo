@@ -229,7 +229,7 @@ class _HomeState extends State<Home> {
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w500,
                           fontStyle: FontStyle.normal,
-                          fontSize: 20),
+                          fontSize: MediaQuery.of(context).size.width * 0.05),
                     ),
                     // Text(
                     //   'your day',
@@ -241,7 +241,7 @@ class _HomeState extends State<Home> {
                     //       fontSize: 20),
                     // ),
                     SizedBox(
-                      height: 33,
+                      height: 30,
                     ),
                     Text(
                       'I am incharge of how I feel,',
@@ -259,10 +259,10 @@ class _HomeState extends State<Home> {
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w800,
                           fontStyle: FontStyle.normal,
-                          fontSize: 20),
+                          fontSize: MediaQuery.of(context).size.width * 0.05),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 23,
                     ),
                     Container(
                       child:
@@ -276,7 +276,8 @@ class _HomeState extends State<Home> {
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.w800,
                               fontStyle: FontStyle.normal,
-                              fontSize: 18),
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.043),
                         );
                       }),
                     ),

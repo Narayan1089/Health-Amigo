@@ -48,22 +48,33 @@ class _BlogDetailsState extends State<BlogDetails> {
                       ),
                       Row(
                         children: [
-                          Text('Date\tTime\t-${blog.author} '),
-                          SizedBox(
-                            width: 130,
+                          Text(
+                            'Jan\'21\t-' + ' ' + '${blog.author} ',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Poppins',
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.035,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w300,
+                              // height: 27
+                            ),
                           ),
-                          Icon(Icons.share_outlined),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          GestureDetector(
-                              child: Icon(Icons.comment),
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Comments()));
-                              })
+                          // SizedBox(
+                          //   width: 130,
+                          // ),
+                          // Icon(Icons.share_outlined),
+                          // SizedBox(
+                          //   width: 30,
+                          // ),
+                          // GestureDetector(
+                          //     child: Icon(Icons.comment),
+                          //     onTap: () {
+                          //       Navigator.push(
+                          //           context,
+                          //           MaterialPageRoute(
+                          //               builder: (context) => Comments()));
+                          //     })
                         ],
                       ),
                       SizedBox(

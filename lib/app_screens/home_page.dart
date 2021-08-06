@@ -106,6 +106,10 @@ class _HomeState extends State<Home> {
                   //   size: 40,
                   // ),
                   // Icon(Icons.face_outlined),
+                  // ImageIcon(
+                  //   AssetImage('assets/images/happy.png'),
+                  //   size: 40,
+                  // ),
                   IconButton(
                     disabledColor: Colors.blue,
                     onPressed: () async {

@@ -6,6 +6,7 @@ import 'package:amigoproject/app_screens/blogs_page.dart';
 import 'package:amigoproject/app_screens/home_page.dart';
 import 'package:amigoproject/app_screens/meditate_page.dart';
 import 'package:amigoproject/app_screens/chat_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(Amigo());
@@ -137,6 +138,20 @@ class _AmigoState extends State<Amigo> {
                   authMethods.signOut(context),
                 },
               ),
+              ListTile(
+                title: Row(
+                  children: [
+                    Icon(Icons.face_retouching_natural),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Feedback'),
+                  ],
+                ),
+                onTap: () => {
+                  _launchInWebViewOrVC('https://forms.gle/ze8CJBA25pp2jxYQ6'),
+                },
+              ),
               // ListTile(
               //   title: Row(
               //     children: [
@@ -256,7 +271,7 @@ class _AmigoState extends State<Amigo> {
                 //   AssetImage('assets/images/chatbot.png'),
                 //   size: 30,
                 // ),
-                label: 'Amigo'),
+                label: 'Theo'),
             BottomNavigationBarItem(
                 icon: ImageIcon(
                   AssetImage('assets/images/blog.png'),
@@ -275,5 +290,18 @@ class _AmigoState extends State<Amigo> {
       ),
 //       theme: ThemeData(primaryColor: Colors.orangeAccent));
     );
+  }
+
+  Future<void> _launchInWebViewOrVC(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: true,
+        forceWebView: true,
+        headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

@@ -114,7 +114,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: Column(
                     children: [
                       Text(
-                        "This is the beginning\nof your chat history\nwith the Amigo Bot.",
+                        "This is the beginning\nof your chat history\nwith the Theo.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 16,

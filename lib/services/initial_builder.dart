@@ -1,5 +1,5 @@
 import 'package:amigoproject/app_screens/doctors_pg.dart';
-import 'package:amigoproject/app_screens/drawer-screens/about_life.dart';
+import 'package:amigoproject/app_screens/drawer-screens/account_details.dart';
 import 'package:amigoproject/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
@@ -61,7 +61,7 @@ class _AmigoState extends State<Amigo> {
                 // margin: EdgeInsets.fromLTRB(0, top, right, bottom),
                 child: ListTile(
                   title: Text('Settings'),
-                  trailing: Icon(Icons.settings),
+                  leading: Icon(Icons.settings),
                   onTap: () => {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => Amigo()))
@@ -69,21 +69,21 @@ class _AmigoState extends State<Amigo> {
                 ),
                 padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
               ),
-              ListTile(
-                title: Row(
-                  children: [
-                    Icon(Icons.face_retouching_natural),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text('Account Details'),
-                  ],
-                ),
-                onTap: () => {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => AboutInfo()))
-                },
-              ),
+              // ListTile(
+              //   title: Row(
+              //     children: [
+              //       Icon(Icons.face_retouching_natural),
+              //       SizedBox(
+              //         width: 10,
+              //       ),
+              //       Text('Account Details'),
+              //     ],
+              //   ),
+              //   onTap: () => {
+              //     Navigator.push(
+              //         context, MaterialPageRoute(builder: (_) => AboutInfo()))
+              //   },
+              // ),
               // ListTile(
               //   title: Row(
               //     children: [
@@ -104,12 +104,12 @@ class _AmigoState extends State<Amigo> {
                     SizedBox(
                       width: 10,
                     ),
-                    Text('About Info'),
+                    Text('Account Details'),
                   ],
                 ),
                 onTap: () => {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => AboutInfo()))
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => AccountDetails()))
                 },
               ),
               ListTile(
@@ -122,7 +122,9 @@ class _AmigoState extends State<Amigo> {
                     Text('Support'),
                   ],
                 ),
-                onTap: () => {Navigator.pop(context)},
+                onTap: () => {
+                  _makePhoneCall('9372123647'),
+                },
               ),
               ListTile(
                 title: Row(
@@ -141,7 +143,7 @@ class _AmigoState extends State<Amigo> {
               ListTile(
                 title: Row(
                   children: [
-                    Icon(Icons.face_retouching_natural),
+                    Icon(Icons.feedback_outlined),
                     SizedBox(
                       width: 10,
                     ),
@@ -300,6 +302,14 @@ class _AmigoState extends State<Amigo> {
         forceWebView: false,
         headers: <String, String>{'my_header_key': 'my_header_value'},
       );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> _makePhoneCall(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
     } else {
       throw 'Could not launch $url';
     }

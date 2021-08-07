@@ -243,6 +243,7 @@ class _LogInState extends State<LogIn> {
                                     ),
                                   ),
                                 );
+                                authMethods.e = false;
                               }
                             },
                             child: isLoading

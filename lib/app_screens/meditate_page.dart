@@ -80,17 +80,17 @@ class _MeditateState extends State<Meditate> {
               MoodCard('assets/images/smile_face.png', 'Anxiety'),
             ],
           ),
-          SizedBox(
-            height: 5,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              MoodCard('assets/images/smile_face.png', 'Stress'),
-              MoodCard('assets/images/smile_face.png', 'Angry'),
-              MoodCard('assets/images/smile_face.png', 'Sad'),
-            ],
-          ),
+          // SizedBox(
+          //   height: 5,
+          // ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: [
+          //     MoodCard('assets/images/smile_face.png', 'Stress'),
+          //     MoodCard('assets/images/smile_face.png', 'Angry'),
+          //     MoodCard('assets/images/smile_face.png', 'Sad'),
+          //   ],
+          // ),
           SizedBox(
             height: 60,
           ),

@@ -346,6 +346,7 @@ class _Register extends State<Register> {
                                     ),
                                   ),
                                 );
+                                authMethods.e = false;
                               }
                               // Navigator.of(context).push(MaterialPageRoute(
                               //     builder: (context) => LogIn()

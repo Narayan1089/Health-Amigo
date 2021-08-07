@@ -340,8 +340,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                     minLines: 1,
                                     maxLines: 5,
                                     decoration: InputDecoration(
-                                      contentPadding:
-                                          const EdgeInsets.only(bottom: 5.0),
+                                      contentPadding: const EdgeInsets.fromLTRB(
+                                          20.0, 0.0, 0.0, 15.0),
                                       hintText: 'Type a Message',
                                       border: InputBorder.none,
                                       // prefixIcon: IconButton(

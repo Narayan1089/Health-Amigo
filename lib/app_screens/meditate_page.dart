@@ -1,4 +1,5 @@
 import 'package:amigoproject/app_screens/meditate_details.dart';
+import 'package:amigoproject/services/audio_player.dart';
 import 'package:amigoproject/services/initial_builder.dart';
 import 'package:flutter/material.dart';
 
@@ -142,8 +143,8 @@ class MoodCard extends StatelessWidget {
       height: 124.88,
       child: GestureDetector(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => MeditateDetails()));
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => MusicPlayer()));
         },
         child: Card(
           elevation: 5,

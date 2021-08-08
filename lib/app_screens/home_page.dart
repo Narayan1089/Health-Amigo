@@ -122,85 +122,10 @@ class _HomeState extends State<Home> {
                     //   size: 40,
                     // ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        IconButton(
-                          disabledColor: Colors.blue,
-                          onPressed: () async {
-                            // int mood = 3;
-                            await moodTracker(mood: 3, user: loggedInUser);
-                            // mood = displayMood();
-                            Provider.of<MoodClass>(context, listen: false)
-                                .displayMood();
-                            // setState(() {
-                            //   mood = moodText;
-                            // });
-                          },
-                          icon: Icon(
-                            Icons.face,
-                            size: 40,
-                          ),
-                          color: Colors.pinkAccent,
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.005,
-                        ),
-                        Container(
-                          child: Text(
-                            'Excited',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.pinkAccent,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.021),
-                          ),
-                        )
-                      ],
-                    ),
-                    Column(
                       children: [
                         IconButton(
                           onPressed: () async {
-                            await moodTracker(mood: 2, user: loggedInUser);
-                            Provider.of<MoodClass>(context, listen: false)
-                                .displayMood();
-                            // setState(() {
-                            //   mood = moodText;
-                            // });
-                          },
-                          icon: Icon(
-                            Icons.face_rounded,
-                            size: 40,
-                          ),
-                          color: Colors.lightGreen.shade300,
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.005,
-                        ),
-                        Container(
-                          child: Text(
-                            'Very Happy',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.lightGreen.shade300,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.021),
-                          ),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        IconButton(
-                          onPressed: () async {
-                            await moodTracker(mood: 1, user: loggedInUser);
+                            await moodTracker(mood: -3, user: loggedInUser);
                             Provider.of<MoodClass>(context, listen: false)
                                 .displayMood();
                           },
@@ -208,81 +133,17 @@ class _HomeState extends State<Home> {
                             Icons.face,
                             size: 40,
                           ),
-                          color: Colors.yellow,
+                          color: Colors.red,
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
                         Container(
                           child: Text(
-                            'Happy',
+                            'Angry',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.yellow,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.021),
-                          ),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        IconButton(
-                          onPressed: () async {
-                            await moodTracker(mood: 0, user: loggedInUser);
-                            Provider.of<MoodClass>(context, listen: false)
-                                .displayMood();
-                          },
-                          icon: Icon(
-                            Icons.face,
-                            size: 40,
-                          ),
-                          color: Colors.grey,
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.005,
-                        ),
-                        Container(
-                          child: Text(
-                            'Neutral',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.021),
-                          ),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        IconButton(
-                          onPressed: () async {
-                            await moodTracker(mood: -1, user: loggedInUser);
-                            Provider.of<MoodClass>(context, listen: false)
-                                .displayMood();
-                          },
-                          icon: Icon(
-                            Icons.face,
-                            size: 40,
-                          ),
-                          color: Colors.blueAccent,
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.005,
-                        ),
-                        Container(
-                          child: Text(
-                            'Sad',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.blueAccent,
+                                color: Colors.red,
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.w600,
                                 fontStyle: FontStyle.normal,
@@ -328,7 +189,7 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           onPressed: () async {
-                            await moodTracker(mood: -3, user: loggedInUser);
+                            await moodTracker(mood: -1, user: loggedInUser);
                             Provider.of<MoodClass>(context, listen: false)
                                 .displayMood();
                           },
@@ -336,17 +197,156 @@ class _HomeState extends State<Home> {
                             Icons.face,
                             size: 40,
                           ),
-                          color: Colors.red,
+                          color: Colors.blueAccent,
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
                         Container(
                           child: Text(
-                            'Angry',
+                            'Sad',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.red,
+                                color: Colors.blueAccent,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.021),
+                          ),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: 0, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                          },
+                          icon: Icon(
+                            Icons.face,
+                            size: 40,
+                          ),
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        Container(
+                          child: Text(
+                            'Neutral',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.021),
+                          ),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: 1, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                          },
+                          icon: Icon(
+                            Icons.face,
+                            size: 40,
+                          ),
+                          color: Colors.yellow.shade600,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        Container(
+                          child: Text(
+                            'Happy',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.yellow.shade600,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.021),
+                          ),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: 2, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                            // setState(() {
+                            //   mood = moodText;
+                            // });
+                          },
+                          icon: Icon(
+                            Icons.face_rounded,
+                            size: 40,
+                          ),
+                          color: Colors.lightGreen.shade300,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        Container(
+                          child: Text(
+                            'Very Happy',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.lightGreen.shade300,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.021),
+                          ),
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButton(
+                          disabledColor: Colors.blue,
+                          onPressed: () async {
+                            // int mood = 3;
+                            await moodTracker(mood: 3, user: loggedInUser);
+                            // mood = displayMood();
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                            // setState(() {
+                            //   mood = moodText;
+                            // });
+                          },
+                          icon: Icon(
+                            Icons.face,
+                            size: 40,
+                          ),
+                          color: Colors.pinkAccent,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        Container(
+                          child: Text(
+                            'Excited',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.pinkAccent,
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.w600,
                                 fontStyle: FontStyle.normal,
@@ -361,84 +361,89 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 25,
                 ),
-                Container(
-                  // alignment: AlignmentGeometry.lerp(a, b, t),
-                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.26,
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
-                  decoration: BoxDecoration(
-                      color: Color(0xffE5E5E5),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Quote of the Day',
-                        style: TextStyle(
-                            // color: Colors.white,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.normal,
-                            fontSize: MediaQuery.of(context).size.width * 0.05),
-                      ),
-                      // Text(
-                      //   'your day',
-                      //   style: TextStyle(
-                      //       // color: Colors.white,
-                      //       fontFamily: 'Montserrat',
-                      //       fontWeight: FontWeight.w600,
-                      //       fontStyle: FontStyle.normal,
-                      //       fontSize: 20),
-                      // ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Text(
-                        'I am incharge of how I feel,',
-                        style: TextStyle(
-                            // color: Colors.white,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w800,
-                            fontStyle: FontStyle.normal,
-                            fontSize:
-                                MediaQuery.of(context).size.width * 0.047),
-                      ),
-                      Text(
-                        'I am choosing happiness.',
-                        style: TextStyle(
-                            // color: Colors.white,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w800,
-                            fontStyle: FontStyle.normal,
-                            fontSize:
-                                MediaQuery.of(context).size.width * 0.047),
-                      ),
-                      SizedBox(
-                        height: 23,
-                      ),
-                      Container(
-                        child: Consumer<MoodClass>(
-                            builder: (context, mood, child) {
-                          String message = mood._moodStatus;
-                          debugPrint("Mood Message: " + message);
-                          return Text(
-                            message.toString(),
-                            style: TextStyle(
-                                color: mood._color,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w800,
-                                fontStyle: FontStyle.normal,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.043),
-                          );
-                        }),
-                      ),
-                    ],
-                  ),
-                ),
+                Consumer<MoodClass>(builder: (context, mood, child) {
+                  return Container(
+                    // alignment: AlignmentGeometry.lerp(a, b, t),
+                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.26,
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    decoration: BoxDecoration(
+                        color: mood._color,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Quote of the Day',
+                          style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Colors.white,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.normal,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.05),
+                        ),
+                        // Text(
+                        //   'your day',
+                        //   style: TextStyle(
+                        //       // color: Colors.white,
+                        //       fontFamily: 'Montserrat',
+                        //       fontWeight: FontWeight.w600,
+                        //       fontStyle: FontStyle.normal,
+                        //       fontSize: 20),
+                        // ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          'I am incharge of how I feel,',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w800,
+                              fontStyle: FontStyle.normal,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.047),
+                        ),
+                        Text(
+                          'I am choosing happiness.',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w800,
+                              fontStyle: FontStyle.normal,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.047),
+                        ),
+                        SizedBox(
+                          height: 23,
+                        ),
+                        // Container(
+                        //   child: Consumer<MoodClass>(
+                        //       builder: (context, mood, child) {
+                        //     String message = mood._moodStatus;
+                        //     debugPrint("Mood Message: " + message);
+                        //     return Text(
+                        //       message.toString(),
+                        //       style: TextStyle(
+                        //           color: mood._color,
+                        //           fontFamily: 'Montserrat',
+                        //           fontWeight: FontWeight.w800,
+                        //           fontStyle: FontStyle.normal,
+                        //           fontSize: MediaQuery.of(context).size.width *
+                        //               0.043),
+                        //     );
+                        //   }),
+                        // ),
+                      ],
+                    ),
+                  );
+                }),
+
                 // Container(
                 //   width: 370,
                 //   height: 220,
@@ -695,15 +700,15 @@ class MeditateCard extends StatelessWidget {
 
 moodTracker({int? mood, User? user}) async {
   _firestoreConfig.retrieveMoodTracker(loggedInUser);
-  int? prev = _firestoreConfig.mood;
-  int? avg = ((prev! + mood!) / 2).ceil();
-  await _firestoreConfig.updateMoodTrack(user: loggedInUser, mood: avg);
+  // int? prev = _firestoreConfig.mood;
+  // int? avg = ((prev! + mood!) / 2).ceil();
+  await _firestoreConfig.updateMoodTrack(user: loggedInUser, mood: mood!);
 }
 
 class MoodClass with ChangeNotifier {
   int? _data;
   String _moodStatus = "Mood Tracker";
-  Color _color = Colors.white;
+  Color _color = Colors.grey;
   String get moodStatus => _moodStatus;
   Color get color => _color;
   // int? get data = _data;
@@ -726,13 +731,13 @@ class MoodClass with ChangeNotifier {
         break;
       case (1):
         _moodStatus = "Stay Happy";
-        _color = Colors.yellow;
+        _color = Colors.yellow.shade600;
         notifyListeners();
         // return moodText;
         break;
       case (0):
         _moodStatus = "Mood with MoodTracker";
-        _color = Colors.white;
+        _color = Colors.grey;
         notifyListeners();
         // return moodText;
         break;

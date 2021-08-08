@@ -112,20 +112,20 @@ class _AmigoState extends State<Amigo> {
                       MaterialPageRoute(builder: (_) => AccountDetails()))
                 },
               ),
-              ListTile(
-                title: Row(
-                  children: [
-                    Icon(Icons.support_agent_outlined),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text('Support'),
-                  ],
-                ),
-                onTap: () => {
-                  _makePhoneCall('9372123647'),
-                },
-              ),
+              // ListTile(
+              //   title: Row(
+              //     children: [
+              //       Icon(Icons.support_agent_outlined),
+              //       SizedBox(
+              //         width: 10,
+              //       ),
+              //       Text('Support'),
+              //     ],
+              //   ),
+              //   onTap: () => {
+              //     _makePhoneCall('9372123647'),
+              //   },
+              // ),
               ListTile(
                 title: Row(
                   children: [

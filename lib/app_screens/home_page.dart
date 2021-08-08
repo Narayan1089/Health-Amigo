@@ -1,6 +1,7 @@
 import 'package:amigoproject/app_screens/blog_details_pg.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
 import 'package:amigoproject/services/database/db.dart';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -62,562 +63,575 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.all(10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              ListTile(
-                // leading: Icon(Icons.face_rounded),
-                title: Text(
-                  'Welcome, ' +
-                      loggedInUser!.displayName.toString().split(" ")[0],
-                  style: TextStyle(
-                      // color: Colors.white,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 20),
+      body: DoubleBackToCloseApp(
+        snackBar: const SnackBar(
+          backgroundColor: Color(0xffFE834F),
+          content: Text(
+            'Tap back again to leave',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.all(10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 10,
                 ),
-                subtitle: Text('How do you feel right now?',
+                ListTile(
+                  // leading: Icon(Icons.face_rounded),
+                  title: Text(
+                    'Welcome, ' +
+                        loggedInUser!.displayName.toString().split(" ")[0],
                     style: TextStyle(
+                        // color: Colors.white,
                         fontFamily: 'Montserrat',
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal)),
-                // trailing: Icon(Icons.calendar_today_outlined),
-              ),
-              // SizedBox(
-              //   height: 5,
-              // ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // ImageIcon(
-                  //   AssetImage('assets/images/angry_face.png'),
-                  //   // size: 40,
-                  // ),
-                  // ImageIcon(
-                  //   AssetImage('assets/images/angry_face.png'),
-                  //   size: 40,
-                  // ),
-                  // Icon(Icons.face_outlined),
-                  // ImageIcon(
-                  //   AssetImage('assets/images/happy.png'),
-                  //   size: 40,
-                  // ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      IconButton(
-                        disabledColor: Colors.blue,
-                        onPressed: () async {
-                          // int mood = 3;
-                          await moodTracker(mood: 3, user: loggedInUser);
-                          // mood = displayMood();
-                          Provider.of<MoodClass>(context, listen: false)
-                              .displayMood();
-                          // setState(() {
-                          //   mood = moodText;
-                          // });
-                        },
-                        icon: Icon(
-                          Icons.face,
-                          size: 40,
-                        ),
-                        color: Colors.pinkAccent,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.005,
-                      ),
-                      Container(
-                        child: Text(
-                          'Excited',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.pinkAccent,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.normal,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.021),
-                        ),
-                      )
-                    ],
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 20),
                   ),
-                  Column(
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          await moodTracker(mood: 2, user: loggedInUser);
-                          Provider.of<MoodClass>(context, listen: false)
-                              .displayMood();
-                          // setState(() {
-                          //   mood = moodText;
-                          // });
-                        },
-                        icon: Icon(
-                          Icons.face_rounded,
-                          size: 40,
-                        ),
-                        color: Colors.lightGreen.shade300,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.005,
-                      ),
-                      Container(
-                        child: Text(
-                          'Very Happy',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.lightGreen.shade300,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.normal,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.021),
-                        ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          await moodTracker(mood: 1, user: loggedInUser);
-                          Provider.of<MoodClass>(context, listen: false)
-                              .displayMood();
-                        },
-                        icon: Icon(
-                          Icons.face,
-                          size: 40,
-                        ),
-                        color: Colors.yellow,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.005,
-                      ),
-                      Container(
-                        child: Text(
-                          'Happy',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.yellow,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.normal,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.021),
-                        ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          await moodTracker(mood: 0, user: loggedInUser);
-                          Provider.of<MoodClass>(context, listen: false)
-                              .displayMood();
-                        },
-                        icon: Icon(
-                          Icons.face,
-                          size: 40,
-                        ),
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.005,
-                      ),
-                      Container(
-                        child: Text(
-                          'Neutral',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.normal,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.021),
-                        ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          await moodTracker(mood: -1, user: loggedInUser);
-                          Provider.of<MoodClass>(context, listen: false)
-                              .displayMood();
-                        },
-                        icon: Icon(
-                          Icons.face,
-                          size: 40,
-                        ),
-                        color: Colors.blueAccent,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.005,
-                      ),
-                      Container(
-                        child: Text(
-                          'Sad',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.blueAccent,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.normal,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.021),
-                        ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          await moodTracker(mood: -2, user: loggedInUser);
-                          Provider.of<MoodClass>(context, listen: false)
-                              .displayMood();
-                        },
-                        icon: Icon(
-                          Icons.face,
-                          size: 40,
-                        ),
-                        color: Colors.purple.shade800,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.005,
-                      ),
-                      Container(
-                        child: Text(
-                          'Bored',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.purple.shade800,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.normal,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.021),
-                        ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          await moodTracker(mood: -3, user: loggedInUser);
-                          Provider.of<MoodClass>(context, listen: false)
-                              .displayMood();
-                        },
-                        icon: Icon(
-                          Icons.face,
-                          size: 40,
-                        ),
-                        color: Colors.red,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.005,
-                      ),
-                      Container(
-                        child: Text(
-                          'Angry',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.normal,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.021),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              Container(
-                // alignment: AlignmentGeometry.lerp(a, b, t),
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.26,
-                padding: EdgeInsets.only(top: 10, bottom: 10),
-                decoration: BoxDecoration(
-                    color: Color(0xffE5E5E5),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Column(
+                  subtitle: Text('How do you feel right now?',
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal)),
+                  // trailing: Icon(Icons.calendar_today_outlined),
+                ),
+                // SizedBox(
+                //   height: 5,
+                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Quote of the Day',
-                      style: TextStyle(
-                          // color: Colors.white,
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          fontSize: MediaQuery.of(context).size.width * 0.05),
-                    ),
-                    // Text(
-                    //   'your day',
-                    //   style: TextStyle(
-                    //       // color: Colors.white,
-                    //       fontFamily: 'Montserrat',
-                    //       fontWeight: FontWeight.w600,
-                    //       fontStyle: FontStyle.normal,
-                    //       fontSize: 20),
+                    // ImageIcon(
+                    //   AssetImage('assets/images/angry_face.png'),
+                    //   // size: 40,
                     // ),
-                    SizedBox(
-                      height: 30,
+                    // ImageIcon(
+                    //   AssetImage('assets/images/angry_face.png'),
+                    //   size: 40,
+                    // ),
+                    // Icon(Icons.face_outlined),
+                    // ImageIcon(
+                    //   AssetImage('assets/images/happy.png'),
+                    //   size: 40,
+                    // ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButton(
+                          disabledColor: Colors.blue,
+                          onPressed: () async {
+                            // int mood = 3;
+                            await moodTracker(mood: 3, user: loggedInUser);
+                            // mood = displayMood();
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                            // setState(() {
+                            //   mood = moodText;
+                            // });
+                          },
+                          icon: Icon(
+                            Icons.face,
+                            size: 40,
+                          ),
+                          color: Colors.pinkAccent,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        Container(
+                          child: Text(
+                            'Excited',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.pinkAccent,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.021),
+                          ),
+                        )
+                      ],
                     ),
-                    Text(
-                      'I am incharge of how I feel,',
-                      style: TextStyle(
-                          // color: Colors.white,
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w800,
-                          fontStyle: FontStyle.normal,
-                          fontSize: MediaQuery.of(context).size.width * 0.047),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: 2, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                            // setState(() {
+                            //   mood = moodText;
+                            // });
+                          },
+                          icon: Icon(
+                            Icons.face_rounded,
+                            size: 40,
+                          ),
+                          color: Colors.lightGreen.shade300,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        Container(
+                          child: Text(
+                            'Very Happy',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.lightGreen.shade300,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.021),
+                          ),
+                        )
+                      ],
                     ),
-                    Text(
-                      'I am choosing happiness.',
-                      style: TextStyle(
-                          // color: Colors.white,
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w800,
-                          fontStyle: FontStyle.normal,
-                          fontSize: MediaQuery.of(context).size.width * 0.047),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: 1, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                          },
+                          icon: Icon(
+                            Icons.face,
+                            size: 40,
+                          ),
+                          color: Colors.yellow,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        Container(
+                          child: Text(
+                            'Happy',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.yellow,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.021),
+                          ),
+                        )
+                      ],
                     ),
-                    SizedBox(
-                      height: 23,
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: 0, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                          },
+                          icon: Icon(
+                            Icons.face,
+                            size: 40,
+                          ),
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        Container(
+                          child: Text(
+                            'Neutral',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.021),
+                          ),
+                        )
+                      ],
                     ),
-                    Container(
-                      child:
-                          Consumer<MoodClass>(builder: (context, mood, child) {
-                        String message = mood._moodStatus;
-                        debugPrint("Mood Message: " + message);
-                        return Text(
-                          message.toString(),
-                          style: TextStyle(
-                              color: mood._color,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w800,
-                              fontStyle: FontStyle.normal,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.043),
-                        );
-                      }),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: -1, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                          },
+                          icon: Icon(
+                            Icons.face,
+                            size: 40,
+                          ),
+                          color: Colors.blueAccent,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        Container(
+                          child: Text(
+                            'Sad',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.blueAccent,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.021),
+                          ),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: -2, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                          },
+                          icon: Icon(
+                            Icons.face,
+                            size: 40,
+                          ),
+                          color: Colors.purple.shade800,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        Container(
+                          child: Text(
+                            'Bored',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.purple.shade800,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.021),
+                          ),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: -3, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                          },
+                          icon: Icon(
+                            Icons.face,
+                            size: 40,
+                          ),
+                          color: Colors.red,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        Container(
+                          child: Text(
+                            'Angry',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.021),
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),
-              ),
-              // Container(
-              //   width: 370,
-              //   height: 220,
-              //   padding: EdgeInsets.only(top: 10, bottom: 10),
-              //   decoration: BoxDecoration(
-              //       color: Color(0xffE5E5E5),
-              //       borderRadius: BorderRadius.circular(10)),
-              //   child: Column(
-              //     children: [
-              //       SizedBox(
-              //         height: 55,
-              //       ),
-              //       Text(
-              //         'Let’s prepare for',
-              //         style: TextStyle(
-              //             // color: Colors.white,
-              //             fontFamily: 'Montserrat',
-              //             fontWeight: FontWeight.w600,
-              //             fontStyle: FontStyle.normal,
-              //             fontSize: 20),
-              //       ),
-              //       Text(
-              //         'your day',
-              //         style: TextStyle(
-              //             // color: Colors.white,
-              //             fontFamily: 'Montserrat',
-              //             fontWeight: FontWeight.w600,
-              //             fontStyle: FontStyle.normal,
-              //             fontSize: 20),
-              //       ),
-              //       SizedBox(
-              //         height: 23,
-              //       ),
-              //       Text(
-              //         'So nothing will break your inner peace',
-              //         style: TextStyle(
-              //             // color: Colors.white,
-              //             fontFamily: 'Montserrat',
-              //             fontWeight: FontWeight.w400,
-              //             fontStyle: FontStyle.normal,
-              //             fontSize: 10.47),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(13, 0, 0, 0),
-                child: Text(
-                  'Must Read Blogs',
-                  style: TextStyle(
-                      // color: Colors.white,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 20),
-                  textAlign: TextAlign.left,
+                SizedBox(
+                  height: 25,
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    // height: 230,
-                    // width: 150,
-                    child: GestureDetector(
-                      child: Card(
-                        elevation: 3,
-                        child: Image(
-                          image: NetworkImage(_blog.blogs[0].url),
-                          height: MediaQuery.of(context).size.height * 0.25,
-                          width: MediaQuery.of(context).size.width * 0.40,
-                        ),
+                Container(
+                  // alignment: AlignmentGeometry.lerp(a, b, t),
+                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.26,
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                  decoration: BoxDecoration(
+                      color: Color(0xffE5E5E5),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
                       ),
-                      onTap: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BlogDetails(
-                                      blog: _blog.blogs[0],
-                                    )))
-                      },
-                    ),
-                  ),
-                  Container(
-                    // height: 230,
-                    // width: 150,
-                    child: GestureDetector(
-                      child: Card(
-                        elevation: 3,
-                        child: Image(
-                          image: NetworkImage(_blog.blogs[1].url),
-                          height: MediaQuery.of(context).size.height * 0.25,
-                          width: MediaQuery.of(context).size.width * 0.40,
-                        ),
+                      Text(
+                        'Quote of the Day',
+                        style: TextStyle(
+                            // color: Colors.white,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.normal,
+                            fontSize: MediaQuery.of(context).size.width * 0.05),
                       ),
-                      onTap: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BlogDetails(
-                                      blog: _blog.blogs[1],
-                                    )))
-                      },
-                    ),
+                      // Text(
+                      //   'your day',
+                      //   style: TextStyle(
+                      //       // color: Colors.white,
+                      //       fontFamily: 'Montserrat',
+                      //       fontWeight: FontWeight.w600,
+                      //       fontStyle: FontStyle.normal,
+                      //       fontSize: 20),
+                      // ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Text(
+                        'I am incharge of how I feel,',
+                        style: TextStyle(
+                            // color: Colors.white,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w800,
+                            fontStyle: FontStyle.normal,
+                            fontSize:
+                                MediaQuery.of(context).size.width * 0.047),
+                      ),
+                      Text(
+                        'I am choosing happiness.',
+                        style: TextStyle(
+                            // color: Colors.white,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w800,
+                            fontStyle: FontStyle.normal,
+                            fontSize:
+                                MediaQuery.of(context).size.width * 0.047),
+                      ),
+                      SizedBox(
+                        height: 23,
+                      ),
+                      Container(
+                        child: Consumer<MoodClass>(
+                            builder: (context, mood, child) {
+                          String message = mood._moodStatus;
+                          debugPrint("Mood Message: " + message);
+                          return Text(
+                            message.toString(),
+                            style: TextStyle(
+                                color: mood._color,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w800,
+                                fontStyle: FontStyle.normal,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.043),
+                          );
+                        }),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              // Card(
-              //   margin: EdgeInsets.fromLTRB(5, 15, 5, 0),
-              //   child: Column(
-              //     children: [
-              //       ListTile(
-              //         title: Text('Stress Score'),
-              //         trailing: Icon(Icons.menu),
-              //       ),
-              //       Divider(),
-              //       ListBody(),
-              //       Divider(),
-              //       ListTile(
-              //         title: Row(
-              //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //           // crossAxisAlignment: CrossAxisAlignment.center,
-              //           children: [
-              //             Text('M'),
-              //             Text('T'),
-              //             Text('W'),
-              //             Text('T'),
-              //             Text('F'),
-              //             Text('S'),
-              //             Text('S'),
-              //           ],
-              //         ),
-              //       )
-              //     ],
-              //   ),
-              // ),
-              // ListTile(
-              //   // leading: Icon(Icons.face_rounded),
-              //   title: Text('Appointments'),
-              //   trailing: TextButton(
-              //     onPressed: () {},
-              //     child: Text(
-              //       'View All',
-              //       style: TextStyle(color: Color(0xffFF834F)),
-              //     ),
-              //   ),
-              // ),
-              // Card(
-              //     // margin: EdgeInsets.all(10),
-              //     shape: null,
-              //     // elevation: 5,
-              //     child: Column(
-              //       children: [
-              //         ListTile(
-              //           // isThreeLine: true,
-              //           leading: Icon(Icons.face_rounded),
-              //           title: Text('Doctor Name'),
-              //           subtitle: Text('Date \nTime Venue'),
-              //           trailing: Icon(Icons.lock_clock),
-              //         ),
-              //       ],
-              //     )),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              // ListTile(
-              //   // leading: Icon(Icons.face_rounded),
-              //   title: Text('Meditate'),
-              //   trailing: TextButton(
-              //     onPressed: () {},
-              //     child: Text(
-              //       'View All',
-              //       style: TextStyle(color: Color(0xffFF834F)),
-              //     ),
-              //   ),
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     MeditateCard('assets/images/smile_face.png', 'Peace'),
-              //     MeditateCard('assets/images/smile_face.png', 'Sad'),
-              //     MeditateCard('assets/images/smile_face.png', 'Sleep'),
-              //     MeditateCard('assets/images/smile_face.png', 'Sad'),
-              //   ],
-              // ),
-            ],
+                ),
+                // Container(
+                //   width: 370,
+                //   height: 220,
+                //   padding: EdgeInsets.only(top: 10, bottom: 10),
+                //   decoration: BoxDecoration(
+                //       color: Color(0xffE5E5E5),
+                //       borderRadius: BorderRadius.circular(10)),
+                //   child: Column(
+                //     children: [
+                //       SizedBox(
+                //         height: 55,
+                //       ),
+                //       Text(
+                //         'Let’s prepare for',
+                //         style: TextStyle(
+                //             // color: Colors.white,
+                //             fontFamily: 'Montserrat',
+                //             fontWeight: FontWeight.w600,
+                //             fontStyle: FontStyle.normal,
+                //             fontSize: 20),
+                //       ),
+                //       Text(
+                //         'your day',
+                //         style: TextStyle(
+                //             // color: Colors.white,
+                //             fontFamily: 'Montserrat',
+                //             fontWeight: FontWeight.w600,
+                //             fontStyle: FontStyle.normal,
+                //             fontSize: 20),
+                //       ),
+                //       SizedBox(
+                //         height: 23,
+                //       ),
+                //       Text(
+                //         'So nothing will break your inner peace',
+                //         style: TextStyle(
+                //             // color: Colors.white,
+                //             fontFamily: 'Montserrat',
+                //             fontWeight: FontWeight.w400,
+                //             fontStyle: FontStyle.normal,
+                //             fontSize: 10.47),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(13, 0, 0, 0),
+                  child: Text(
+                    'Must Read Blogs',
+                    style: TextStyle(
+                        // color: Colors.white,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 20),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      // height: 230,
+                      // width: 150,
+                      child: GestureDetector(
+                        child: Card(
+                          elevation: 3,
+                          child: Image(
+                            image: NetworkImage(_blog.blogs[0].url),
+                            height: MediaQuery.of(context).size.height * 0.25,
+                            width: MediaQuery.of(context).size.width * 0.40,
+                          ),
+                        ),
+                        onTap: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BlogDetails(
+                                        blog: _blog.blogs[0],
+                                      )))
+                        },
+                      ),
+                    ),
+                    Container(
+                      // height: 230,
+                      // width: 150,
+                      child: GestureDetector(
+                        child: Card(
+                          elevation: 3,
+                          child: Image(
+                            image: NetworkImage(_blog.blogs[1].url),
+                            height: MediaQuery.of(context).size.height * 0.25,
+                            width: MediaQuery.of(context).size.width * 0.40,
+                          ),
+                        ),
+                        onTap: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BlogDetails(
+                                        blog: _blog.blogs[1],
+                                      )))
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                // Card(
+                //   margin: EdgeInsets.fromLTRB(5, 15, 5, 0),
+                //   child: Column(
+                //     children: [
+                //       ListTile(
+                //         title: Text('Stress Score'),
+                //         trailing: Icon(Icons.menu),
+                //       ),
+                //       Divider(),
+                //       ListBody(),
+                //       Divider(),
+                //       ListTile(
+                //         title: Row(
+                //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //           // crossAxisAlignment: CrossAxisAlignment.center,
+                //           children: [
+                //             Text('M'),
+                //             Text('T'),
+                //             Text('W'),
+                //             Text('T'),
+                //             Text('F'),
+                //             Text('S'),
+                //             Text('S'),
+                //           ],
+                //         ),
+                //       )
+                //     ],
+                //   ),
+                // ),
+                // ListTile(
+                //   // leading: Icon(Icons.face_rounded),
+                //   title: Text('Appointments'),
+                //   trailing: TextButton(
+                //     onPressed: () {},
+                //     child: Text(
+                //       'View All',
+                //       style: TextStyle(color: Color(0xffFF834F)),
+                //     ),
+                //   ),
+                // ),
+                // Card(
+                //     // margin: EdgeInsets.all(10),
+                //     shape: null,
+                //     // elevation: 5,
+                //     child: Column(
+                //       children: [
+                //         ListTile(
+                //           // isThreeLine: true,
+                //           leading: Icon(Icons.face_rounded),
+                //           title: Text('Doctor Name'),
+                //           subtitle: Text('Date \nTime Venue'),
+                //           trailing: Icon(Icons.lock_clock),
+                //         ),
+                //       ],
+                //     )),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // ListTile(
+                //   // leading: Icon(Icons.face_rounded),
+                //   title: Text('Meditate'),
+                //   trailing: TextButton(
+                //     onPressed: () {},
+                //     child: Text(
+                //       'View All',
+                //       style: TextStyle(color: Color(0xffFF834F)),
+                //     ),
+                //   ),
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+                //     MeditateCard('assets/images/smile_face.png', 'Peace'),
+                //     MeditateCard('assets/images/smile_face.png', 'Sad'),
+                //     MeditateCard('assets/images/smile_face.png', 'Sleep'),
+                //     MeditateCard('assets/images/smile_face.png', 'Sad'),
+                //   ],
+                // ),
+              ],
+            ),
           ),
         ),
       ),

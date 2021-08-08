@@ -1,4 +1,5 @@
 import 'package:amigoproject/app_screens/blog_details_pg.dart';
+import 'package:amigoproject/services/initial_builder.dart';
 import 'package:flutter/material.dart';
 import 'blog.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -66,100 +67,108 @@ class _BlogsState extends State<Blogs> {
     return Scaffold(
       body: SingleChildScrollView(
         physics: ScrollPhysics(),
-        child: Container(
-          child: Column(
-            children: [
-              // Container(
-              // width: 372,
-              // height: 42,
-              // alignment: Alignment.center,
-              // child: TextField(
-              //   decoration: InputDecoration(
-              //       hintText: 'Search...',
-              //       border: OutlineInputBorder(
-              //           borderRadius: BorderRadius.circular(10))),
-              // ),
-              // Row(
-              //   children: [
-              //     Icon(Icons.search),
-              //     SizedBox(
-              //       width: 10,
-              //     ),
-              //     TextField(
-              //       decoration: InputDecoration(
-              //           hintText: 'Search...',
-              //           border: OutlineInputBorder(
-              //               borderRadius: BorderRadius.circular(10))),
-              //     ),
-              //     SizedBox(
-              //       width: 10,
-              //     ),
-              //     Icon(Icons.mic_outlined)
-              //   ],
-              // ),
-              // ),
-              ListTile(
-                title: Text(
-                  'Blogs',
-                  style: TextStyle(
-                      // color: Colors.white,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 20),
+        child: WillPopScope(
+          onWillPop: () async {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Amigo()));
+            return true;
+          },
+          child: Container(
+            child: Column(
+              children: [
+                // Container(
+                // width: 372,
+                // height: 42,
+                // alignment: Alignment.center,
+                // child: TextField(
+                //   decoration: InputDecoration(
+                //       hintText: 'Search...',
+                //       border: OutlineInputBorder(
+                //           borderRadius: BorderRadius.circular(10))),
+                // ),
+                // Row(
+                //   children: [
+                //     Icon(Icons.search),
+                //     SizedBox(
+                //       width: 10,
+                //     ),
+                //     TextField(
+                //       decoration: InputDecoration(
+                //           hintText: 'Search...',
+                //           border: OutlineInputBorder(
+                //               borderRadius: BorderRadius.circular(10))),
+                //     ),
+                //     SizedBox(
+                //       width: 10,
+                //     ),
+                //     Icon(Icons.mic_outlined)
+                //   ],
+                // ),
+                // ),
+                ListTile(
+                  title: Text(
+                    'Blogs',
+                    style: TextStyle(
+                        // color: Colors.white,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 20),
+                  ),
+                  subtitle: Text(
+                    'Feeling Happy or Sad? Vent it out with us.',
+                    style: TextStyle(
+                        // color: Colors.white,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w400,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 13),
+                  ),
                 ),
-                subtitle: Text(
-                  'Feeling Happy or Sad? Vent it out with us.',
-                  style: TextStyle(
-                      // color: Colors.white,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 13),
-                ),
-              ),
-              StaggeredGridView.countBuilder(
-                padding: EdgeInsets.fromLTRB(7, 3, 7, 3),
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                crossAxisCount: 4,
-                itemCount: widget.blogs.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    child: Card(
-                      child: Column(
-                        children: [
-                          Image(image: NetworkImage(widget.blogs[index].url)),
-                          Container(
-                            child: Text(
-                              widget.blogs[index].title,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w600,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.03),
-                            ),
-                          )
-                        ],
+                StaggeredGridView.countBuilder(
+                  padding: EdgeInsets.fromLTRB(7, 3, 7, 3),
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  crossAxisCount: 4,
+                  itemCount: widget.blogs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      child: Card(
+                        child: Column(
+                          children: [
+                            Image(image: NetworkImage(widget.blogs[index].url)),
+                            Container(
+                              child: Text(
+                                widget.blogs[index].title,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.03),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    onTap: () => {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BlogDetails(
-                                    blog: widget.blogs[index],
-                                  )))
-                    },
-                  );
-                },
-                staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
-                mainAxisSpacing: 4.0,
-                crossAxisSpacing: 4.0,
-              ),
-            ],
+                      onTap: () => {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BlogDetails(
+                                      blog: widget.blogs[index],
+                                    )))
+                      },
+                    );
+                  },
+                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
+                  mainAxisSpacing: 4.0,
+                  crossAxisSpacing: 4.0,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -42,6 +42,10 @@ class AuthMethods {
       // print(result);
       user = result.user;
       if (user != null) {
+        await _firestore.collection('users').doc(user.uid).set({
+          "name": user.displayName,
+          "moodTrack": 0,
+        });
         return _userFromFirebaseUser(user);
       }
       // if (!user!.emailVerified) {
@@ -91,9 +95,9 @@ class AuthMethods {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
-      if (user != null && !user.emailVerified) {
-        await user.sendEmailVerification();
-      }
+      // if (user != null && !user.emailVerified) {
+      //   await user.sendEmailVerification();
+      // }
       if (user != null) {
         // await _firestore.;
         await _firestore.collection('users').doc(user.uid).set({

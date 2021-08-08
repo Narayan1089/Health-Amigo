@@ -1,4 +1,3 @@
-import 'package:amigoproject/app_screens/blog_comments.dart';
 import 'package:flutter/material.dart';
 import 'blog.dart';
 
@@ -86,7 +85,9 @@ class _BlogDetailsState extends State<BlogDetails> {
                             style: TextStyle(
                               color: Colors.black,
                               fontFamily: 'Poppins',
-                              fontSize: 18,
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.0175,
+                              // MediaQuery.of(context).size.height * 0.02,
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.w300,
                               // height: 27

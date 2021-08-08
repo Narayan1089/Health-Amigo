@@ -1,16 +1,12 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart';
 
-class Button{
-   String payload;
-   String title;
+class Button {
+  String payload;
+  String title;
 
-  Button({
-    required this.payload,
-    required this.title
-  });
+  Button({required this.payload, required this.title});
 
   factory Button.fromJson(Map<String, dynamic> json) {
     return Button(
@@ -20,7 +16,7 @@ class Button{
   }
 }
 
-class BotResponse{
+class BotResponse {
   String recipient_id;
   String text;
 
@@ -34,56 +30,46 @@ class BotResponse{
   }
 }
 
-
 class Bot {
-
   late List<BotResponse> list;
 
-  Future<List<BotResponse>> getBotResponse(String senderId, String message) async{
+  Future<List<BotResponse>> getBotResponse(
+      String senderId, String message) async {
+    try {
+      final response =
+          await post(Uri.parse("http://35.244.60.65:443/webhooks/rest/webhook"),
+              headers: <String, String>{
+                'Content-Type': 'application/json',
+              },
+              body: jsonEncode(<String, String>{
+                'sender': senderId,
+                'message': message,
+              }));
 
-    try{
-     final response = await post(
-       Uri.parse("http://35.244.60.65:443/webhooks/rest/webhook"),
-       headers:<String, String>{
-      'Content-Type': 'application/json',
-      },
-      body:jsonEncode(<String, String> {
-         'sender': senderId,
-         'message': message,
-         
-      })
-     );
+      if (response.statusCode == 200) {
+        print(response.body);
+        var data = json.decode(response.body);
+        var rest = data as List;
 
-    if (response.statusCode == 200) {
+        list = rest
+            .map<BotResponse>((json) => BotResponse.fromJson(json))
+            .toList();
+        print(list);
+        //  print(response.body);
+        //  List<dynamic> values=json.decode(response.body);
 
-      print(response.body);
-      var data = json.decode(response.body);
-      var rest = data as List;
-
-      list = rest.map<BotResponse>((json) => BotResponse.fromJson(json)).toList();
-      print(list);
-      //  print(response.body);
-      //  List<dynamic> values=json.decode(response.body);
-
-      return list;
-    }
-    else{
-      print('else');
-      list = [BotResponse(recipient_id: "",text: "Sorry, There was some error.")];
-      return list;
-      
-    }
-    //  print(values);
-    }
-    catch(er){
+        return list;
+      } else {
+        print('else');
+        list = [
+          BotResponse(recipient_id: "", text: "Sorry, There was some error.")
+        ];
+        return list;
+      }
+      //  print(values);
+    } catch (er) {
       print('exception');
       throw Exception('Failed to load messages.');
     }
-
-     
-   
   }
-
-
-
 }

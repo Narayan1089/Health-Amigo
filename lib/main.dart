@@ -28,6 +28,7 @@ class _MyApp extends State<MyApp> {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(
+              
               body: Center(
                 child: Column(
                   children: [Icon(Icons.error), Text("Something went wrong")],
@@ -52,7 +53,7 @@ class _MyApp extends State<MyApp> {
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               home: Scaffold(
-                body: Wrapper(),
+                body: Wrapper(),   
               ),
             ),
           );

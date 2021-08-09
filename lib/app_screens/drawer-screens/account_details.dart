@@ -107,12 +107,8 @@ class AccountDetails extends StatelessWidget {
                           color: Colors.white,
                           fontWeight: FontWeight.normal,
                           fontFamily: 'Roboto',
-<<<<<<< HEAD
                           fontSize:
                               MediaQuery.of(context).size.height * 0.0175),
-=======
-                          fontSize: MediaQuery.of(context).size.height * 0.0175),
->>>>>>> a1c83494e6591f579c7b6fb1509a04ab466c2f19
                     ),
                   ),
                 ),

@@ -35,7 +35,11 @@ Map<int, Color> color = {
 class _AmigoState extends State<Amigo> {
   @override
   int _selectedpg = 0;
-  final _pgOptions = [Home(), Meditate(), ChatScreen(), Blogs(), Doctor()];
+  final _pgOptions = [
+    Home(),
+    //  Meditate(),
+    ChatScreen(), Blogs(), Doctor()
+  ];
 
   MaterialColor colorCustom = MaterialColor(0xffFE834F, color);
 
@@ -257,12 +261,12 @@ class _AmigoState extends State<Amigo> {
                   size: 30,
                 ),
                 label: 'Home'),
-            BottomNavigationBarItem(
-                icon: ImageIcon(
-                  AssetImage('assets/images/meditate.png'),
-                  size: 30,
-                ),
-                label: 'Meditate'),
+            // BottomNavigationBarItem(
+            //     icon: ImageIcon(
+            //       AssetImage('assets/images/meditate.png'),
+            //       size: 30,
+            //     ),
+            //     label: 'Meditate'),
             BottomNavigationBarItem(
                 icon: ImageIcon(
                   AssetImage('assets/images/amigo-1.png'),

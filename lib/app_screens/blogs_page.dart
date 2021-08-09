@@ -148,7 +148,7 @@ class _BlogsState extends State<Blogs> {
                               child: Image.network(widget.blogs[index].url),
                             ),
                             SizedBox(
-                              height: 7,
+                              height: 5,
                             ),
                             // Image(image: NetworkImage()),
                             Container(
@@ -163,7 +163,10 @@ class _BlogsState extends State<Blogs> {
                                         MediaQuery.of(context).size.width *
                                             0.03),
                               ),
-                            )
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
                           ],
                         ),
                       ),

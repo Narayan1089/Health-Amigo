@@ -63,6 +63,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: DoubleBackToCloseApp(
         snackBar: const SnackBar(
           backgroundColor: Color(0xffFE834F),
@@ -361,134 +362,98 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 25,
                 ),
+                // Consumer<MoodClass>(builder: (context, mood, child) {
+                //   return
+                Container(
+                  // alignment: AlignmentGeometry.lerp(a, b, t),
+                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.26,
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                  decoration: BoxDecoration(
+                      color: Color(0xffE5E5E5),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Quote of the Day',
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            // color: Colors.white,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.normal,
+                            fontSize: MediaQuery.of(context).size.width * 0.05),
+                      ),
+                      // Text(
+                      //   'your day',
+                      //   style: TextStyle(
+                      //       // color: Colors.white,
+                      //       fontFamily: 'Montserrat',
+                      //       fontWeight: FontWeight.w600,
+                      //       fontStyle: FontStyle.normal,
+                      //       fontSize: 20),
+                      // ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Text(
+                        'I am incharge of how I feel,',
+                        style: TextStyle(
+                            // color: Colors.white,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w800,
+                            fontStyle: FontStyle.normal,
+                            fontSize:
+                                MediaQuery.of(context).size.width * 0.047),
+                      ),
+                      Text(
+                        'I am choosing happiness.',
+                        style: TextStyle(
+                            // color: Colors.white,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w800,
+                            fontStyle: FontStyle.normal,
+                            fontSize:
+                                MediaQuery.of(context).size.width * 0.047),
+                      ),
+                      // SizedBox(
+                      //   height: 23,
+                      // ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.02,
+                ),
                 Consumer<MoodClass>(builder: (context, mood, child) {
+                  String message = mood._moodStatus;
+                  debugPrint("Mood Message: " + message);
                   return Container(
-                    // alignment: AlignmentGeometry.lerp(a, b, t),
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.height * 0.26,
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
                     decoration: BoxDecoration(
                         color: mood._color,
                         borderRadius: BorderRadius.circular(10)),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'Quote of the Day',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.white,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w500,
-                              fontStyle: FontStyle.normal,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.05),
-                        ),
-                        // Text(
-                        //   'your day',
-                        //   style: TextStyle(
-                        //       // color: Colors.white,
-                        //       fontFamily: 'Montserrat',
-                        //       fontWeight: FontWeight.w600,
-                        //       fontStyle: FontStyle.normal,
-                        //       fontSize: 20),
-                        // ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Text(
-                          'I am incharge of how I feel,',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w800,
-                              fontStyle: FontStyle.normal,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.047),
-                        ),
-                        Text(
-                          'I am choosing happiness.',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w800,
-                              fontStyle: FontStyle.normal,
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.047),
-                        ),
-                        SizedBox(
-                          height: 23,
-                        ),
-                        // Container(
-                        //   child: Consumer<MoodClass>(
-                        //       builder: (context, mood, child) {
-                        //     String message = mood._moodStatus;
-                        //     debugPrint("Mood Message: " + message);
-                        //     return Text(
-                        //       message.toString(),
-                        //       style: TextStyle(
-                        //           color: mood._color,
-                        //           fontFamily: 'Montserrat',
-                        //           fontWeight: FontWeight.w800,
-                        //           fontStyle: FontStyle.normal,
-                        //           fontSize: MediaQuery.of(context).size.width *
-                        //               0.043),
-                        //     );
-                        //   }),
-                        // ),
-                      ],
+                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.08,
+                    child: Center(
+                      child: Text(
+                        message.toString(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w800,
+                            fontStyle: FontStyle.normal,
+                            fontSize:
+                                MediaQuery.of(context).size.width * 0.043),
+                      ),
                     ),
                   );
                 }),
-
-                // Container(
-                //   width: 370,
-                //   height: 220,
-                //   padding: EdgeInsets.only(top: 10, bottom: 10),
-                //   decoration: BoxDecoration(
-                //       color: Color(0xffE5E5E5),
-                //       borderRadius: BorderRadius.circular(10)),
-                //   child: Column(
-                //     children: [
-                //       SizedBox(
-                //         height: 55,
-                //       ),
-                //       Text(
-                //         'Let’s prepare for',
-                //         style: TextStyle(
-                //             // color: Colors.white,
-                //             fontFamily: 'Montserrat',
-                //             fontWeight: FontWeight.w600,
-                //             fontStyle: FontStyle.normal,
-                //             fontSize: 20),
-                //       ),
-                //       Text(
-                //         'your day',
-                //         style: TextStyle(
-                //             // color: Colors.white,
-                //             fontFamily: 'Montserrat',
-                //             fontWeight: FontWeight.w600,
-                //             fontStyle: FontStyle.normal,
-                //             fontSize: 20),
-                //       ),
-                //       SizedBox(
-                //         height: 23,
-                //       ),
-                //       Text(
-                //         'So nothing will break your inner peace',
-                //         style: TextStyle(
-                //             // color: Colors.white,
-                //             fontFamily: 'Montserrat',
-                //             fontWeight: FontWeight.w400,
-                //             fontStyle: FontStyle.normal,
-                //             fontSize: 10.47),
-                //       ),
-                //     ],
-                //   ),
-                // ),
                 SizedBox(
                   height: 20,
                 ),

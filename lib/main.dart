@@ -28,7 +28,6 @@ class _MyApp extends State<MyApp> {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Scaffold(
-              
               body: Center(
                 child: Column(
                   children: [Icon(Icons.error), Text("Something went wrong")],
@@ -47,13 +46,14 @@ class _MyApp extends State<MyApp> {
               ),
               StreamProvider(
                 create: (context) => context.read<AuthMethods>().authState,
+                initialData: null,
               ),
               ChangeNotifierProvider(create: (_) => MoodClass())
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               home: Scaffold(
-                body: Wrapper(),   
+                body: Wrapper(),
               ),
             ),
           );

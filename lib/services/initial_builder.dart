@@ -1,10 +1,10 @@
 import 'package:amigoproject/app_screens/doctors_pg.dart';
 import 'package:amigoproject/app_screens/drawer-screens/account_details.dart';
+import 'package:amigoproject/app_screens/meditate_page.dart';
 import 'package:amigoproject/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
 import 'package:amigoproject/app_screens/home_page.dart';
-import 'package:amigoproject/app_screens/meditate_page.dart';
 import 'package:amigoproject/app_screens/chat_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -35,11 +35,7 @@ Map<int, Color> color = {
 class _AmigoState extends State<Amigo> {
   @override
   int _selectedpg = 0;
-  final _pgOptions = [
-    Home(),
-    //  Meditate(),
-    ChatScreen(), Blogs(), Doctor()
-  ];
+  final _pgOptions = [Home(), Meditate(), ChatScreen(), Blogs(), Doctor()];
 
   MaterialColor colorCustom = MaterialColor(0xffFE834F, color);
 
@@ -261,12 +257,12 @@ class _AmigoState extends State<Amigo> {
                   size: 30,
                 ),
                 label: 'Home'),
-            // BottomNavigationBarItem(
-            //     icon: ImageIcon(
-            //       AssetImage('assets/images/meditate.png'),
-            //       size: 30,
-            //     ),
-            //     label: 'Meditate'),
+            BottomNavigationBarItem(
+                icon: ImageIcon(
+                  AssetImage('assets/images/meditate.png'),
+                  size: 30,
+                ),
+                label: 'Meditate'),
             BottomNavigationBarItem(
                 icon: ImageIcon(
                   AssetImage('assets/images/amigo-1.png'),
@@ -306,14 +302,6 @@ class _AmigoState extends State<Amigo> {
         forceWebView: false,
         headers: <String, String>{'my_header_key': 'my_header_value'},
       );
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  Future<void> _makePhoneCall(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
     } else {
       throw 'Could not launch $url';
     }

@@ -516,11 +516,14 @@ class _HomeState extends State<Home> {
                       // width: 150,
                       child: GestureDetector(
                         child: Card(
-                          elevation: 3,
-                          child: Image(
-                            image: NetworkImage(_blog.blogs[0].url),
-                            height: MediaQuery.of(context).size.height * 0.25,
-                            width: MediaQuery.of(context).size.width * 0.40,
+                          elevation: 0,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Image(
+                              image: NetworkImage(_blog.blogs[0].url),
+                              height: MediaQuery.of(context).size.height * 0.25,
+                              width: MediaQuery.of(context).size.width * 0.40,
+                            ),
                           ),
                         ),
                         onTap: () => {
@@ -538,11 +541,14 @@ class _HomeState extends State<Home> {
                       // width: 150,
                       child: GestureDetector(
                         child: Card(
-                          elevation: 3,
-                          child: Image(
-                            image: NetworkImage(_blog.blogs[1].url),
-                            height: MediaQuery.of(context).size.height * 0.25,
-                            width: MediaQuery.of(context).size.width * 0.40,
+                          elevation: 0,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Image(
+                              image: NetworkImage(_blog.blogs[2].url),
+                              height: MediaQuery.of(context).size.height * 0.25,
+                              width: MediaQuery.of(context).size.width * 0.40,
+                            ),
                           ),
                         ),
                         onTap: () => {
@@ -550,7 +556,7 @@ class _HomeState extends State<Home> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => BlogDetails(
-                                        blog: _blog.blogs[1],
+                                        blog: _blog.blogs[2],
                                       )))
                         },
                       ),

@@ -2,7 +2,11 @@
 
 // import 'package:amigoproject/app_screens/home_page.dart';
 // import 'package:amigoproject/services/initial_builder.dart';
+import 'dart:async';
+
+import 'package:amigoproject/after_sos.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SOS1 extends StatefulWidget {
   const SOS1({Key? key}) : super(key: key);
@@ -12,10 +16,53 @@ class SOS1 extends StatefulWidget {
 }
 
 class _SOS1State extends State<SOS1> {
+  late Timer _timer;
+  int _start = 5;
+  bool timerClose = true;
+
+  // bool timeDispose = false;
+
+  void startTimer() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    startTimer();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 5), () {
+      timerClose ? launch(('tel://9876543210')) : print("SOS Cancelled");
+      _timer.cancel();
+      // dispose();
+      // 5 seconds over, navigate to Page2.
+
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (_) => AfterSoS(),
+      //     ));
+    });
+
     return Container(
-      color: Color(0xffFF834F),
+      color: Color(0xffFF834A),
       child: Center(
         child: Container(
           width: 352,
@@ -45,7 +92,7 @@ class _SOS1State extends State<SOS1> {
               // ),
 
               Text(
-                '05',
+                '$_start',
                 //   Timer.periodic(Duration(seconds: 5), (timer) {
                 //   print(DateTime.now());
                 // });
@@ -111,6 +158,14 @@ class _SOS1State extends State<SOS1> {
                 child: Center(
                   child: TextButton(
                     onPressed: () {
+                      setState(() {
+                        timerClose = false;
+                      });
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (_) => AfterSoS(),
+                      //     ));
                       Navigator.pop(context);
                       // Navigator.push(context,
                       //     MaterialPageRoute(builder: (context) => Amigo()));

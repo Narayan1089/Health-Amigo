@@ -1,16 +1,31 @@
 import 'package:amigoproject/app_screens/blog_details_pg.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
+import 'package:amigoproject/app_screens/widget_screens/thoughts.dart';
+import 'package:amigoproject/providers/thoughts_provider.dart';
 import 'package:amigoproject/services/database/db.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'dart:math';
 
 User? loggedInUser;
 String? moodText = '';
 FirestoreConfig _firestoreConfig = FirestoreConfig();
 // MediaQueryData mediaQueryData = MediaQuery.of(context);
+
+List quotes = [
+  "Don't expect things to happen.\n It's better to be surprised than to be disappointed.",
+  "I am incharge of how I feel,\n I am choosing happiness.",
+  "Wake up with determination.\n Go to bed with satisfaction.",
+  "Just because it’s hard; \ndoesn’t mean; \nit’s impossible. You can do it.",
+  "Everything is possible.\n The impossible just takes longer.",
+  "The less you care what others think,\n the happier you’ll be.",
+];
+int randomQuotes = Random().nextInt(quotes.length);
 
 class Home extends StatefulWidget {
 //  const Home({required Key key, required String title}) : super(key: key);
@@ -62,6 +77,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    ThoughtsProvider thoughtsProvider =
+        Provider.of<ThoughtsProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       body: DoubleBackToCloseApp(
@@ -76,13 +93,13 @@ class _HomeState extends State<Home> {
         ),
         child: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.all(10),
+            // margin: EdgeInsets.all(2),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 10,
+                  height: 2,
                 ),
                 ListTile(
                   // leading: Icon(Icons.face_rounded),
@@ -92,7 +109,7 @@ class _HomeState extends State<Home> {
                     style: TextStyle(
                         // color: Colors.white,
                         fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w900,
                         fontStyle: FontStyle.normal,
                         fontSize: 20),
                   ),
@@ -103,9 +120,7 @@ class _HomeState extends State<Home> {
                           fontWeight: FontWeight.normal)),
                   // trailing: Icon(Icons.calendar_today_outlined),
                 ),
-                // SizedBox(
-                //   height: 5,
-                // ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -130,28 +145,28 @@ class _HomeState extends State<Home> {
                             Provider.of<MoodClass>(context, listen: false)
                                 .displayMood();
                           },
-                          icon: Icon(
-                            Icons.face,
-                            size: 40,
+                          icon: const FaIcon(
+                            FontAwesomeIcons.angry,
+                            size: 35,
                           ),
                           color: Colors.red,
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
-                        Container(
-                          child: Text(
-                            'Angry',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.red,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.021),
-                          ),
-                        )
+                        // Container(
+                        //   child: Text(
+                        //     'Angry',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.red,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
                       ],
                     ),
                     Column(
@@ -162,28 +177,28 @@ class _HomeState extends State<Home> {
                             Provider.of<MoodClass>(context, listen: false)
                                 .displayMood();
                           },
-                          icon: Icon(
-                            Icons.face,
-                            size: 40,
+                          icon: const FaIcon(
+                            FontAwesomeIcons.meh,
+                            size: 35,
                           ),
                           color: Colors.purple.shade800,
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
-                        Container(
-                          child: Text(
-                            'Bored',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.purple.shade800,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.021),
-                          ),
-                        )
+                        // Container(
+                        //   child: Text(
+                        //     'Bored',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.purple.shade800,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
                       ],
                     ),
                     Column(
@@ -194,28 +209,28 @@ class _HomeState extends State<Home> {
                             Provider.of<MoodClass>(context, listen: false)
                                 .displayMood();
                           },
-                          icon: Icon(
-                            Icons.face,
-                            size: 40,
+                          icon: const FaIcon(
+                            FontAwesomeIcons.sadTear,
+                            size: 35,
                           ),
                           color: Colors.blueAccent,
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
-                        Container(
-                          child: Text(
-                            'Sad',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.blueAccent,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.021),
-                          ),
-                        )
+                        // Container(
+                        //   child: Text(
+                        //     'Sad',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.blueAccent,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
                       ],
                     ),
                     Column(
@@ -226,28 +241,28 @@ class _HomeState extends State<Home> {
                             Provider.of<MoodClass>(context, listen: false)
                                 .displayMood();
                           },
-                          icon: Icon(
-                            Icons.face,
-                            size: 40,
+                          icon: const FaIcon(
+                            FontAwesomeIcons.smile,
+                            size: 35,
                           ),
                           color: Colors.grey,
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
-                        Container(
-                          child: Text(
-                            'Neutral',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.021),
-                          ),
-                        )
+                        // Container(
+                        //   child: Text(
+                        //     'Neutral',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.grey,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
                       ],
                     ),
                     Column(
@@ -258,28 +273,28 @@ class _HomeState extends State<Home> {
                             Provider.of<MoodClass>(context, listen: false)
                                 .displayMood();
                           },
-                          icon: Icon(
-                            Icons.face,
-                            size: 40,
+                          icon: const FaIcon(
+                            FontAwesomeIcons.laugh,
+                            size: 35,
                           ),
                           color: Colors.yellow.shade600,
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
-                        Container(
-                          child: Text(
-                            'Happy',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.yellow.shade600,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.021),
-                          ),
-                        )
+                        // Container(
+                        //   child: Text(
+                        //     'Happy',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.yellow.shade600,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
                       ],
                     ),
                     Column(
@@ -293,28 +308,28 @@ class _HomeState extends State<Home> {
                             //   mood = moodText;
                             // });
                           },
-                          icon: Icon(
-                            Icons.face_rounded,
-                            size: 40,
+                          icon: const FaIcon(
+                            FontAwesomeIcons.laughSquint,
+                            size: 35,
                           ),
                           color: Colors.lightGreen.shade300,
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
-                        Container(
-                          child: Text(
-                            'Very Happy',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.lightGreen.shade300,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.021),
-                          ),
-                        )
+                        // Container(
+                        //   child: Text(
+                        //     'Very Happy',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.lightGreen.shade300,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
                       ],
                     ),
                     Column(
@@ -333,101 +348,108 @@ class _HomeState extends State<Home> {
                             //   mood = moodText;
                             // });
                           },
-                          icon: Icon(
-                            Icons.face,
-                            size: 40,
+                          icon: const FaIcon(
+                            FontAwesomeIcons.grinStars,
+                            size: 35,
                           ),
                           color: Colors.pinkAccent,
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.005,
                         ),
-                        Container(
-                          child: Text(
-                            'Excited',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.pinkAccent,
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.normal,
-                                fontSize:
-                                    MediaQuery.of(context).size.width * 0.021),
-                          ),
-                        )
+                        // Container(
+                        //   child: Text(
+                        //     'Excited',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.pinkAccent,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
                       ],
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 2,
                 ),
                 // Consumer<MoodClass>(builder: (context, mood, child) {
                 //   return
                 Container(
                   // alignment: AlignmentGeometry.lerp(a, b, t),
                   margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.height * 0.26,
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                  width: MediaQuery.of(context).size.width * 0.94,
+                  height: MediaQuery.of(context).size.height * 0.18,
+                  padding: EdgeInsets.only(top: 5, bottom: 5),
                   decoration: BoxDecoration(
                       color: Color(0xffE5E5E5),
                       borderRadius: BorderRadius.circular(10)),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Quote of the Day',
-                        style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            // color: Colors.white,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.normal,
-                            fontSize: MediaQuery.of(context).size.width * 0.05),
-                      ),
-                      // Text(
-                      //   'your day',
-                      //   style: TextStyle(
-                      //       // color: Colors.white,
-                      //       fontFamily: 'Montserrat',
-                      //       fontWeight: FontWeight.w600,
-                      //       fontStyle: FontStyle.normal,
-                      //       fontSize: 20),
-                      // ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Text(
-                        'I am incharge of how I feel,',
-                        style: TextStyle(
-                            // color: Colors.white,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w800,
-                            fontStyle: FontStyle.normal,
-                            fontSize:
-                                MediaQuery.of(context).size.width * 0.047),
-                      ),
-                      Text(
-                        'I am choosing happiness.',
-                        style: TextStyle(
-                            // color: Colors.white,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w800,
-                            fontStyle: FontStyle.normal,
-                            fontSize:
-                                MediaQuery.of(context).size.width * 0.047),
-                      ),
-                      // SizedBox(
-                      //   height: 23,
-                      // ),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 2,
+                        ),
+                        Text(
+                          'Quote of the Day',
+                          // textAlign: TextAlign.center,
+                          style: TextStyle(
+                              decoration: TextDecoration.none,
+                              // color: Colors.white,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w900,
+                              fontStyle: FontStyle.normal,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.05),
+                        ),
+                        // Text(
+                        //   'your day',
+                        //   style: TextStyle(
+                        //       // color: Colors.white,
+                        //       fontFamily: 'Montserrat',
+                        //       fontWeight: FontWeight.w600,
+                        //       fontStyle: FontStyle.normal,
+                        //       fontSize: 20),
+                        // ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          quotes[randomQuotes],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+
+                              // color: Colors.white,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w500,
+                              fontStyle: FontStyle.normal,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.040),
+                        ),
+                        // Text(
+                        //   'I am choosing happiness.',
+                        //   style: TextStyle(
+                        //       // color: Colors.white,
+                        //       fontFamily: 'Montserrat',
+                        //       fontWeight: FontWeight.w500,
+                        //       fontStyle: FontStyle.normal,
+                        //       fontSize:
+                        //           MediaQuery.of(context).size.width * 0.040),
+                        // ),
+                        // SizedBox(
+                        //   height: 23,
+                        // ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
+                  height: MediaQuery.of(context).size.height * 0.01,
                 ),
                 Consumer<MoodClass>(builder: (context, mood, child) {
                   String message = mood._moodStatus;
@@ -437,7 +459,7 @@ class _HomeState extends State<Home> {
                         color: mood._color,
                         borderRadius: BorderRadius.circular(10)),
                     margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    width: MediaQuery.of(context).size.width * 0.9,
+                    width: MediaQuery.of(context).size.width * 0.94,
                     height: MediaQuery.of(context).size.height * 0.08,
                     child: Center(
                       child: Text(
@@ -455,12 +477,12 @@ class _HomeState extends State<Home> {
                   );
                 }),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(13, 0, 0, 0),
                   child: Text(
-                    'Must Read Blogs',
+                    ' Must Read Blogs',
                     style: TextStyle(
                         // color: Colors.white,
                         fontFamily: 'Montserrat',
@@ -528,6 +550,132 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
+
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+                //     Container(
+                //       // height: 230,
+                //       // width: 150,
+                //       child: GestureDetector(
+                //         child: Card(
+                //           elevation: 0,
+                //           child: ClipRRect(
+                //             borderRadius: BorderRadius.circular(15.0),
+                //             child: Image(
+                //               image: NetworkImage(_blog.blogs[3].url),
+                //               height: MediaQuery.of(context).size.height * 0.25,
+                //               width: MediaQuery.of(context).size.width * 0.40,
+                //             ),
+                //           ),
+                //         ),
+                //         onTap: () => {
+                //           Navigator.push(
+                //               context,
+                //               MaterialPageRoute(
+                //                   builder: (context) => BlogDetails(
+                //                         blog: _blog.blogs[3],
+                //                       )))
+                //         },
+                //       ),
+                //     ),
+                //     Container(
+                //       // height: 230,
+                //       // width: 150,
+                //       child: GestureDetector(
+                //         child: Card(
+                //           elevation: 0,
+                //           child: ClipRRect(
+                //             borderRadius: BorderRadius.circular(15.0),
+                //             child: Image(
+                //               image: NetworkImage(_blog.blogs[1].url),
+                //               height: MediaQuery.of(context).size.height * 0.25,
+                //               width: MediaQuery.of(context).size.width * 0.40,
+                //             ),
+                //           ),
+                //         ),
+                //         onTap: () => {
+                //           Navigator.push(
+                //               context,
+                //               MaterialPageRoute(
+                //                   builder: (context) => BlogDetails(
+                //                         blog: _blog.blogs[1],
+                //                       )))
+                //         },
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                SizedBox(
+                  height: 10,
+                ),
+                // Card(
+                //   elevation: 5,
+                //   margin: EdgeInsets.fromLTRB(5, 15, 5, 0),
+                //   child: ListTile(
+                //     title: Text(
+                //       'Notes',
+                //       textAlign: TextAlign.center,
+                //     ),
+                //     trailing: Icon(Icons.note_add),
+                //     onTap: () => Navigator.pushReplacement(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => Notes_Screen())),
+                //   ),
+                // ),
+
+                Container(
+                  padding: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(2),
+                  child: GestureDetector(
+                    onTap: () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ThoughtsPage())),
+                    child: Card(
+                      color: Color(0xfffa9d6a),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          const ListTile(
+                            leading: Text(
+                              'Today\'s thoughts',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            // title: Text('The Enchanted Nightingale'),
+                            trailing: Icon(Icons.arrow_forward_outlined,
+                                color: Colors.white),
+                            onTap: null,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: thoughtsProvider.thought == ""
+                                ? Text(
+                                    "Click here to add",
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                    ),
+                                  )
+                                : Text(
+                                    thoughtsProvider.thought,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
                 // Card(
                 //   margin: EdgeInsets.fromLTRB(5, 15, 5, 0),
                 //   child: Column(

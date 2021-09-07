@@ -40,6 +40,16 @@ dependencies:
   double_back_to_close_app: ^2.0.1
   chewie: ^1.2.2
   video_player: ^2.1.12
+  youtube_player_flutter: ^8.0.0
+  font_awesome_flutter: ^9.1.0
+  otp_text_field: ^1.1.1
+  auto_size_text: ^1.1.2
+  sqflite:
+  path:
+  intl: 
+  share: ^0.6.1
+  flutter_slidable:
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -115,5 +125,6 @@ flutter:
           - weight: 900
   assets:
     - assets/images/
+    - assets/mood/
     - assets/images/Sos.png
     - assets/videos/test.mp4

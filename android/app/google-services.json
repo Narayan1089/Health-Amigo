@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "657600427761-7a2kba3sth6ql9qimt4m1mbnp1o3jffs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.amigoproject",
+            "certificate_hash": "65e02163950c91c2fe2fa915391f0725c27f1cdb"
+          }
+        },
+        {
           "client_id": "657600427761-mtd9bajit9cshurklv5nta5t2orl2mac.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

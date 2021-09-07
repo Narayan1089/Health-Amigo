@@ -1,5 +1,5 @@
 import 'package:amigoproject/services/initial_builder.dart';
-import 'package:amigoproject/services/video_player/guided_tracks.dart';
+import 'package:amigoproject/services/video_player/meditate_videos.dart';
 import 'package:flutter/material.dart';
 
 class Meditate extends StatefulWidget {
@@ -22,19 +22,20 @@ class _MeditateState extends State<Meditate> {
         child: Column(
           children: [
             SizedBox(
-              height: 64,
+              height: 24,
             ),
             Text(
               'Soothing - To Calm Your Soul',
               style: TextStyle(
                   fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w900,
                   fontStyle: FontStyle.normal,
-                  fontSize: 14.87),
+                  fontSize: 13.87),
             ),
             SizedBox(
               height: 36,
             ),
+
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             //   children: [
@@ -83,8 +84,19 @@ class _MeditateState extends State<Meditate> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MoodCard('assets/images/smile_face.png', 'Happy'),
-                MoodCard('assets/images/smile_face.png', 'Focus'),
-                MoodCard('assets/images/smile_face.png', 'Anxiety'),
+                MoodCard('assets/images/thinking.png', 'Focus'),
+                MoodCard('assets/images/stress.png', 'Anxiety'),
+              ],
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                MoodCard('assets/images/depression.png', 'Stress'),
+                MoodCard('assets/images/angry.png', 'Angry'),
+                MoodCard('assets/images/sado.jpg', 'Sad'),
               ],
             ),
             // SizedBox(
@@ -142,8 +154,8 @@ class MoodCard extends StatelessWidget {
       height: 124.88,
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => GuidedTracks()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => MeditateVideos()));
         },
         child: Card(
           elevation: 5,
@@ -165,9 +177,9 @@ class MoodCard extends StatelessWidget {
                 title.toString(),
                 style: TextStyle(
                     fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                     fontStyle: FontStyle.normal,
-                    fontSize: 14.87),
+                    fontSize: 12.87),
               )
             ],
           ),

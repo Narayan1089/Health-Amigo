@@ -91,6 +91,7 @@ class _ChatScreenState extends State<ChatScreen> {
       scrollDown();
     });
     return Scaffold(
+      // resizeToAvoidBottomInset: false,
       body: DoubleBackToCloseApp(
         snackBar: const SnackBar(
           backgroundColor: Color(0xffFE834F),

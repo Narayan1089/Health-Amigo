@@ -146,543 +146,271 @@ class _HomeState extends State<Home> {
                 // SizedBox(
                 //   height: 5,
                 // ),
-                Showcase(
-                  key: keyOne,
-                  // title: 'Mood Tracker',
-                  description: 'Tap to log mood!',
-                  overlayPadding: EdgeInsets.fromLTRB(3, 3, 3, 12),
-                  shapeBorder: CircleBorder(),
-                  animationDuration: Duration(milliseconds: 1500),
-                  // tooltipColor: Colors.blueGrey,
-                  overlayColor: Color(0xff222222),
-                  // disposeOnTap: true,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      // ImageIcon(
-                      //   AssetImage('assets/images/angry_face.png'),
-                      //   // size: 40,
-                      // ),
-                      // ImageIcon(
-                      //   AssetImage('assets/images/angry_face.png'),
-                      //   size: 40,
-                      // ),
-                      // Icon(Icons.face_outlined),
-                      // ImageIcon(
-                      //   AssetImage('assets/images/happy.png'),
-                      //   size: 40,
-                      // ),
-                      Column(
-                        children: [
-                          IconButton(
-                            onPressed: () async {
-                              await moodTracker(mood: -3, user: loggedInUser);
-                              Provider.of<MoodClass>(context, listen: false)
-                                  .displayMood();
-                            },
-                            icon: const FaIcon(
-                              FontAwesomeIcons.angry,
-                              size: 35,
-                            ),
-                            color: Colors.red,
+                // Showcase(
+                //   key: keyOne,
+                //   // title: 'Mood Tracker',
+                //   description: 'Tap to log mood!',
+                //   overlayPadding: EdgeInsets.fromLTRB(3, 3, 3, 12),
+                //   shapeBorder: CircleBorder(),
+                //   animationDuration: Duration(milliseconds: 1500),
+                //   // tooltipColor: Colors.blueGrey,
+                //   overlayColor: Color(0xff222222),
+                //   // disposeOnTap: true,
+                //   child:
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // ImageIcon(
+                    //   AssetImage('assets/images/angry_face.png'),
+                    //   // size: 40,
+                    // ),
+                    // ImageIcon(
+                    //   AssetImage('assets/images/angry_face.png'),
+                    //   size: 40,
+                    // ),
+                    // Icon(Icons.face_outlined),
+                    // ImageIcon(
+                    //   AssetImage('assets/images/happy.png'),
+                    //   size: 40,
+                    // ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: -3, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.angry,
+                            size: 35,
                           ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.005,
+                          color: Colors.red,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        // Container(
+                        //   child: Text(
+                        //     'Angry',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.red,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: -2, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.meh,
+                            size: 35,
                           ),
-                          // Container(
-                          //   child: Text(
-                          //     'Angry',
-                          //     textAlign: TextAlign.center,
-                          //     style: TextStyle(
-                          //         color: Colors.red,
-                          //         fontFamily: 'Montserrat',
-                          //         fontWeight: FontWeight.w600,
-                          //         fontStyle: FontStyle.normal,
-                          //         fontSize:
-                          //             MediaQuery.of(context).size.width * 0.021),
-                          //   ),
-                          // )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          IconButton(
-                            onPressed: () async {
-                              await moodTracker(mood: -2, user: loggedInUser);
-                              Provider.of<MoodClass>(context, listen: false)
-                                  .displayMood();
-                            },
-                            icon: const FaIcon(
-                              FontAwesomeIcons.meh,
-                              size: 35,
-                            ),
-                            color: Colors.purple.shade800,
+                          color: Colors.purple.shade800,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        // Container(
+                        //   child: Text(
+                        //     'Bored',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.purple.shade800,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: -1, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.sadTear,
+                            size: 35,
                           ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.005,
+                          color: Colors.blueAccent,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        // Container(
+                        //   child: Text(
+                        //     'Sad',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.blueAccent,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: 0, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.smile,
+                            size: 35,
                           ),
-                          // Container(
-                          //   child: Text(
-                          //     'Bored',
-                          //     textAlign: TextAlign.center,
-                          //     style: TextStyle(
-                          //         color: Colors.purple.shade800,
-                          //         fontFamily: 'Montserrat',
-                          //         fontWeight: FontWeight.w600,
-                          //         fontStyle: FontStyle.normal,
-                          //         fontSize:
-                          //             MediaQuery.of(context).size.width * 0.021),
-                          //   ),
-                          // )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          IconButton(
-                            onPressed: () async {
-                              await moodTracker(mood: -1, user: loggedInUser);
-                              Provider.of<MoodClass>(context, listen: false)
-                                  .displayMood();
-                            },
-                            icon: const FaIcon(
-                              FontAwesomeIcons.sadTear,
-                              size: 35,
-                            ),
-                            color: Colors.blueAccent,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        // Container(
+                        //   child: Text(
+                        //     'Neutral',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.grey,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: 1, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.laugh,
+                            size: 35,
                           ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.005,
+                          color: Colors.yellow.shade600,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        // Container(
+                        //   child: Text(
+                        //     'Happy',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.yellow.shade600,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await moodTracker(mood: 2, user: loggedInUser);
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                            // setState(() {
+                            //   mood = moodText;
+                            // });
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.laughSquint,
+                            size: 35,
                           ),
-                          // Container(
-                          //   child: Text(
-                          //     'Sad',
-                          //     textAlign: TextAlign.center,
-                          //     style: TextStyle(
-                          //         color: Colors.blueAccent,
-                          //         fontFamily: 'Montserrat',
-                          //         fontWeight: FontWeight.w600,
-                          //         fontStyle: FontStyle.normal,
-                          //         fontSize:
-                          //             MediaQuery.of(context).size.width * 0.021),
-                          //   ),
-                          // )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          IconButton(
-                            onPressed: () async {
-                              await moodTracker(mood: 0, user: loggedInUser);
-                              Provider.of<MoodClass>(context, listen: false)
-                                  .displayMood();
-                            },
-                            icon: const FaIcon(
-                              FontAwesomeIcons.smile,
-                              size: 35,
-                            ),
-                            color: Colors.grey,
+                          color: Colors.lightGreen.shade300,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        // Container(
+                        //   child: Text(
+                        //     'Very Happy',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.lightGreen.shade300,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButton(
+                          disabledColor: Colors.blue,
+                          onPressed: () async {
+                            // int mood = 3;
+                            await moodTracker(mood: 3, user: loggedInUser);
+                            // mood = displayMood();
+                            Provider.of<MoodClass>(context, listen: false)
+                                .displayMood();
+                            // setState(() {
+                            //   mood = moodText;
+                            // });
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.grinStars,
+                            size: 35,
                           ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.005,
-                          ),
-                          // Container(
-                          //   child: Text(
-                          //     'Neutral',
-                          //     textAlign: TextAlign.center,
-                          //     style: TextStyle(
-                          //         color: Colors.grey,
-                          //         fontFamily: 'Montserrat',
-                          //         fontWeight: FontWeight.w600,
-                          //         fontStyle: FontStyle.normal,
-                          //         fontSize:
-                          //             MediaQuery.of(context).size.width * 0.021),
-                          //   ),
-                          // )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          IconButton(
-                            onPressed: () async {
-                              await moodTracker(mood: 1, user: loggedInUser);
-                              Provider.of<MoodClass>(context, listen: false)
-                                  .displayMood();
-                            },
-                            icon: const FaIcon(
-                              FontAwesomeIcons.laugh,
-                              size: 35,
-                            ),
-                            color: Colors.yellow.shade600,
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.005,
-                          ),
-                          // Container(
-                          //   child: Text(
-                          //     'Happy',
-                          //     textAlign: TextAlign.center,
-                          //     style: TextStyle(
-                          //         color: Colors.yellow.shade600,
-                          //         fontFamily: 'Montserrat',
-                          //         fontWeight: FontWeight.w600,
-                          //         fontStyle: FontStyle.normal,
-                          //         fontSize:
-                          //             MediaQuery.of(context).size.width * 0.021),
-                          //   ),
-                          // )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          IconButton(
-                            onPressed: () async {
-                              await moodTracker(mood: 2, user: loggedInUser);
-                              Provider.of<MoodClass>(context, listen: false)
-                                  .displayMood();
-                              // setState(() {
-                              //   mood = moodText;
-                              // });
-                            },
-                            icon: const FaIcon(
-                              FontAwesomeIcons.laughSquint,
-                              size: 35,
-                            ),
-                            color: Colors.lightGreen.shade300,
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.005,
-                          ),
-                          // Container(
-                          //   child: Text(
-                          //     'Very Happy',
-                          //     textAlign: TextAlign.center,
-                          //     style: TextStyle(
-                          //         color: Colors.lightGreen.shade300,
-                          //         fontFamily: 'Montserrat',
-                          //         fontWeight: FontWeight.w600,
-                          //         fontStyle: FontStyle.normal,
-                          //         fontSize:
-                          //             MediaQuery.of(context).size.width * 0.021),
-                          //   ),
-                          // )
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          IconButton(
-                            disabledColor: Colors.blue,
-                            onPressed: () async {
-                              // int mood = 3;
-                              await moodTracker(mood: 3, user: loggedInUser);
-                              // mood = displayMood();
-                              Provider.of<MoodClass>(context, listen: false)
-                                  .displayMood();
-                              // setState(() {
-                              //   mood = moodText;
-                              // });
-                            },
-                            icon: const FaIcon(
-                              FontAwesomeIcons.grinStars,
-                              size: 35,
-                            ),
-                            color: Colors.pinkAccent,
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.005,
-                          ),
-                          // Container(
-                          //   child: Text(
-                          //     'Excited',
-                          //     textAlign: TextAlign.center,
-                          //     style: TextStyle(
-                          //         color: Colors.pinkAccent,
-                          //         fontFamily: 'Montserrat',
-                          //         fontWeight: FontWeight.w600,
-                          //         fontStyle: FontStyle.normal,
-                          //         fontSize:
-                          //             MediaQuery.of(context).size.width * 0.021),
-                          //   ),
-                          // )
-                        ],
-                      ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            // ImageIcon(
-                            //   AssetImage('assets/images/angry_face.png'),
-                            //   // size: 40,
-                            // ),
-                            // ImageIcon(
-                            //   AssetImage('assets/images/angry_face.png'),
-                            //   size: 40,
-                            // ),
-                            // Icon(Icons.face_outlined),
-                            // ImageIcon(
-                            //   AssetImage('assets/images/happy.png'),
-                            //   size: 40,
-                            // ),
-                            Column(
-                              children: [
-                                IconButton(
-                                  onPressed: () async {
-                                    await moodTracker(
-                                        mood: -3, user: loggedInUser);
-                                    Provider.of<MoodClass>(context,
-                                            listen: false)
-                                        .displayMood();
-                                  },
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.angry,
-                                    size: 35,
-                                  ),
-                                  color: Colors.red,
-                                ),
-                                SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.005,
-                                ),
-                                // Container(
-                                //   child: Text(
-                                //     'Angry',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(
-                                //         color: Colors.red,
-                                //         fontFamily: 'Montserrat',
-                                //         fontWeight: FontWeight.w600,
-                                //         fontStyle: FontStyle.normal,
-                                //         fontSize:
-                                //             MediaQuery.of(context).size.width * 0.021),
-                                //   ),
-                                // )
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                IconButton(
-                                  onPressed: () async {
-                                    await moodTracker(
-                                        mood: -2, user: loggedInUser);
-                                    Provider.of<MoodClass>(context,
-                                            listen: false)
-                                        .displayMood();
-                                  },
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.meh,
-                                    size: 35,
-                                  ),
-                                  color: Colors.purple.shade800,
-                                ),
-                                SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.005,
-                                ),
-                                // Container(
-                                //   child: Text(
-                                //     'Bored',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(
-                                //         color: Colors.purple.shade800,
-                                //         fontFamily: 'Montserrat',
-                                //         fontWeight: FontWeight.w600,
-                                //         fontStyle: FontStyle.normal,
-                                //         fontSize:
-                                //             MediaQuery.of(context).size.width * 0.021),
-                                //   ),
-                                // )
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                IconButton(
-                                  onPressed: () async {
-                                    await moodTracker(
-                                        mood: -1, user: loggedInUser);
-                                    Provider.of<MoodClass>(context,
-                                            listen: false)
-                                        .displayMood();
-                                  },
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.sadTear,
-                                    size: 35,
-                                  ),
-                                  color: Colors.blueAccent,
-                                ),
-                                SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.005,
-                                ),
-                                // Container(
-                                //   child: Text(
-                                //     'Sad',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(
-                                //         color: Colors.blueAccent,
-                                //         fontFamily: 'Montserrat',
-                                //         fontWeight: FontWeight.w600,
-                                //         fontStyle: FontStyle.normal,
-                                //         fontSize:
-                                //             MediaQuery.of(context).size.width * 0.021),
-                                //   ),
-                                // )
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                IconButton(
-                                  onPressed: () async {
-                                    await moodTracker(
-                                        mood: 0, user: loggedInUser);
-                                    Provider.of<MoodClass>(context,
-                                            listen: false)
-                                        .displayMood();
-                                  },
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.smile,
-                                    size: 35,
-                                  ),
-                                  color: Colors.grey,
-                                ),
-                                SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.005,
-                                ),
-                                // Container(
-                                //   child: Text(
-                                //     'Neutral',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(
-                                //         color: Colors.grey,
-                                //         fontFamily: 'Montserrat',
-                                //         fontWeight: FontWeight.w600,
-                                //         fontStyle: FontStyle.normal,
-                                //         fontSize:
-                                //             MediaQuery.of(context).size.width * 0.021),
-                                //   ),
-                                // )
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                IconButton(
-                                  onPressed: () async {
-                                    await moodTracker(
-                                        mood: 1, user: loggedInUser);
-                                    Provider.of<MoodClass>(context,
-                                            listen: false)
-                                        .displayMood();
-                                  },
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.laugh,
-                                    size: 35,
-                                  ),
-                                  color: Colors.yellow.shade600,
-                                ),
-                                SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.005,
-                                ),
-                                // Container(
-                                //   child: Text(
-                                //     'Happy',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(
-                                //         color: Colors.yellow.shade600,
-                                //         fontFamily: 'Montserrat',
-                                //         fontWeight: FontWeight.w600,
-                                //         fontStyle: FontStyle.normal,
-                                //         fontSize:
-                                //             MediaQuery.of(context).size.width * 0.021),
-                                //   ),
-                                // )
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                IconButton(
-                                  onPressed: () async {
-                                    await moodTracker(
-                                        mood: 2, user: loggedInUser);
-                                    Provider.of<MoodClass>(context,
-                                            listen: false)
-                                        .displayMood();
-                                    // setState(() {
-                                    //   mood = moodText;
-                                    // });
-                                  },
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.laughSquint,
-                                    size: 35,
-                                  ),
-                                  color: Colors.lightGreen.shade300,
-                                ),
-                                SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.005,
-                                ),
-                                // Container(
-                                //   child: Text(
-                                //     'Very Happy',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(
-                                //         color: Colors.lightGreen.shade300,
-                                //         fontFamily: 'Montserrat',
-                                //         fontWeight: FontWeight.w600,
-                                //         fontStyle: FontStyle.normal,
-                                //         fontSize:
-                                //             MediaQuery.of(context).size.width * 0.021),
-                                //   ),
-                                // )
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                IconButton(
-                                  disabledColor: Colors.blue,
-                                  onPressed: () async {
-                                    // int mood = 3;
-                                    await moodTracker(
-                                        mood: 3, user: loggedInUser);
-                                    // mood = displayMood();
-                                    Provider.of<MoodClass>(context,
-                                            listen: false)
-                                        .displayMood();
-                                    // setState(() {
-                                    //   mood = moodText;
-                                    // });
-                                  },
-                                  icon: const FaIcon(
-                                    FontAwesomeIcons.grinStars,
-                                    size: 35,
-                                  ),
-                                  color: Colors.pinkAccent,
-                                ),
-                                SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.005,
-                                ),
-                                // Container(
-                                //   child: Text(
-                                //     'Excited',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(
-                                //         color: Colors.pinkAccent,
-                                //         fontFamily: 'Montserrat',
-                                //         fontWeight: FontWeight.w600,
-                                //         fontStyle: FontStyle.normal,
-                                //         fontSize:
-                                //             MediaQuery.of(context).size.width * 0.021),
-                                //   ),
-                                // )
-                              ],
-                            ),
-                          ]),
-                    ],
-                  ),
+                          color: Colors.pinkAccent,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.005,
+                        ),
+                        // Container(
+                        //   child: Text(
+                        //     'Excited',
+                        //     textAlign: TextAlign.center,
+                        //     style: TextStyle(
+                        //         color: Colors.pinkAccent,
+                        //         fontFamily: 'Montserrat',
+                        //         fontWeight: FontWeight.w600,
+                        //         fontStyle: FontStyle.normal,
+                        //         fontSize:
+                        //             MediaQuery.of(context).size.width * 0.021),
+                        //   ),
+                        // )
+                      ],
+                    ),
+                  ],
                 ),
+                // ),
                 SizedBox(
                   height: 2,
                 ),
@@ -729,7 +457,7 @@ class _HomeState extends State<Home> {
                           height: 30,
                         ),
                         Text(
-                          quotes[randomQuotes],
+                          quotes[randomQuotes].toString(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
 

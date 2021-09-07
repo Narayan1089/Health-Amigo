@@ -140,10 +140,12 @@ class MoodCard extends StatelessWidget {
   late final String? title;
   late final IconData? icon;
   late final String? image;
+  late final String? url;
 
-  MoodCard(img, title) {
+  MoodCard(img, title, String s) {
     this.title = title;
     this.image = img;
+    this.url = s;
   }
   // const MoodCard({Key? key}) : super(key: key);
 

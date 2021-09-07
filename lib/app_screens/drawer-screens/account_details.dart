@@ -214,7 +214,8 @@ Future<void> _launchInBrowser(String url) async {
     await launch(
       url,
       forceSafariVC: false,
-      forceWebView: false,
+      // forceWebView: true,
+      // enableJavaScript: true,
       headers: <String, String>{'my_header_key': 'my_header_value'},
     );
   } else {

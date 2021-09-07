@@ -1,11 +1,14 @@
 import 'package:amigoproject/app_screens/blog_details_pg.dart';
+import 'package:amigoproject/services/initial_builder.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'blog.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Blogs extends StatefulWidget {
   // const Blogs({Key key}) : super(key: key);
-  List<Blog> blogs = [
+
+  final List<Blog> blogs = [
     Blog(
         author: 'Sharvari Kumbhar',
         url:
@@ -62,9 +65,16 @@ class Blogs extends StatefulWidget {
 }
 
 class _BlogsState extends State<Blogs> {
-  // Future<List<Blog>> _getBlogs() {
-  //   return blogs;
-  // }
+  final Stream<QuerySnapshot> _blogsStream = FirebaseFirestore.instance
+      .collection('blogs')
+      .snapshots(includeMetadataChanges: true);
+
+  late Map<String, dynamic>? data;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,115 +87,175 @@ class _BlogsState extends State<Blogs> {
             //     context, MaterialPageRoute(builder: (context) => Amigo()));
             return true;
           },
-          child: Container(
-            child: Column(
-              children: [
-                // Container(
-                // width: 372,
-                // height: 42,
-                // alignment: Alignment.center,
-                // child: TextField(
-                //   decoration: InputDecoration(
-                //       hintText: 'Search...',
-                //       border: OutlineInputBorder(
-                //           borderRadius: BorderRadius.circular(10))),
-                // ),
-                // Row(
-                //   children: [
-                //     Icon(Icons.search),
-                //     SizedBox(
-                //       width: 10,
-                //     ),
-                //     TextField(
-                //       decoration: InputDecoration(
-                //           hintText: 'Search...',
-                //           border: OutlineInputBorder(
-                //               borderRadius: BorderRadius.circular(10))),
-                //     ),
-                //     SizedBox(
-                //       width: 10,
-                //     ),
-                //     Icon(Icons.mic_outlined)
-                //   ],
-                // ),
-                // ),
-                ListTile(
-                  title: Text(
-                    'Blogs',
-                    style: TextStyle(
-                        // color: Colors.white,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 20),
-                  ),
-                  subtitle: Text(
-                    'Feeling Happy or Sad? Vent it out with us.',
-                    style: TextStyle(
-                        // color: Colors.white,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 13),
-                  ),
-                ),
-                StaggeredGridView.countBuilder(
-                  padding: EdgeInsets.fromLTRB(7, 3, 7, 3),
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  crossAxisCount: 4,
-                  itemCount: widget.blogs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        elevation: 0.0,
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15.0),
-                              child: Image.network(widget.blogs[index].url),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            // Image(image: NetworkImage()),
-                            Container(
-                              child: Text(
-                                widget.blogs[index].title,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w600,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.03),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                          ],
+          child: SafeArea(
+            child: StreamBuilder<QuerySnapshot>(
+                stream: _blogsStream,
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading");
+                  }
+
+                  return Container(
+                    child: Column(
+                      children: [
+                        // Container(
+                        // width: 372,
+                        // height: 42,
+                        // alignment: Alignment.center,
+                        // child: TextField(
+                        //   decoration: InputDecoration(
+                        //       hintText: 'Search...',
+                        //       border: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(10))),
+                        // ),
+                        // Row(
+                        //   children: [
+                        //     Icon(Icons.search),
+                        //     SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     TextField(
+                        //       decoration: InputDecoration(
+                        //           hintText: 'Search...',
+                        //           border: OutlineInputBorder(
+                        //               borderRadius: BorderRadius.circular(10))),
+                        //     ),
+                        //     SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     Icon(Icons.mic_outlined)
+                        //   ],
+                        // ),
+                        // ),
+                        ListTile(
+                          title: Text(
+                            'Blogs',
+                            style: TextStyle(
+                                // color: Colors.white,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 20),
+                          ),
+                          subtitle: Text(
+                            'Feeling Happy or Sad? Vent it out with us.',
+                            style: TextStyle(
+                                // color: Colors.white,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 13),
+                          ),
                         ),
-                      ),
-                      onTap: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BlogDetails(
-                                      blog: widget.blogs[index],
-                                    )))
-                      },
-                    );
-                  },
-                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
-                  mainAxisSpacing: 4.0,
-                  crossAxisSpacing: 4.0,
-                ),
-              ],
-            ),
+                        StaggeredGridView.countBuilder(
+                          padding: EdgeInsets.fromLTRB(7, 3, 7, 3),
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          crossAxisCount: 4,
+                          // itemCount: widget.blogs.length,
+                          itemCount: snapshot.data!.docs.length,
+                          //     .map((DocumentSnapshot document) {
+                          //   data = document.data()! as Map<String, dynamic>;
+                          // }).length,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (snapshot.hasData) {
+                              return snapshot.data!.docs.length != 0
+                                  ? snapshot.data!.docs
+                                      .map((DocumentSnapshot document) {
+                                      data = document.data()!
+                                          as Map<String, dynamic>;
+
+                                      debugPrint("Blogs: " +
+                                          snapshot.data!.docs.length
+                                              .toString());
+                                      debugPrint(
+                                          "Url: " + data!['image'].toString());
+                                      debugPrint("Title: " +
+                                          data!['title'].toString());
+                                      return Container(
+                                        child: GestureDetector(
+                                          child: Card(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                            elevation: 0.0,
+                                            child: Column(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0),
+                                                  child: Image.network(
+                                                      data!['image']
+                                                          .toString()),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                // Image(image: NetworkImage()),
+                                                Container(
+                                                  child: Text(
+                                                    data!['title'],
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.03),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          onTap: () => {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    BlogDetails(
+                                                  blog: data as Blog,
+                                                ),
+                                              ),
+                                            ),
+                                          },
+                                        ),
+                                      );
+                                    }).toList() as Widget
+                                  : Center(child: CircularProgressIndicator());
+                            } else {
+                              return Center(
+                                  child: CircularProgressIndicator(
+                                valueColor: new AlwaysStoppedAnimation<Color>(
+                                    Colors.blue),
+                              ));
+                            }
+                            // return Text('helllo');
+                          },
+                          staggeredTileBuilder: (int index) =>
+                              new StaggeredTile.fit(2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                        ),
+                      ],
+                    ),
+                  );
+                }),
           ),
         ),
       ),

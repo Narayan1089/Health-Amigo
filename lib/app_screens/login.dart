@@ -58,40 +58,41 @@ class _LogInState extends State<LogIn> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.only(top: 40.0),
-        color: Colors.white,
-        height: size.height,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              height: 70,
-            ),
-            Image(
-              image: AssetImage('assets/images/Logo.png'),
-              height: 102,
-              width: 133,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Text(
-              "Log in",
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.normal,
-                fontFamily: 'Lobster',
-                color: Color(0xffFE834F),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.only(top: 40.0),
+          color: Colors.white,
+          height: size.height,
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 70,
               ),
-            ),
-            SizedBox(
-              height: 36,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
+              Image(
+                image: AssetImage('assets/images/Logo.png'),
+                height: 102,
+                width: 133,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Text(
+                "Log in",
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.normal,
+                  fontFamily: 'Lobster',
+                  color: Color(0xffFE834F),
+                ),
+              ),
+              SizedBox(
+                height: 36,
+              ),
+              Expanded(
+                // child: SingleChildScrollView(
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -103,7 +104,7 @@ class _LogInState extends State<LogIn> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(color: Colors.black, width: 1.5),
-//
+                          //
                         ),
                         child: TextFormField(
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -120,7 +121,7 @@ class _LogInState extends State<LogIn> {
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.all(4),
                             enabledBorder: InputBorder.none,
-//                        errorBorder: InputBorder.none,
+                            //                        errorBorder: InputBorder.none,
                             labelText: 'Email',
                             labelStyle: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -168,7 +169,7 @@ class _LogInState extends State<LogIn> {
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.all(4),
                             enabledBorder: InputBorder.none,
-//                        errorBorder: InputBorder.none,
+                            //                        errorBorder: InputBorder.none,
                             labelText: 'Password',
                             labelStyle: TextStyle(
                               fontSize: 17,
@@ -291,8 +292,9 @@ class _LogInState extends State<LogIn> {
                   ),
                 ),
               ),
-            )
-          ],
+              // )
+            ],
+          ),
         ),
       ),
     );

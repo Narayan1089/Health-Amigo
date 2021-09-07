@@ -1,12 +1,14 @@
 import 'package:amigoproject/app_screens/blog_details_pg.dart';
 import 'package:amigoproject/services/initial_builder.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'blog.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Blogs extends StatefulWidget {
   // const Blogs({Key key}) : super(key: key);
-  List<Blog> blogs = [
+
+  final List<Blog> blogs = [
     Blog(
         author: 'Sharvari Kumbhar',
         url:
@@ -42,8 +44,9 @@ class Blogs extends StatefulWidget {
         title: "Relationship between thought and language."),
     Blog(
       author: 'Nikos M.',
-      url: 'https://images.unsplash.com/photo-1620147461831-a97b99ade1d3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fG1lbnRhbCUyMGhlYWx0aHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
-          // 'https://images.unsplash.com/photo-1542639130-c9fadbddcc6b?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDMzfF9oYi1kbDRRLTRVfHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+      url:
+          'https://images.unsplash.com/photo-1620147461831-a97b99ade1d3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fG1lbnRhbCUyMGhlYWx0aHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
+      // 'https://images.unsplash.com/photo-1542639130-c9fadbddcc6b?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDMzfF9oYi1kbDRRLTRVfHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
       text:
           "“The only journey is the journey within.” – Rainer Maria Rilke \n\n WHO statistics indicate that between 76% to 85% of people with mental health issues in low- and middle-income countries receive no treatment. People often avoid or delay seeking help because they are afraid of being treated differently, excluded from society, or bullied. This occurs because prejudice, stigma and discrimination surround mental health and it affects people who suffer from mental illnesses prominently. Regardless of the extent of discrimination, it will cause harm and often aggravate a person's already fleeting mental stability. People with mental illness are often marginalized and discriminated against in many ways, but understanding them and eliminating these problems will help motivate people to get professional help. \n\n Stigma is a social process of labeling, devaluation and discrimination on the basis of physical, emotional and behavioral components. Stigma arises from lack of awareness and knowledge and inaccurate media representation of mental health contributes to it. Steve J. Barnes identifies three main types of stigmas: \n\n Structural stigmatization refers to large organizations that prevent a person from accessing mental assistance.Social stigma is about supporting stereotypes about those suffering from mental illness.\n\nSelf-stigmatization is the internalization of stigma that affects your relationship with yourself and others, it can affect your motivation to recover and your adherence to therapy.\n\n The stigma surrounding mental health disorders is a major problem among the various racial and ethnic communities, making it particularly difficult for people in these communities to access professional assistance. Certain Asian cultures see the search for help as a sign of contempt for cultural values and shame for the family. These communities often misinterpret mental disorders as psychiatric illnesses and such patients are very often neglected or misdiagnosed. Some people mistake mental disorders and demonize sufferers based on irrelevant religious or social beliefs. While some African-Americans are skeptical and distrust the mental health system.\n\n How is stigmatization harmful?\n\n Stigma and discrimination may aggravate mental health disorders and reduce the likelihood of getting professional help. It also adversely affects the recovery process of people diagnosed with serious mental health issues. Stigmatization creates a reluctance to seek assistance and often leads to bullying, physical violence or harassment. One of the major effects of stigmatization is self-doubt as it leads to toxic credibility like 'you'll never get over your disease'. This belief paralyzes an individual and promotes feelings of shame, despair and isolation. Stigmatization is prevalent in workplaces where people have shared concerns about retaliation or being fired if they sought mental health care. Workplace stress affects employees and their mental wellbeing. As observed throughout this pandemic, productivity has increased at the expense of people's mental health. Employees feel obliged to work unsociable hours to maintain their jobs and sustain their families. These have been conspicuous factors contributing to a deterioration in the mental health of employees.\n\n Addressing Stigma\n\n Communication is quintessential to any healthy relationship. Sharing your problems brings solace and warmth. Research shows that having deep and meaningful conversations with someone who is suffering will not only help end stigma, but also provide hope and motivation to get professional help.  The media plays an important role in shaping our thoughts and ideas, accurate and positive media portrayal can help enhance people's current negative perspective about mental health. Shows like BoJack Horseman, Spinning Out, This is Us and One Day at a Time almost accurately describe the life of a person with mental disorders. Here are some ways to trivialize stigma:\n\n- Express yourself: share your problems, normalize mental health discussions.\n- Be compassionate: regardless of an individual's mental or physical health, be compassionate towards everyone.\n- Be attentive: monitor your behavior patterns and report any change.\n- Educate yourself and others: talk about mental health, share facts and correct misinterpretations.\n- Promote equality: treat people equally irrespective of their gender, social status, sexual preference and mental health status.\n- Get help- do not hesitate to ask for help, it is absolutely normal to need someone and there is no shame in admitting that you are in dire need of assistance.\n\n Surveys and researchers have proven that younger populations have a wider exposure to mental health and tend to be more empathetic towards people with mental disorders. We are the future, and as I look to the future, I see us all in a mentally healthier place than we are. A diagnosis does not determine who you are or what you can do. Life is a compilation of some very complicated situations that profoundly affect our mental health and we all need someone who understands what we are experiencing. I understand that stigma makes it extremely hard to confront your issues and get help but all you need is a change of perspective. An important part of loving and understanding yourself involves telling yourself that ‘I'm not okay’. And it is okay to not be okay sometimes, but it's not okay to let yourself believe that you're delusional or to be afraid. This is your fight against you and you shall be victorious. ",
       title: 'Mental Health, Stigma and Getting Professional Help',
@@ -62,9 +65,16 @@ class Blogs extends StatefulWidget {
 }
 
 class _BlogsState extends State<Blogs> {
-  // Future<List<Blog>> _getBlogs() {
-  //   return blogs;
-  // }
+  final Stream<QuerySnapshot> _blogsStream = FirebaseFirestore.instance
+      .collection('blogs')
+      .snapshots(includeMetadataChanges: true);
+
+  late Map<String, dynamic>? data;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,115 +87,175 @@ class _BlogsState extends State<Blogs> {
                 context, MaterialPageRoute(builder: (context) => Amigo()));
             return true;
           },
-          child: Container(
-            child: Column(
-              children: [
-                // Container(
-                // width: 372,
-                // height: 42,
-                // alignment: Alignment.center,
-                // child: TextField(
-                //   decoration: InputDecoration(
-                //       hintText: 'Search...',
-                //       border: OutlineInputBorder(
-                //           borderRadius: BorderRadius.circular(10))),
-                // ),
-                // Row(
-                //   children: [
-                //     Icon(Icons.search),
-                //     SizedBox(
-                //       width: 10,
-                //     ),
-                //     TextField(
-                //       decoration: InputDecoration(
-                //           hintText: 'Search...',
-                //           border: OutlineInputBorder(
-                //               borderRadius: BorderRadius.circular(10))),
-                //     ),
-                //     SizedBox(
-                //       width: 10,
-                //     ),
-                //     Icon(Icons.mic_outlined)
-                //   ],
-                // ),
-                // ),
-                ListTile(
-                  title: Text(
-                    'Blogs',
-                    style: TextStyle(
-                        // color: Colors.white,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 20),
-                  ),
-                  subtitle: Text(
-                    'Feeling Happy or Sad? Vent it out with us.',
-                    style: TextStyle(
-                        // color: Colors.white,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 13),
-                  ),
-                ),
-                StaggeredGridView.countBuilder(
-                  padding: EdgeInsets.fromLTRB(7, 3, 7, 3),
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  crossAxisCount: 4,
-                  itemCount: widget.blogs.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        elevation: 0.0,
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15.0),
-                              child: Image.network(widget.blogs[index].url),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            // Image(image: NetworkImage()),
-                            Container(
-                              child: Text(
-                                widget.blogs[index].title,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w600,
-                                    fontStyle: FontStyle.normal,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            0.03),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                          ],
+          child: SafeArea(
+            child: StreamBuilder<QuerySnapshot>(
+                stream: _blogsStream,
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading");
+                  }
+
+                  return Container(
+                    child: Column(
+                      children: [
+                        // Container(
+                        // width: 372,
+                        // height: 42,
+                        // alignment: Alignment.center,
+                        // child: TextField(
+                        //   decoration: InputDecoration(
+                        //       hintText: 'Search...',
+                        //       border: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(10))),
+                        // ),
+                        // Row(
+                        //   children: [
+                        //     Icon(Icons.search),
+                        //     SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     TextField(
+                        //       decoration: InputDecoration(
+                        //           hintText: 'Search...',
+                        //           border: OutlineInputBorder(
+                        //               borderRadius: BorderRadius.circular(10))),
+                        //     ),
+                        //     SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     Icon(Icons.mic_outlined)
+                        //   ],
+                        // ),
+                        // ),
+                        ListTile(
+                          title: Text(
+                            'Blogs',
+                            style: TextStyle(
+                                // color: Colors.white,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 20),
+                          ),
+                          subtitle: Text(
+                            'Feeling Happy or Sad? Vent it out with us.',
+                            style: TextStyle(
+                                // color: Colors.white,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 13),
+                          ),
                         ),
-                      ),
-                      onTap: () => {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BlogDetails(
-                                      blog: widget.blogs[index],
-                                    )))
-                      },
-                    );
-                  },
-                  staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
-                  mainAxisSpacing: 4.0,
-                  crossAxisSpacing: 4.0,
-                ),
-              ],
-            ),
+                        StaggeredGridView.countBuilder(
+                          padding: EdgeInsets.fromLTRB(7, 3, 7, 3),
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          crossAxisCount: 4,
+                          // itemCount: widget.blogs.length,
+                          itemCount: snapshot.data!.docs.length,
+                          //     .map((DocumentSnapshot document) {
+                          //   data = document.data()! as Map<String, dynamic>;
+                          // }).length,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (snapshot.hasData) {
+                              return snapshot.data!.docs.length != 0
+                                  ? snapshot.data!.docs
+                                      .map((DocumentSnapshot document) {
+                                      data = document.data()!
+                                          as Map<String, dynamic>;
+
+                                      debugPrint("Blogs: " +
+                                          snapshot.data!.docs.length
+                                              .toString());
+                                      debugPrint(
+                                          "Url: " + data!['image'].toString());
+                                      debugPrint("Title: " +
+                                          data!['title'].toString());
+                                      return Container(
+                                        child: GestureDetector(
+                                          child: Card(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                            elevation: 0.0,
+                                            child: Column(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0),
+                                                  child: Image.network(
+                                                      data!['image']
+                                                          .toString()),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                // Image(image: NetworkImage()),
+                                                Container(
+                                                  child: Text(
+                                                    data!['title'],
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FontStyle.normal,
+                                                        fontSize: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.03),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          onTap: () => {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    BlogDetails(
+                                                  blog: data as Blog,
+                                                ),
+                                              ),
+                                            ),
+                                          },
+                                        ),
+                                      );
+                                    }).toList() as Widget
+                                  : Center(child: CircularProgressIndicator());
+                            } else {
+                              return Center(
+                                  child: CircularProgressIndicator(
+                                valueColor: new AlwaysStoppedAnimation<Color>(
+                                    Colors.blue),
+                              ));
+                            }
+                            // return Text('helllo');
+                          },
+                          staggeredTileBuilder: (int index) =>
+                              new StaggeredTile.fit(2),
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                        ),
+                      ],
+                    ),
+                  );
+                }),
           ),
         ),
       ),

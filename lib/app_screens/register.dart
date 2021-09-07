@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:amigoproject/services/auth.dart';
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:amigoproject/app_screens/phoneNumberScreen.dart';
 
 class Register extends StatefulWidget {
@@ -26,10 +27,11 @@ class _Register extends State<Register> {
   bool isLoading = false;
   bool _isObscure = true;
   bool _isObscure1 = true;
+  bool isChecked = false;
 
   Future signMeUp() async {
     // var r = ;
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() && isChecked == true) {
       setState(() {
         isLoading = true;
       });
@@ -51,10 +53,21 @@ class _Register extends State<Register> {
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => LogIn()));
           } else {
+            // if (!isChecked) {
+            //   authMethods.errorMessage = "Please Accept the T&C";
+            //   authMethods.e = true;
+            // }
             return 'error';
           }
         },
       );
+    } else {
+      if (!isChecked) {
+        authMethods.errorMessage =
+            "Please read and accept the Terms & Conditions";
+        authMethods.e = true;
+      }
+      return 'error';
     }
   }
 
@@ -62,39 +75,40 @@ class _Register extends State<Register> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.only(top: 30.0),
-        color: Colors.white,
-        height: size.height,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              height: 60,
-            ),
-            // Image(
-            //   image: AssetImage('assets/images/Logo.png'),
-            //   height: 102,
-            //   width: 133,
-            // ),
-            // SizedBox(
-            //   height: 25,
-            // ),
-            Text(
-              "Register",
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeight.normal,
-                fontFamily: 'Lobster',
-                color: Color(0xffFE834F),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.only(top: 30.0),
+          color: Colors.white,
+          height: size.height,
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 60,
               ),
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
+              // Image(
+              //   image: AssetImage('assets/images/Logo.png'),
+              //   height: 102,
+              //   width: 133,
+              // ),
+              // SizedBox(
+              //   height: 25,
+              // ),
+              Text(
+                "Register",
+                style: TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.normal,
+                  fontFamily: 'Lobster',
+                  color: Color(0xffFE834F),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Expanded(
+                // child: SingleChildScrollView(
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -316,6 +330,63 @@ class _Register extends State<Register> {
                       SizedBox(
                         height: 15,
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // CheckboxListTile(
+                          //   value: isChecked,
+                          //   onChanged: (val) {
+                          //     setState(() => isChecked = val!);
+                          //   },
+                          //   subtitle: !isChecked
+                          //       ? Text(
+                          //           'Required.',
+                          //           style: TextStyle(color: Colors.red),
+                          //         )
+                          //       : null,
+                          //   title: new Text(
+                          //     'I agree.',
+                          //     style: TextStyle(fontSize: 14.0),
+                          //   ),
+                          //   controlAffinity: ListTileControlAffinity.leading,
+                          //   // activeColor: Colors.green,
+                          // ),
+
+                          Checkbox(
+                            checkColor: Colors.white,
+                            // fillColor: MaterialStateProperty.resolveWith(),
+                            value: isChecked,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isChecked = value!;
+                              });
+                            },
+                          ),
+                          // SizedBox(
+                          //   width: MediaQuery.of(context).size.width * 0.001,
+                          // ),
+                          TextButton(
+                            onPressed: () {
+                              // Navigator.of(context).pop();
+                              _launchInBrowser(
+                                  'https://drive.google.com/file/d/11ApUst5cD2yJIOeSvRw1Fps5nBb59I1A/view?usp=sharing');
+                            },
+                            child: Text(
+                              "Accept our Terms & Conditions",
+                              style: TextStyle(
+                                color: Color(0xffFF834F),
+                                fontFamily: 'Montserrat',
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
                         height: 40,
                         width: 189,
@@ -398,10 +469,24 @@ class _Register extends State<Register> {
                   ),
                 ),
               ),
-            )
-          ],
+              // )
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+        headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

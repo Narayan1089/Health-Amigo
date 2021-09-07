@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
 import 'package:amigoproject/app_screens/home_page.dart';
 import 'package:amigoproject/app_screens/chat_screen.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -129,6 +130,21 @@ class _AmigoState extends State<Amigo> {
               ListTile(
                 title: Row(
                   children: [
+                    Icon(Icons.feedback_outlined),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Feedback'),
+                  ],
+                ),
+                onTap: () => {
+                  // _launchInBrowser('https://pub.dev/packages/url_launcher'),
+                  _launchInBrowser('https://forms.gle/ze8CJBA25pp2jxYQ6'),
+                },
+              ),
+              ListTile(
+                title: Row(
+                  children: [
                     Icon(Icons.logout),
                     SizedBox(
                       width: 10,
@@ -138,20 +154,6 @@ class _AmigoState extends State<Amigo> {
                 ),
                 onTap: () => {
                   authMethods.signOut(context),
-                },
-              ),
-              ListTile(
-                title: Row(
-                  children: [
-                    Icon(Icons.feedback_outlined),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text('Feedback'),
-                  ],
-                ),
-                onTap: () => {
-                  _launchInBrowser('https://forms.gle/ze8CJBA25pp2jxYQ6'),
                 },
               ),
               // ListTile(
@@ -239,7 +241,10 @@ class _AmigoState extends State<Amigo> {
           // ),
           // ),
         ),
-        body: _pgOptions[_selectedpg],
+        body: ShowCaseWidget(
+            builder: Builder(
+          builder: (_) => _pgOptions[_selectedpg],
+        )),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedpg,
@@ -299,7 +304,9 @@ class _AmigoState extends State<Amigo> {
       await launch(
         url,
         forceSafariVC: false,
-        forceWebView: false,
+        // forceWebView: true,
+        // enableJavaScript: true,
+        // universalLinksOnly: ,
         headers: <String, String>{'my_header_key': 'my_header_value'},
       );
     } else {

@@ -82,9 +82,14 @@ class _MeditateState extends State<Meditate> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                MoodCard('assets/images/smile_face.png', 'Happy'),
-                MoodCard('assets/images/smile_face.png', 'Focus'),
-                MoodCard('assets/images/smile_face.png', 'Anxiety'),
+                // MoodCard('assets/images/smile_face.png', 'Happy'),
+                MoodCard('assets/images/smile_face.png', 'Sleep',
+                    'https://static.videezy.com/system/resources/previews/000/008/445/original/Dark_Haired_Girl_in_disbelief_1.mp4'),
+                MoodCard('assets/images/smile_face.png', 'Sleep',
+                    'https://static.videezy.com/system/resources/previews/000/008/445/original/Dark_Haired_Girl_in_disbelief_1.mp4'),
+                // MoodCard('assets/images/smile_face.png', 'Anxiety',
+                //     'assets/videos/GT2new.mp4'),
+                // 'https://drive.google.com/drive/u/0/folders/1Q--ZrD9GxyCx6ROBIUlFXlzo7hrGChqx'),
               ],
             ),
             // SizedBox(
@@ -128,10 +133,12 @@ class MoodCard extends StatelessWidget {
   late final String? title;
   late final IconData? icon;
   late final String? image;
+  late final String? url;
 
-  MoodCard(img, title) {
+  MoodCard(img, title, String s) {
     this.title = title;
     this.image = img;
+    this.url = s;
   }
   // const MoodCard({Key? key}) : super(key: key);
 
@@ -143,7 +150,11 @@ class MoodCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => GuidedTracks()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => GuidedTracks(
+                        url: url,
+                      )));
         },
         child: Card(
           elevation: 5,

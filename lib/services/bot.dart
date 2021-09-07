@@ -37,7 +37,7 @@ class Bot {
       String senderId, String message) async {
     try {
       final response =
-          await post(Uri.parse("http://35.244.60.65:443/webhooks/rest/webhook"),
+          await post(Uri.parse("http://34.93.177.23:443/webhooks/rest/webhook"),
               headers: <String, String>{
                 'Content-Type': 'application/json',
               },

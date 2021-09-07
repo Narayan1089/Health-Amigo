@@ -8,7 +8,7 @@ class FirestoreConfig {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   updateMoodTrack({required User? user, required int mood}) async {
-    _firestore
+    await _firestore
         .collection('users')
         .doc(user!.uid)
         .update({'moodTrack': mood})
@@ -16,8 +16,8 @@ class FirestoreConfig {
         .catchError((error) => print("Failed to update user: $error"));
   }
 
-  retrieveMoodTracker(User? user) {
-    _firestore
+  retrieveMoodTracker(User? user) async {
+    await _firestore
         .collection('users')
         .doc(user!.uid)
         .get()

@@ -1,4 +1,3 @@
-import 'package:amigoproject/app_screens/widget_screens/thoughts.dart';
 import 'package:amigoproject/providers/thoughts_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -126,82 +125,91 @@ class AccountDetails extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.all(2),
-              child: GestureDetector(
-                onTap: () => Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => ThoughtsPage())),
-                child: Card(
-                  color: Colors.grey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      const ListTile(
-                        leading: Text(
-                          'What\'s on your mind ?',
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        ),
-                        // title: Text('The Enchanted Nightingale'),
-                        trailing: Icon(Icons.arrow_forward_outlined,
-                            color: Colors.black54),
-                        onTap: null,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.all(2),
-              child: GestureDetector(
-                onTap: () => Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => ThoughtsPage())),
-                child: Card(
-                  color: Color(0xfffa9d6a),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      const ListTile(
-                        leading: Text(
-                          'Today\'s thoughts',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        // title: Text('The Enchanted Nightingale'),
-                        trailing: Icon(Icons.arrow_forward_outlined,
-                            color: Colors.white),
-                        onTap: null,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: thoughtsProvider.thought == ""
-                            ? Text(
-                                "Click here to add",
-                                style: TextStyle(
-                                  color: Colors.red,
-                                ),
-                              )
-                            : Text(
-                                thoughtsProvider.thought,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                      ),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            // Container(
+            //   padding: EdgeInsets.all(10),
+            //   margin: EdgeInsets.all(2),
+            //   child: GestureDetector(
+            //     onTap: () => Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => ThoughtsPage())),
+            //     child: Card(
+            //       color: Colors.grey,
+            //       child: Column(
+            //         mainAxisSize: MainAxisSize.min,
+            //         children: <Widget>[
+            //           const ListTile(
+            //             leading: Text(
+            //               'What\'s on your mind ?',
+            //               style: TextStyle(
+            //                   color: Colors.black54,
+            //                   fontWeight: FontWeight.bold,
+            //                   fontSize: 18),
+            //             ),
+            //             // title: Text('The Enchanted Nightingale'),
+            //             trailing: Icon(Icons.arrow_forward_outlined,
+            //                 color: Colors.black54),
+            //             onTap: null,
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // TableCalendar(
+            //   firstDay: DateTime.utc(2021, 9, 1),
+            //   lastDay: DateTime.utc(2021, 9, 30),
+            //   focusedDay: DateTime.now(),
+            //   calendarFormat: CalendarFormat.week,
+            //   calendarStyle: CalendarStyle(
+            //     markerDecoration: BoxDecoration(color: Color(0xffFF834F)),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            // Container(
+            //   padding: EdgeInsets.all(10),
+            //   margin: EdgeInsets.all(2),
+            //   child: GestureDetector(
+            //     onTap: () => Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => ThoughtsPage())),
+            //     child: Card(
+            //       color: Color(0xfffa9d6a),
+            //       child: Column(
+            //         mainAxisSize: MainAxisSize.min,
+            //         children: <Widget>[
+            //           const ListTile(
+            //             leading: Text(
+            //               'Today\'s thoughts',
+            //               style: TextStyle(
+            //                   color: Colors.white, fontWeight: FontWeight.bold),
+            //             ),
+            //             // title: Text('The Enchanted Nightingale'),
+            //             // trailing: Icon(Icons.arrow_forward_outlined,
+            //             //     color: Colors.white),
+            //             onTap: null,
+            //           ),
+            //           Padding(
+            //             padding: const EdgeInsets.all(10.0),
+            //             child: thoughtsProvider.thought == ""
+            //                 ? Text(
+            //                     "Click here to add",
+            //                     style: TextStyle(
+            //                       color: Colors.red,
+            //                     ),
+            //                   )
+            //                 : Text(
+            //                     thoughtsProvider.thought,
+            //                     style: TextStyle(
+            //                       color: Colors.white,
+            //                     ),
+            //                   ),
+            //           ),
+            //           const SizedBox(height: 10),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

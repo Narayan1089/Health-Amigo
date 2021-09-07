@@ -1,6 +1,4 @@
 import 'package:amigoproject/providers/thoughts_provider.dart';
-import 'package:amigoproject/services/initial_builder.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

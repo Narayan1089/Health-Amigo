@@ -1,6 +1,7 @@
 import 'package:amigoproject/app_screens/doctors_pg.dart';
 import 'package:amigoproject/app_screens/drawer-screens/account_details.dart';
 import 'package:amigoproject/app_screens/meditate_page.dart';
+import 'package:amigoproject/app_screens/sos.dart';
 import 'package:amigoproject/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
@@ -171,80 +172,83 @@ class _AmigoState extends State<Amigo> {
             ],
           ),
         ),
-        appBar: AppBar(
-          actions: [
-            // IconButton(
-            //   onPressed: () {
-            //     Navigator.of(context)
-            //         .push(MaterialPageRoute(builder: (context) => SOS()));
-            //   },
-            //   icon: Container(
-            //     child: Image(
-            //       image: AssetImage('assets/images/sos_big.png'),
-            //       height: 100,
-            //       width: 100,
-            //     ),
-            //     height: 105,
-            //     width: 105,
-            //   ),
-            // ),
-            // SizedBox(
-            //   width: 15,
-            // ),
-            // IconButton(
-            //   onPressed: () {},
-            //   icon: const Icon(Icons.search),
-            //   iconSize: 26,
-            //   color: Colors.black,
-            // ),
-          ],
-          elevation: 0,
-          // automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          // title: Text(
-          //   "Amigo",
-          //   style: TextStyle(
-          //     fontFamily: "Poppins",
-          //     fontWeight: FontWeight.w700,
-          //     fontSize: 20,
-          //   ),
-          // ),
-          // flexibleSpace: SafeArea(
-          //   child: Container(
-          //     padding: EdgeInsets.only(right: 16),
-          // child: Row(
-          //   children: <Widget>[
-          // IconButton(
-          //   onPressed: () {},
-          //   icon: const Icon(Icons.account_circle_rounded),
-          //   iconSize: 26,
-          //   color: Color(0xffFF834F),
-          // ),
-          // IconButton(
-          //   onPressed: () {},
-          //   icon: Icon(Icons.settings_outlined),
-          //   iconSize: 26,
-          // ),
-          //     SizedBox(
-          //       width: 60,
-          //     ),
-          //     Text(
-          //       "Amigo",
-          //       style: TextStyle(
-          //         fontFamily: "Poppins",
-          //         fontWeight: FontWeight.w700,
-          //         fontSize: 20,
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // ),
-          // ),
-        ),
-        body: ShowCaseWidget(
-            builder: Builder(
-          builder: (_) => _pgOptions[_selectedpg],
-        )),
+        appBar: _selectedpg == 2
+            ? AppBar(
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) => SOS()));
+                    },
+                    icon: Container(
+                      child: Image(
+                        image: AssetImage('assets/images/sos_big.png'),
+                        height: 100,
+                        width: 100,
+                      ),
+                      height: 105,
+                      width: 105,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  // IconButton(
+                  //   onPressed: () {},
+                  //   icon: const Icon(Icons.search),
+                  //   iconSize: 26,
+                  //   color: Colors.black,
+                  // ),
+                ],
+                elevation: 0,
+                // automaticallyImplyLeading: false,
+                backgroundColor: Colors.white,
+                // title: Text(
+                //   "Amigo",
+                //   style: TextStyle(
+                //     fontFamily: "Poppins",
+                //     fontWeight: FontWeight.w700,
+                //     fontSize: 20,
+                //   ),
+                // ),
+                // flexibleSpace: SafeArea(
+                //   child: Container(
+                //     padding: EdgeInsets.only(right: 16),
+                //     child: Row(
+                //       children: <Widget>[
+                //         IconButton(
+                //           onPressed: () {},
+                //           icon: const Icon(Icons.account_circle_rounded),
+                //           iconSize: 26,
+                //           color: Color(0xffFF834F),
+                //         ),
+                //         IconButton(
+                //           onPressed: () {},
+                //           icon: Icon(Icons.settings_outlined),
+                //           iconSize: 26,
+                //         ),
+                //         SizedBox(
+                //           width: 60,
+                //         ),
+                //         Text(
+                //           "Amigo",
+                //           style: TextStyle(
+                //             fontFamily: "Poppins",
+                //             fontWeight: FontWeight.w700,
+                //             fontSize: 20,
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
+              )
+            : AppBar(
+                elevation: 0,
+                // automaticallyImplyLeading: false,
+                backgroundColor: Colors.white,
+              ),
+        body: _pgOptions[_selectedpg],
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedpg,

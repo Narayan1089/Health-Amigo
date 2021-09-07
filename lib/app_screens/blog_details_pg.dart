@@ -1,3 +1,4 @@
+import 'package:amigoproject/services/initial_builder.dart';
 import 'package:flutter/material.dart';
 import 'blog.dart';
 
@@ -16,6 +17,8 @@ class _BlogDetailsState extends State<BlogDetails> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Amigo()));
         return true;
       },
       child: Scaffold(

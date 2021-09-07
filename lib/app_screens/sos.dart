@@ -15,25 +15,27 @@ class SOS extends StatelessWidget {
                 height: 135,
               ),
               Text(
-                'Are you currently in a\nstate of emergency?',
+                'Are you currently in a\nstate of emergency ?',
                 style: TextStyle(
                   color: Color(0xff4B4C4D),
                   fontFamily: 'Poppins',
                   fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w900,
                   fontSize: 24,
                 ),
               ),
               SizedBox(
                 height: 100,
               ),
-              Image.asset(
-                'assets/images/Sos.png',
-                width: 188,
-                height: 188,
+              Container(
+                child: Image.asset(
+                  'assets/images/Sos.png',
+                  width: 148,
+                  height: 148,
+                ),
               ),
               SizedBox(
-                height: 160,
+                height: 100,
               ),
               Container(
                 height: 45,
@@ -65,7 +67,7 @@ class SOS extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 5,
               ),
               Container(
                 child: TextButton(

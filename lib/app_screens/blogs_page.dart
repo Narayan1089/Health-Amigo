@@ -83,8 +83,8 @@ class _BlogsState extends State<Blogs> {
         physics: ScrollPhysics(),
         child: WillPopScope(
           onWillPop: () async {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => Amigo()));
+            // Navigator.pushReplacement(
+            //     context, MaterialPageRoute(builder: (context) => Amigo()));
             return true;
           },
           child: SafeArea(
@@ -259,6 +259,14 @@ class _BlogsState extends State<Blogs> {
           ),
         ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   tooltip: "Add notes",
+      //   backgroundColor: Colors.orange[400],
+      //   child: const Icon(Icons.add),
+      //   onPressed: () {},
+      // ),
+      // floatingActionButtonLocation:
+      //     FloatingActionButtonLocation.miniCenterDocked,
     );
   }
 }

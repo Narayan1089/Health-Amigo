@@ -1,4 +1,4 @@
-import 'package:amigoproject/app_screens/login.dart';
+import 'package:amigoproject/app_screens/phoneOTP.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,7 +51,7 @@ class _Register extends State<Register> {
 
             print('$email \n $password');
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => LogIn()));
+                context, MaterialPageRoute(builder: (context) => PhoneOTP()));
           } else {
             // if (!isChecked) {
             //   authMethods.errorMessage = "Please Accept the T&C";
@@ -143,7 +143,7 @@ class _Register extends State<Register> {
                             labelStyle: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
-                              color: Color(0xffFF834F),
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -182,7 +182,7 @@ class _Register extends State<Register> {
                             labelStyle: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
-                              color: Color(0xffFF834F),
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -219,7 +219,7 @@ class _Register extends State<Register> {
                             labelStyle: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
-                              color: Color(0xffFF834F),
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -259,7 +259,7 @@ class _Register extends State<Register> {
                                 _isObscure
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Color(0xffFF834F),
+                                color: Colors.grey,
                               ),
                             ),
                             border: InputBorder.none,
@@ -270,7 +270,7 @@ class _Register extends State<Register> {
                             labelStyle: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xffFF834F),
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -310,7 +310,7 @@ class _Register extends State<Register> {
                                 _isObscure1
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Color(0xffFF834F),
+                                color: Colors.grey,
                               ),
                             ),
                             border: InputBorder.none,
@@ -321,7 +321,7 @@ class _Register extends State<Register> {
                             labelStyle: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xffFF834F),
+                              color: Colors.grey,
                             ),
                           ),
                         ),
@@ -441,13 +441,13 @@ class _Register extends State<Register> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        "Already have an Account?",
-                        style: TextStyle(
-                            color: Color(0xffFF834F),
-                            fontFamily: 'Montserrat',
-                            fontSize: 16),
-                      ),
+                      // Text(
+                      //   "Already have an Account?",
+                      //   style: TextStyle(
+                      //       color: Color(0xffFF834F),
+                      //       fontFamily: 'Montserrat',
+                      //       fontSize: 16),
+                      // ),
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -455,13 +455,13 @@ class _Register extends State<Register> {
                           //                            builder: (context) => LogIn(widget.toggle)));
                         },
                         child: Text(
-                          "Click Here",
+                          "Already have an Account?",
                           style: TextStyle(
                             color: Color(0xffFF834F),
                             fontFamily: 'Montserrat',
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline,
+                            decoration: TextDecoration.none,
                           ),
                         ),
                       ),

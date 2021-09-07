@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:amigoproject/app_screens/login.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -164,6 +165,45 @@ class AuthMethods {
     }
   }
 
+  void showSnackBar(BuildContext context, String text) {
+    final snackBar = SnackBar(content: Text(text));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  Future<void> verifyPhoneNumber(
+      String phoneNumber, BuildContext context, Function setData) async {
+    PhoneVerificationCompleted verificationCompleted =
+        (PhoneAuthCredential phoneAuthCredential) async {
+      showSnackBar(context, "Verification Completed");
+    };
+    PhoneVerificationFailed verificationFailed =
+        (FirebaseAuthException exception) {
+      showSnackBar(context, exception.toString());
+    };
+
+    void Function(String verificationID, [int? forceResnedingtoken]) codeSent =
+        (String verificationID, [int? forceResnedingtoken]) {
+      showSnackBar(context, "Verification Code sent on the phone number");
+      setData(verificationID);
+    };
+
+    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
+        (String verificationID) {
+      showSnackBar(context, "Time out");
+    };
+    try {
+      await _auth.verifyPhoneNumber(
+          timeout: Duration(seconds: 60),
+          phoneNumber: phoneNumber,
+          verificationCompleted: verificationCompleted,
+          verificationFailed: verificationFailed,
+          codeSent: codeSent,
+          codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
 //  Future phoneVerification(
 //    String number,
 //    String email,
@@ -189,4 +229,35 @@ class AuthMethods {
 //      }
 //    } catch (e) {}
 //  }
+
+  Future signInwithPhoneNumber(
+      String verificationId, String smsCode, BuildContext context) async {
+    User? user;
+    try {
+      AuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: smsCode);
+
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
+
+      // user = userCredential.user;
+      // if (user != null) {
+      //   await _firestore.collection('users').doc(user.uid).set({
+      //     "name": user.displayName,
+      //     "moodTrack": 0,
+      //   });
+      //   return _userFromFirebaseUser(user);
+      // }
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (builder) => LogIn()), (route) => false);
+
+      showSnackBar(
+          context, "Please log In with the registered account to continue");
+    } catch (e) {
+      showSnackBar(
+        context,
+        "Please enter valid OTP or auth credentials",
+      );
+    }
+  }
 }

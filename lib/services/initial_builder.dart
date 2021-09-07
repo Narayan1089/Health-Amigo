@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
 import 'package:amigoproject/app_screens/home_page.dart';
 import 'package:amigoproject/app_screens/chat_screen.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {

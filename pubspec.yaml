@@ -49,6 +49,7 @@ dependencies:
   intl: 
   share: ^0.6.1
   flutter_slidable:
+  syncfusion_flutter_datepicker: ^19.2.60
 
 
   # The following adds the Cupertino Icons font to your application.

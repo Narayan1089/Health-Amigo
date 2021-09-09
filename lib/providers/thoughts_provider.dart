@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-class ThoughtsProvider extends ChangeNotifier {
-  var thought = "";
+// class ThoughtsProvider extends ChangeNotifier {
+//   var thought = "";
 
-  void changeThoughts(var userText) {
-    thought = userText;
-    notifyListeners();
-  }
-}
+//   void changeThoughts(var userText) {
+//     thought = userText;
+//     notifyListeners();
+//   }
+// }

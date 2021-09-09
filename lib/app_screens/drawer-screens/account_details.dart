@@ -1,9 +1,10 @@
 import 'package:amigoproject/app_screens/widget_screens/thoughts.dart';
-import 'package:amigoproject/providers/thoughts_provider.dart';
+// import 'package:amigoproject/providers/thoughts_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 User? loggedInUser;
 String? url = 'https://forms.gle/ze8CJBA25pp2jxYQ6';
@@ -126,38 +127,47 @@ class AccountDetails extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.all(2),
-              child: GestureDetector(
-                onTap: () => Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => ThoughtsPage())),
-                child: Card(
-                  color: Colors.grey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      const ListTile(
-                        leading: Text(
-                          'What\'s on your mind ?',
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        ),
-                        // title: Text('The Enchanted Nightingale'),
-                        trailing: Icon(Icons.arrow_forward_outlined,
-                            color: Colors.black54),
-                        onTap: null,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+
+            SfDateRangePicker(
+              showNavigationArrow: true,
+              todayHighlightColor: Colors.orange,
+              view: DateRangePickerView.month,
+              monthViewSettings:
+                  DateRangePickerMonthViewSettings(numberOfWeeksInView: 1),
             ),
-            SizedBox(
-              height: 10,
-            ),
+
+            // Container(
+            //   padding: EdgeInsets.all(10),
+            //   margin: EdgeInsets.all(2),
+            //   child: GestureDetector(
+            //     onTap: () => Navigator.pushReplacement(context,
+            //         MaterialPageRoute(builder: (context) => ThoughtsPage())),
+            //     child: Card(
+            //       color: Colors.grey,
+            //       child: Column(
+            //         mainAxisSize: MainAxisSize.min,
+            //         children: <Widget>[
+            //           const ListTile(
+            //             leading: Text(
+            //               'What\'s on your mind ?',
+            //               style: TextStyle(
+            //                   color: Colors.black54,
+            //                   fontWeight: FontWeight.bold,
+            //                   fontSize: 18),
+            //             ),
+            //             // title: Text('The Enchanted Nightingale'),
+            //             trailing: Icon(Icons.arrow_forward_outlined,
+            //                 color: Colors.black54),
+            //             onTap: null,
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
             Container(
               padding: EdgeInsets.all(10),
               margin: EdgeInsets.all(2),
@@ -190,11 +200,19 @@ class AccountDetails extends StatelessWidget {
                                 ),
                               )
                             : Text(
-                                thoughtsProvider.thought,
+                                thoughtsProvider.thought.toString(),
                                 style: TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
+
+                        //  ListView.builder(
+                        //     itemCount: thoughtsProvider.thought.length,
+                        //     itemBuilder:
+                        //         (BuildContext context, int index) {
+                        //       return Text(
+                        //           thoughtsProvider.thought[index]);
+                        //     })
                       ),
                       const SizedBox(height: 10),
                     ],

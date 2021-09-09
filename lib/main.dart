@@ -8,6 +8,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:amigoproject/services/auth.dart';
 
+import 'app_screens/widget_screens/thoughts.dart';
+
 void main() {
   runApp(MyApp());
 }

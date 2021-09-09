@@ -628,53 +628,53 @@ class _HomeState extends State<Home> {
                 //   ),
                 // ),
 
-                Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(2),
-                  child: GestureDetector(
-                    onTap: () => Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ThoughtsPage())),
-                    child: Card(
-                      color: Color(0xfffa9d6a),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          const ListTile(
-                            leading: Text(
-                              'Today\'s thoughts',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            // title: Text('The Enchanted Nightingale'),
-                            trailing: Icon(Icons.arrow_forward_outlined,
-                                color: Colors.white),
-                            onTap: null,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: thoughtsProvider.thought == ""
-                                ? Text(
-                                    "Click here to add",
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                    ),
-                                  )
-                                : Text(
-                                    thoughtsProvider.thought,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                          ),
-                          const SizedBox(height: 10),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // Container(
+                //   padding: EdgeInsets.all(10),
+                //   margin: EdgeInsets.all(2),
+                //   child: GestureDetector(
+                //     onTap: () => Navigator.pushReplacement(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => ThoughtsPage())),
+                //     child: Card(
+                //       color: Color(0xfffa9d6a),
+                //       child: Column(
+                //         mainAxisSize: MainAxisSize.min,
+                //         children: <Widget>[
+                //           const ListTile(
+                //             leading: Text(
+                //               'Today\'s thoughts',
+                //               style: TextStyle(
+                //                   color: Colors.white,
+                //                   fontWeight: FontWeight.bold),
+                //             ),
+                //             // title: Text('The Enchanted Nightingale'),
+                //             trailing: Icon(Icons.arrow_forward_outlined,
+                //                 color: Colors.white),
+                //             onTap: null,
+                //           ),
+                //           Padding(
+                //             padding: const EdgeInsets.all(10.0),
+                //             child: thoughtsProvider.thought == ""
+                //                 ? Text(
+                //                     "Click here to add",
+                //                     style: TextStyle(
+                //                       color: Colors.red,
+                //                     ),
+                //                   )
+                //                 : Text(
+                //                     thoughtsProvider.thought,
+                //                     style: TextStyle(
+                //                       color: Colors.white,
+                //                     ),
+                //                   ),
+                //           ),
+                //           const SizedBox(height: 10),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
 
                 // Card(
                 //   margin: EdgeInsets.fromLTRB(5, 15, 5, 0),

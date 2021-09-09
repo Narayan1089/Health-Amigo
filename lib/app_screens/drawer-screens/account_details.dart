@@ -1,5 +1,7 @@
+
 import 'package:amigoproject/app_screens/widget_screens/thoughts.dart';
 // import 'package:amigoproject/providers/thoughts_provider.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -128,19 +130,11 @@ class AccountDetails extends StatelessWidget {
               ),
             ),
 
-            SfDateRangePicker(
-              showNavigationArrow: true,
-              todayHighlightColor: Colors.orange,
-              view: DateRangePickerView.month,
-              monthViewSettings:
-                  DateRangePickerMonthViewSettings(numberOfWeeksInView: 1),
-            ),
-
             // Container(
             //   padding: EdgeInsets.all(10),
             //   margin: EdgeInsets.all(2),
             //   child: GestureDetector(
-            //     onTap: () => Navigator.pushReplacement(context,
+            //     onTap: () => Navigator.push(context,
             //         MaterialPageRoute(builder: (context) => ThoughtsPage())),
             //     child: Card(
             //       color: Colors.grey,
@@ -220,6 +214,7 @@ class AccountDetails extends StatelessWidget {
                 ),
               ),
             ),
+
           ],
         ),
       ),
@@ -232,7 +227,8 @@ Future<void> _launchInBrowser(String url) async {
     await launch(
       url,
       forceSafariVC: false,
-      forceWebView: false,
+      // forceWebView: true,
+      // enableJavaScript: true,
       headers: <String, String>{'my_header_key': 'my_header_value'},
     );
   } else {

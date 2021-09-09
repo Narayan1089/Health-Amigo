@@ -24,7 +24,7 @@ class _ChewieListItemState extends State<ChewieListItem> {
         videoPlayerController: widget.videoPlayerController,
         autoInitialize: true,
         looping: widget.looping,
-        // aspectRatio: 16 / 9,
+        aspectRatio: 4 / 3,
         errorBuilder: (context, errorMessage) {
           return Center(
             child: Text(
@@ -40,12 +40,12 @@ class _ChewieListItemState extends State<ChewieListItem> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.4,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Chewie(
-          controller: _chewieController,
-        ),
+      // child: Padding(
+      // padding: const EdgeInsets.all(8.0),
+      child: Chewie(
+        controller: _chewieController,
       ),
+      // ),
     );
   }
 

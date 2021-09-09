@@ -4,7 +4,6 @@
 // import 'package:amigoproject/services/initial_builder.dart';
 import 'dart:async';
 
-import 'package:amigoproject/after_sos.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

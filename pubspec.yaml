@@ -30,7 +30,7 @@ dependencies:
   firebase_core: ^1.2.0
   firebase_auth: ^1.4.1
   cloud_firestore: ^2.4.0
-  firebase_storage: ^8.1.3
+  # firebase_storage: ^8.1.3
   firebase_messaging: ^10.0.2
   readmore: ^2.1.0
   vibration: ^1.7.3
@@ -49,8 +49,9 @@ dependencies:
   intl: 
   share: ^0.6.1
   flutter_slidable:
-  syncfusion_flutter_datepicker: ^19.2.60
-
+  firebase_storage: ^10.0.1
+  showcaseview: ^1.1.0
+  table_calendar: ^3.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -128,4 +129,5 @@ flutter:
     - assets/images/
     - assets/mood/
     - assets/images/Sos.png
-    - assets/videos/test.mp4
+    # - assets/videos/
+    # - assets/videos/GT1new.mp4

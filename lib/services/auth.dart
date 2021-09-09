@@ -42,13 +42,18 @@ class AuthMethods {
           email: email, password: password);
       // print(result);
       user = result.user;
-      if (user != null) {
+      if (user != null && user.emailVerified) {
         await _firestore.collection('users').doc(user.uid).set({
           "name": user.displayName,
           "moodTrack": 0,
           "thoughts": "Add your words here",
         });
         return _userFromFirebaseUser(user);
+      } else {
+        e = true;
+        errorMessage =
+            'Please verify your Email using the link sent on registered email.';
+        return 'error';
       }
       // if (!user!.emailVerified) {
       //   e = true;
@@ -97,9 +102,9 @@ class AuthMethods {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
-      // if (user != null && !user.emailVerified) {
-      //   await user.sendEmailVerification();
-      // }
+      if (user != null && !user.emailVerified) {
+        await user.sendEmailVerification();
+      }
       if (user != null) {
         // await _firestore.;
         await _firestore.collection('users').doc(user.uid).set({

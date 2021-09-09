@@ -1,4 +1,5 @@
 import 'package:amigoproject/app_screens/doctors_pg.dart';
+import 'package:amigoproject/app_screens/drawer-screens/measured_info.dart';
 import 'package:amigoproject/app_screens/drawer-screens/account_details.dart';
 import 'package:amigoproject/app_screens/meditate_page.dart';
 import 'package:amigoproject/app_screens/sos.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:amigoproject/app_screens/blogs_page.dart';
 import 'package:amigoproject/app_screens/home_page.dart';
 import 'package:amigoproject/app_screens/chat_screen.dart';
+import 'package:showcaseview/showcaseview.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -70,21 +72,7 @@ class _AmigoState extends State<Amigo> {
                 ),
                 padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
               ),
-              // ListTile(
-              //   title: Row(
-              //     children: [
-              //       Icon(Icons.face_retouching_natural),
-              //       SizedBox(
-              //         width: 10,
-              //       ),
-              //       Text('Account Details'),
-              //     ],
-              //   ),
-              //   onTap: () => {
-              //     Navigator.push(
-              //         context, MaterialPageRoute(builder: (_) => AboutInfo()))
-              //   },
-              // ),
+
               // ListTile(
               //   title: Row(
               //     children: [
@@ -101,7 +89,7 @@ class _AmigoState extends State<Amigo> {
               ListTile(
                 title: Row(
                   children: [
-                    Icon(Icons.info_outline),
+                    Icon(Icons.face_retouching_natural),
                     SizedBox(
                       width: 10,
                     ),
@@ -111,6 +99,21 @@ class _AmigoState extends State<Amigo> {
                 onTap: () => {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (_) => AccountDetails()))
+                },
+              ),
+              ListTile(
+                title: Row(
+                  children: [
+                    Icon(Icons.info_outline),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Measured Info'),
+                  ],
+                ),
+                onTap: () => {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => AboutInfo()))
                 },
               ),
               // ListTile(
@@ -130,6 +133,21 @@ class _AmigoState extends State<Amigo> {
               ListTile(
                 title: Row(
                   children: [
+                    Icon(Icons.feedback_outlined),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Feedback'),
+                  ],
+                ),
+                onTap: () => {
+                  // _launchInBrowser('https://pub.dev/packages/url_launcher'),
+                  _launchInBrowser('https://forms.gle/ze8CJBA25pp2jxYQ6'),
+                },
+              ),
+              ListTile(
+                title: Row(
+                  children: [
                     Icon(Icons.logout),
                     SizedBox(
                       width: 10,
@@ -139,20 +157,6 @@ class _AmigoState extends State<Amigo> {
                 ),
                 onTap: () => {
                   authMethods.signOut(context),
-                },
-              ),
-              ListTile(
-                title: Row(
-                  children: [
-                    Icon(Icons.feedback_outlined),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text('Feedback'),
-                  ],
-                ),
-                onTap: () => {
-                  _launchInBrowser('https://forms.gle/ze8CJBA25pp2jxYQ6'),
                 },
               ),
               // ListTile(
@@ -306,7 +310,9 @@ class _AmigoState extends State<Amigo> {
       await launch(
         url,
         forceSafariVC: false,
-        forceWebView: false,
+        // forceWebView: true,
+        // enableJavaScript: true,
+        // universalLinksOnly: ,
         headers: <String, String>{'my_header_key': 'my_header_value'},
       );
     } else {

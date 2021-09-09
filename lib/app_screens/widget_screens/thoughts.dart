@@ -2,7 +2,6 @@ import 'package:amigoproject/providers/thoughts_provider.dart';
 import 'package:amigoproject/services/database/db.dart';
 import 'package:amigoproject/services/initial_builder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -99,8 +98,14 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
               ),
               TextField(
                 controller: userThoughts,
+                keyboardType: TextInputType.multiline,
+                textInputAction: TextInputAction.newline,
+                minLines: 1,
+                maxLines: 20,
                 decoration: InputDecoration(
-                  border: InputBorder.none,
+                  // icon: Icons.edit as Widget,
+                  hintText: 'Pen down your thoughts ...',
+                  // border: InputBorder.,
                 ),
 
                 onChanged: (value) async {
@@ -121,7 +126,28 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
                 // ),
 
                 // showCursor: true,
+
               ),
+              // TextField(
+              //   // strutStyle:
+              //   //     StrutStyle(height: MediaQuery.of(context).size.height),
+              //   controller: userThoughts,
+              //   decoration: InputDecoration(
+              //     // icon: Icons.edit as Widget,
+              //     hintText: 'Pen down your thoughts ...',
+              //     // border: InputBorder.,
+              //   ),
+
+              //   onChanged: (value) => setState(
+              //     () {
+              //       data.changeThoughts(value);
+              //       // userText = value;
+              //       // print(userText);
+              //     },
+              //   ),
+
+              //   // showCursor: true,
+              // ),
             ],
           ),
         ),

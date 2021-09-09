@@ -166,6 +166,7 @@ class _SOS1State extends State<SOS1> {
                       //       builder: (_) => AfterSoS(),
                       //     ));
                       Navigator.pop(context);
+                      Navigator.pop(context);
                       // Navigator.push(context,
                       //     MaterialPageRoute(builder: (context) => Amigo()));
                     },

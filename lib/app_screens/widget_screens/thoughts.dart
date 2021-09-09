@@ -131,7 +131,7 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
 }
 
 thoughtsTracker({String? thought, User? user}) async {
-  _firestoreConfig.retrieveMoodTracker(loggedInUser);
+  _firestoreConfig.retrieveThoughts(loggedInUser);
   // int? prev = _firestoreConfig.mood;
   // int? avg = ((prev! + mood!) / 2).ceil();
   await _firestoreConfig.updateThoughts(user: loggedInUser, thought: thought!);

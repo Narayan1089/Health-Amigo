@@ -155,7 +155,9 @@ class AboutInfo extends StatelessWidget {
               focusedDay: DateTime.now(),
               calendarFormat: CalendarFormat.week,
               calendarStyle: CalendarStyle(
-                markerDecoration: BoxDecoration(color: Color(0xffFF834F)),
+                todayDecoration: BoxDecoration(
+                    color: Color(0xfffa9d6a), shape: BoxShape.circle),
+                // markerDecoration: BoxDecoration(color: Color(0xffFF834F)),
               ),
             ),
             SizedBox(
@@ -165,8 +167,8 @@ class AboutInfo extends StatelessWidget {
               padding: EdgeInsets.all(10),
               margin: EdgeInsets.all(2),
               child: GestureDetector(
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ThoughtsPage())),
+                // onTap: () => Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => ThoughtsPage())),
                 child: Card(
                   color: Color(0xfffa9d6a),
                   child: Column(
@@ -185,19 +187,22 @@ class AboutInfo extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: thoughtsProvider.thought == ""
-                            ? Text(
-                                "Click here to add",
-                                style: TextStyle(
-                                  color: Colors.red,
-                                ),
-                              )
-                            : Text(
-                                thoughtsProvider.thought,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
+                        child:
+                            // thoughtsProvider.thought == ""
+                            //     ? Text(
+                            //         "Click here to add",
+                            //         style: TextStyle(
+                            //           color: Colors.red,
+                            //         ),
+                            //       )
+                            //     :
+                            Text(
+                          thoughtsProvider.thought,
+                          // textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 10),
                     ],

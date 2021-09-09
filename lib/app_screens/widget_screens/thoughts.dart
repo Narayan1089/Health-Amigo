@@ -53,10 +53,15 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
               ),
               TextField(
                 controller: userThoughts,
+                keyboardType: TextInputType.multiline,
+                textInputAction: TextInputAction.newline,
+                minLines: 1,
+                maxLines: 20,
                 decoration: InputDecoration(
-                  border: InputBorder.none,
+                  // icon: Icons.edit as Widget,
+                  hintText: 'Pen down your thoughts ...',
+                  // border: InputBorder.,
                 ),
-
                 onChanged: (value) => setState(
                   () {
                     data.changeThoughts(value);
@@ -64,9 +69,27 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
                     // print(userText);
                   },
                 ),
-
-                // showCursor: true,
               ),
+              // TextField(
+              //   // strutStyle:
+              //   //     StrutStyle(height: MediaQuery.of(context).size.height),
+              //   controller: userThoughts,
+              //   decoration: InputDecoration(
+              //     // icon: Icons.edit as Widget,
+              //     hintText: 'Pen down your thoughts ...',
+              //     // border: InputBorder.,
+              //   ),
+
+              //   onChanged: (value) => setState(
+              //     () {
+              //       data.changeThoughts(value);
+              //       // userText = value;
+              //       // print(userText);
+              //     },
+              //   ),
+
+              //   // showCursor: true,
+              // ),
             ],
           ),
         ),

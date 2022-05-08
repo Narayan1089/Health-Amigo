@@ -1,7 +1,7 @@
 // @dart = 2.9
 import 'package:amigoproject/app_screens/home_page.dart';
-import 'package:amigoproject/providers/notes_provider.dart';
-import 'package:amigoproject/providers/thoughts_provider.dart';
+// import 'package:amigoproject/providers/notes_provider.dart';
+// import 'package:amigoproject/providers/thoughts_provider.dart';
 import 'package:amigoproject/services/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -60,9 +60,6 @@ class _MyApp extends State<MyApp> {
               ),
               ChangeNotifierProvider(
                 create: (_) => MoodClass(),
-              ),
-              ChangeNotifierProvider(
-                create: (context) => NotesProviders(),
               ),
               ChangeNotifierProvider(
                 create: (_) => ThoughtsProvider(),

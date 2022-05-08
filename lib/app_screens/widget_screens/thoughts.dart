@@ -98,21 +98,34 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
               ),
               TextField(
                 controller: userThoughts,
-                keyboardType: TextInputType.multiline,
-                textInputAction: TextInputAction.newline,
-                minLines: 1,
-                maxLines: 20,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.send,
+                // minLines: 1,
+                // maxLines: 20,
                 decoration: InputDecoration(
                   // icon: Icons.edit as Widget,
                   hintText: 'Pen down your thoughts ...',
                   // border: InputBorder.,
                 ),
 
-                onChanged: (value) async {
-                  await thoughtsTracker(thought: value, user: loggedInUser);
+                onSubmitted: (value) async {
+                  await thoughtsTracker(
+                      thought: value,
+                      user: loggedInUser,
+                      dateTime: DateTime.now());
                   Provider.of<ThoughtsProvider>(context, listen: false)
                       .displayThoughts();
+                  userThoughts.clear();
                 },
+
+                // onChanged: (value) async {
+                //   await thoughtsTracker(
+                //       thought: value,
+                //       user: loggedInUser,
+                //       dateTime: DateTime.now());
+                //   Provider.of<ThoughtsProvider>(context, listen: false)
+                //       .displayThoughts();
+                // },
 
                 // onChanged: (value) async => setState(
                 //   () {
@@ -126,7 +139,6 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
                 // ),
 
                 // showCursor: true,
-
               ),
               // TextField(
               //   // strutStyle:
@@ -156,11 +168,12 @@ class _ThoughtsPageState extends State<ThoughtsPage> {
   }
 }
 
-thoughtsTracker({String? thought, User? user}) async {
+thoughtsTracker({String? thought, User? user, DateTime? dateTime}) async {
   _firestoreConfig.retrieveThoughts(loggedInUser);
   // int? prev = _firestoreConfig.mood;
   // int? avg = ((prev! + mood!) / 2).ceil();
-  await _firestoreConfig.updateThoughts(user: loggedInUser, thought: thought!);
+  await _firestoreConfig.updateThoughts(
+      user: loggedInUser, thought: thought!, dateTime: dateTime);
 }
 
 class ThoughtsProvider extends ChangeNotifier {

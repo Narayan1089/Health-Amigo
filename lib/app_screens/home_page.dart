@@ -100,8 +100,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    ThoughtsProvider thoughtsProvider =
-        Provider.of<ThoughtsProvider>(context, listen: false);
+    // ThoughtsProvider thoughtsProvider =
+    //     Provider.of<ThoughtsProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       body: DoubleBackToCloseApp(
@@ -177,7 +177,10 @@ class _HomeState extends State<Home> {
                         children: [
                           IconButton(
                             onPressed: () async {
-                              await moodTracker(mood: -3, user: loggedInUser);
+                              await moodTracker(
+                                  mood: -3,
+                                  user: loggedInUser,
+                                  dateTime: DateTime.now());
                               Provider.of<MoodClass>(context, listen: false)
                                   .displayMood();
                             },
@@ -209,7 +212,10 @@ class _HomeState extends State<Home> {
                         children: [
                           IconButton(
                             onPressed: () async {
-                              await moodTracker(mood: -2, user: loggedInUser);
+                              await moodTracker(
+                                  mood: -2,
+                                  user: loggedInUser,
+                                  dateTime: DateTime.now());
                               Provider.of<MoodClass>(context, listen: false)
                                   .displayMood();
                             },
@@ -241,7 +247,10 @@ class _HomeState extends State<Home> {
                         children: [
                           IconButton(
                             onPressed: () async {
-                              await moodTracker(mood: -1, user: loggedInUser);
+                              await moodTracker(
+                                  mood: -1,
+                                  user: loggedInUser,
+                                  dateTime: DateTime.now());
                               Provider.of<MoodClass>(context, listen: false)
                                   .displayMood();
                             },
@@ -273,7 +282,10 @@ class _HomeState extends State<Home> {
                         children: [
                           IconButton(
                             onPressed: () async {
-                              await moodTracker(mood: 0, user: loggedInUser);
+                              await moodTracker(
+                                  mood: 0,
+                                  user: loggedInUser,
+                                  dateTime: DateTime.now());
                               Provider.of<MoodClass>(context, listen: false)
                                   .displayMood();
                             },
@@ -305,7 +317,10 @@ class _HomeState extends State<Home> {
                         children: [
                           IconButton(
                             onPressed: () async {
-                              await moodTracker(mood: 1, user: loggedInUser);
+                              await moodTracker(
+                                  mood: 1,
+                                  user: loggedInUser,
+                                  dateTime: DateTime.now());
                               Provider.of<MoodClass>(context, listen: false)
                                   .displayMood();
                             },
@@ -337,7 +352,10 @@ class _HomeState extends State<Home> {
                         children: [
                           IconButton(
                             onPressed: () async {
-                              await moodTracker(mood: 2, user: loggedInUser);
+                              await moodTracker(
+                                  mood: 2,
+                                  user: loggedInUser,
+                                  dateTime: DateTime.now());
                               Provider.of<MoodClass>(context, listen: false)
                                   .displayMood();
                               // setState(() {
@@ -376,7 +394,10 @@ class _HomeState extends State<Home> {
                             disabledColor: Colors.blue,
                             onPressed: () async {
                               // int mood = 3;
-                              await moodTracker(mood: 3, user: loggedInUser);
+                              await moodTracker(
+                                  mood: 3,
+                                  user: loggedInUser,
+                                  dateTime: DateTime.now());
                               // mood = displayMood();
                               Provider.of<MoodClass>(context, listen: false)
                                   .displayMood();
@@ -682,6 +703,7 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 10,
                 ),
+
                 // Card(
                 //   elevation: 5,
                 //   margin: EdgeInsets.fromLTRB(5, 15, 5, 0),
@@ -887,12 +909,20 @@ class MeditateCard extends StatelessWidget {
   }
 }
 
-moodTracker({int? mood, User? user}) async {
+moodTracker({int? mood, User? user, DateTime? dateTime}) async {
   // _firestoreConfig.retrieveMoodTracker(loggedInUser);
   // int? prev = _firestoreConfig.mood;
   // int? avg = ((prev! + mood!) / 2).ceil();
-  await _firestoreConfig.updateMoodTrack(user: loggedInUser, mood: mood!);
+  await _firestoreConfig.updateMoodTrack(
+      user: loggedInUser, mood: mood!, dateTime: dateTime);
 }
+
+// class _ThoughtsData {
+//   _ThoughtsData(this.year, this.sales);
+
+//   final String year;
+//   final double sales;
+// }
 
 class MoodClass with ChangeNotifier {
   int? _data;

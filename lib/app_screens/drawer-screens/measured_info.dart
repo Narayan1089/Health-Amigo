@@ -1,11 +1,134 @@
+import 'package:amigoproject/app_screens/widget_screens/barchart_graph.dart';
 import 'package:amigoproject/app_screens/widget_screens/thoughts.dart';
-import 'package:amigoproject/providers/thoughts_provider.dart';
+
+import 'package:amigoproject/models/barchart.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:showcaseview/showcaseview.dart';
+// import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class AboutInfo extends StatelessWidget {
+// import 'package:syncfusion_flutter_charts/charts.dart';
+// import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+
+bool showCase = true;
+User? loggedInUser;
+final double barWidth = 22;
+
+class MoodChartData {
+  MoodChartData(this.mood, this.count);
+  final String mood;
+  final double count;
+}
+
+// final List<BarChartModel> data = [
+//   BarChartModel(
+//     year: "2014",
+//     financial: 250,
+//     // color: charts.ColorUtil.fromDartColor(Color(0xFF47505F)),
+//   ),
+//   BarChartModel(
+//     year: "2015",
+//     financial: 300,
+//     // color: charts.ColorUtil.fromDartColor(Colors.red),
+//   ),
+//   BarChartModel(
+//     year: "2016",
+//     financial: 100,
+//     // color: charts.ColorUtil.fromDartColor(Colors.green),
+//   ),
+//   BarChartModel(
+//     year: "2017",
+//     financial: 450,
+//     // color: charts.ColorUtil.fromDartColor(Colors.yellow),
+//   ),
+//   BarChartModel(
+//     year: "2018",
+//     financial: 630,
+//     // color: charts.ColorUtil.fromDartColor(Colors.lightBlueAccent),
+//   ),
+//   BarChartModel(
+//     year: "2019",
+//     financial: 1000,
+//     // color: charts.ColorUtil.fromDartColor(Colors.pink),
+//   ),
+//   BarChartModel(
+//     year: "2020",
+//     financial: 400,
+//     // color: charts.ColorUtil.fromDartColor(Colors.purple),
+//   ),
+// ];
+
+class AboutInfo extends StatefulWidget {
   const AboutInfo({Key? key}) : super(key: key);
+
+  @override
+  State<AboutInfo> createState() => _AboutInfoState();
+}
+
+class _AboutInfoState extends State<AboutInfo> {
+  final List<MoodChartData> chartData = [
+    MoodChartData('Angry', 22),
+    MoodChartData('Happy', 18),
+    MoodChartData('Sad', 30),
+    MoodChartData('Neutral', 20),
+    MoodChartData('Happy', 14),
+    MoodChartData('Very Happy', 18),
+    MoodChartData('Excited', 13)
+  ];
+
+  CalendarFormat format = CalendarFormat.week;
+  DateTime selectedDay = DateTime.now();
+  DateTime focusedDay = DateTime.now();
+
+  // final keyOne = GlobalKey();
+
+  // final _auth = FirebaseAuth.instance;
+
+  // Future<void> getCurrentUser() async {
+  //   try {
+  //     final user = _auth.currentUser;
+
+  //     if (user != null) {
+  //       loggedInUser = user;
+  //       if (loggedInUser != null) {
+  //         // email = loggedInUser?.email;
+  //         // id = loggedInUser?.uid;
+  //         // name = loggedInUser?.displayName;
+  //       }
+  //     }
+  //     print(user);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+
+  // void initState() {
+  //   super.initState();
+  //   getCurrentUser();
+  //   // Provider.of<MoodClass>(context).displayMood();
+  //   // mood = displayMood();
+
+  //   if (showCase) {
+  //     WidgetsBinding.instance!.addPostFrameCallback(
+  //       (_) => ShowCaseWidget.of(context)!.startShowCase([keyOne]),
+  //     );
+  //     setState(() {
+  //       showCase = false;
+  //     });
+  //   }
+
+  //   Provider.of<ThoughtsProvider>(context, listen: false).displayThoughts();
+  // }
+
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   // Provider.of<MoodClass>(context).displayMood();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +156,14 @@ class AboutInfo extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body:
+          // LayoutBuilder(
+          //   builder: (BuildContext context, BoxConstraints viewportConstraints) {
+          SingleChildScrollView(
+        // child: ConstrainedBox(
+        //   constraints: BoxConstraints(
+        //     maxHeight: viewportConstraints.maxHeight - 15,
+        //   ),
         child: Column(
           children: [
             // Container(
@@ -150,18 +280,38 @@ class AboutInfo extends StatelessWidget {
             //   ),
             // ),
             TableCalendar(
-              firstDay: DateTime.utc(2021, 9, 1),
-              lastDay: DateTime.utc(2021, 9, 30),
+              firstDay: DateTime.utc(2021, 8, 1),
+              lastDay: DateTime.utc(2022, 10, 30),
               focusedDay: DateTime.now(),
-              calendarFormat: CalendarFormat.week,
+              calendarFormat: format,
               calendarStyle: CalendarStyle(
+                isTodayHighlighted: true,
+                selectedDecoration: BoxDecoration(
+                  color: Colors.amberAccent,
+                  shape: BoxShape.circle,
+                ),
                 todayDecoration: BoxDecoration(
                     color: Color(0xfffa9d6a), shape: BoxShape.circle),
                 // markerDecoration: BoxDecoration(color: Color(0xffFF834F)),
               ),
+              onFormatChanged: (CalendarFormat _format) {
+                setState(() {
+                  format = _format;
+                });
+              },
+              onDaySelected: (DateTime selectDay, DateTime focusDay) {
+                setState(() {
+                  selectedDay = selectDay;
+                  focusedDay = focusDay;
+                });
+                print(focusedDay);
+              },
+              selectedDayPredicate: (DateTime date) {
+                return isSameDay(selectedDay, date);
+              },
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             Container(
               padding: EdgeInsets.all(10),
@@ -197,22 +347,77 @@ class AboutInfo extends StatelessWidget {
                             //       )
                             //     :
                             Text(
-                          thoughtsProvider.thought,
+                          thoughtsProvider.thought.toString(),
                           // textAlign: TextAlign.left,
                           style: TextStyle(
                             color: Colors.white,
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 5),
                     ],
                   ),
                 ),
               ),
             ),
+            // SfCartesianChart(
+            //   // backgroundColor: Colors.black,
+            //   title: ChartTitle(text: 'Mood Log'),
+            //   primaryXAxis: CategoryAxis(),
+            //   series: <ChartSeries>[
+            //     // Renders line chart
+            //     LineSeries<MoodChartData, String>(
+            //         dataSource: chartData,
+            //         xValueMapper: (MoodChartData count, _) => count.mood,
+            //         yValueMapper: (MoodChartData count, _) => count.count,
+            //         name: 'Mood Chart'),
+            //   ],
+            // ),
+            SizedBox(
+              height: 5,
+            ),
+
+            // Expanded(
+            //   child: BarChart(
+            //     BarChartData(
+            //       alignment: BarChartAlignment.center,
+            //       maxY: 20,
+            //       minY: 0,
+            //       groupsSpace: 12,
+            //       barTouchData: BarTouchData(enabled: true),
+            //       titlesData: FlTitlesData(
+            //         topTitles: BarTitles.getTopBottomTitles(),
+            //         bottomTitles: BarTitles.getTopBottomTitles(),
+            //         leftTitles: BarTitles.getSideTitles(),
+            //         rightTitles: BarTitles.getSideTitles(),
+            //       ),
+            //       barGroups: BarData.barData
+            //           .map(
+            //             (data) => BarChartGroupData(
+            //               x: data.id,
+            //               barRods: [
+            //                 BarChartRodData(
+            //                   y: data.y,
+            //                   width: barWidth,
+            //                   colors: [data.color],
+            //                   borderRadius: BorderRadius.only(
+            //                     topLeft: Radius.circular(6),
+            //                     topRight: Radius.circular(6),
+            //                   ),
+            //                 ),
+            //               ],
+            //             ),
+            //           )
+            //           .toList(),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
     );
+    //     },
+    //   ),
+    // );
   }
 }

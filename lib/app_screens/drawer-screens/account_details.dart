@@ -1,4 +1,3 @@
-
 import 'package:amigoproject/app_screens/widget_screens/thoughts.dart';
 // import 'package:amigoproject/providers/thoughts_provider.dart';
 
@@ -6,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+// import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 User? loggedInUser;
 String? url = 'https://forms.gle/ze8CJBA25pp2jxYQ6';
@@ -214,7 +213,6 @@ class AccountDetails extends StatelessWidget {
                 ),
               ),
             ),
-
           ],
         ),
       ),

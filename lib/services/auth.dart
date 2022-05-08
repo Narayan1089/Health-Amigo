@@ -46,7 +46,6 @@ class AuthMethods {
         await _firestore.collection('users').doc(user.uid).set({
           "name": user.displayName,
           "moodTrack": 0,
-          "thoughts": "Add your words here",
         });
         return _userFromFirebaseUser(user);
       } else {
